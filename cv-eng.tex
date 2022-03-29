@@ -1,0 +1,248 @@
+﻿%% start of file `template.tex'.
+%% Copyright 2006-2015 Xavier Danaux (xdanaux@gmail.com).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+\documentclass[11pt,a4paper,roman]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
+
+% moderncv themes
+\moderncvstyle{classic}                             % style options are 'casual' (default), 'classic', 'banking', 'oldstyle' and 'fancy'
+\moderncvcolor{burgundy}                               % color options 'black', 'blue' (default), 'burgundy', 'green', 'grey', 'orange', 'purple' and 'red'
+%\renewcommand{\familydefault}{\sfdefault}         % to set the default font; use '\sfdefault' for the default sans serif font, '\rmdefault' for the default roman one, or any tex font name
+%\nopagenumbers{}                                  % uncomment to suppress automatic page numbering for CVs longer than one page
+
+% character encoding
+%\usepackage[utf8]{inputenc}                       % if you are not using xelatex ou lualatex, replace by the encoding you are using
+%\usepackage{CJKutf8}                              % if you need to use CJK to typeset your resume in Chinese, Japanese or Korean
+
+% adjust the page margins
+\usepackage[scale=0.75]{geometry}
+%\setlength{\hintscolumnwidth}{3cm}                % if you want to change the width of the column with the dates
+%\setlength{\makecvheadnamewidth}{10cm}            % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
+% setting the colours according to \moderncvcolor
+\colorlet{languagecolor}{color1}
+\colorlet{nolanguagecolor}{color2}
+\newcount\languagecount
+\newcommand\languageknowledge[2]
+  {%
+    % if you change the 4cm you can change the distance, the 4cm is the space
+    % reserved for the language's name, immediately after it the dots are
+    % printed.
+    %\hfill % if you want the dots to be at the right margin
+    \languagecount=0
+    \loop\ifnum\languagecount<#2
+      \advance\languagecount1
+      \textcolor{languagecolor}{$\bullet$}%
+    \repeat
+    \loop\ifnum\languagecount<5
+      \advance\languagecount1
+      \textcolor{nolanguagecolor}{$\bullet$}%
+    \repeat
+    \makebox[3cm][l]{ \textbf{#1}}%
+  }
+
+% personal data
+\name{Gianluca}{Aguzzi}
+\title{PhD Student}
+\address{Via Mulini 23/25}{47521}{Italy, Cesena}
+\email{gianluca.aguzzi@unibo.it}
+\homepage{https://cric96.github.io/}
+\social[orcid]{0000-0002-1553-4561}
+\social[github]{cric96}
+\social[stackoverflow]{gianluca-aguzzi}
+% bibliography adjustements (only useful if you make citations in your resume, or print a list of publications using BibTeX)
+%   to show numerical labels in the bibliography (default is to show no labels)
+%\makeatletter\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}\makeatother
+\renewcommand*{\bibliographyitemlabel}{[\arabic{enumiv}]}
+%   to redefine the bibliography heading string ("Publications")
+%\renewcommand{\refname}{Articles}
+
+% bibliography with mutiple entries
+\usepackage{multibib}
+\newcites{book,misc}{{Books},{Others}}
+%----------------------------------------------------------------------------------
+%            content
+%----------------------------------------------------------------------------------
+\begin{document}
+
+\makecvtitle
+
+\subsection{Current Placement}
+\cventry{2020--today}{PhD in Computer Science And Engineering}%
+ {Alma Mater Studiorum -- Università di Bologna}{Cesena}
+ {}{}
+\subsection{Research Theme}
+\cvitem{}{
+  My current research topics concern large-scale system coordination and machine learning algorithm in distributed and multi-agent systems. In particular, I am interested in \emph{engineering} self-adaptive systems by means of \emph{models}, \emph{programming languages} and \emph{disciplines}. Furthermore, I investigate the use of Machine Learning algorithms -- and in particular Reinforcement Learning -- in support of that engineering process making the collective program more \emph{effective}, \emph{efficient} and \emph{smarter}.
+}
+\section{Education}
+
+%%%%%
+\cventry{2018--2020}{Master in Software Engineering}%
+ {Alma Mater Studiorum -- Università di Bologna}{Cesena}
+ {\textit{110 cum Laude}}{}
+\cvitem{}{Thesis: \emph{Scafi web: a Scala-JavaScript platform for executing, simulating, and controlling aggregate computing systems}}
+\cvitem{}{Supervisors: \emph{Mirko Viroli, Roberto Casadei}}
+%%%%
+\cventry{2015--2018}{Bachelor in Computer Science and Software Engineering}{Alma Mater Studiorum -- Università di Bologna}{Cesena}{\textit{110 cum Laude}}{}
+\cvitem{}{Thesis: \emph{Sviluppo di un front-end di simulazione per applicazioni aggregate nel framework Scafi}}
+\cvitem{}{Supervisors: \emph{Mirko Viroli, Roberto Casadei}}
+
+\cventry{2015--2018}{High School on Computer Science}{ITIS E. Mattei.}{Urbino}{\textit{100}}{}
+
+\section{Scientific Activities}
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{pub}
+\subsection{Participation in International Conferences}
+\cventry{2021}{Artifact Evaluation Committee}{International Conference on Autonomic Computing and Self-Organizing Systems - \emph{ACSOS}}{}{}{}
+\cventry{2022}{Artifact Evaluation Committee}{International Conference on Coordination Models and Languages - \emph{DisCoTec}}{}{}{}
+\section{Teaching}
+
+\subsection{Tutoring}
+\cventry{2022--today}{Concurrent and Distributed Programming}%
+ {Alma Mater Studiorum -- Università di Bologna}{Master in Computer Science and Engineering}
+ {}{}
+\cventry{2022--today}{Programming and Development Paradigms}%
+ {Alma Mater Studiorum -- Università di Bologna}{Master in Computer Science and Engineering}
+ {}{}
+\cventry{2018 - 2019}{Snap! courses}{CRIAD Coding}{Grade schools}{}{}
+\subsection{Talks}
+\cventry{2021}{On Collective Reinforcement Learning}%
+{Alma Mater Studiorum -- Università di Bologna}{Talks @ Pervasive Computing}
+{}{}
+
+\cventry{2021}{MVC meets Monad}%
+{Alma Mater Studiorum -- Università di Bologna}{Talks @ Programming and Development Paradigms}
+{}{}
+
+\cventry{2019}{Crea il tuo videogioco in Snap!}%
+{Talk @ Salone dell'Orientamento, Forlì}{}
+{}{}
+
+
+%\subsection{Student Supervisor}
+
+\section{Technical Skills}
+
+\subsection{Programming Languages}
+\begin{cvcolumns}
+  \cvcolumn{}{
+    \cvitem{\languageknowledge{Scala}{5}}{}
+    \cvitem{\languageknowledge{Java}{4}}{}
+    \cvitem{\languageknowledge{C\#}{3}}{}
+    \cvitem{\languageknowledge{C}{2}}{}
+  }
+  \cvcolumn{}{
+    \cvitem{\languageknowledge{Kotlin}{3}}{}
+    \cvitem{\languageknowledge{JavaScript}{3}}{}
+    \cvitem{\languageknowledge{Bash}{2}}{}
+    \cvitem{\languageknowledge{Prolog}{1}}{}
+  }
+  \cvcolumn{}{
+    \cvitem{\languageknowledge{TypeScript}{1}}{}
+    \cvitem{\languageknowledge{Haskell}{1}}{}
+    \cvitem{\languageknowledge{C++}{2}}{}
+  }
+\end{cvcolumns}
+
+\subsection{Other Languages}
+\begin{cvcolumns}
+  \cvcolumn{}{
+    \cvitem{\languageknowledge{HTML}{3}}{}
+    \cvitem{\languageknowledge{XML}{2}}{}
+    \cvitem{\languageknowledge{JSON}{3}}{}
+    \cvitem{\languageknowledge{RDF}{1}}{}{}
+    }
+  \cvcolumn{}{
+    \cvitem{\languageknowledge{Markdown}{3}}{}
+    \cvitem{\languageknowledge{LaTeX}{4}}{}
+    \cvitem{\languageknowledge{OWL}{1}}{}
+  }
+  \cvcolumn{}{
+    \cvitem{\languageknowledge{SPARQL}{1}}{}
+    \cvitem{\languageknowledge{YAML}{2}}{}
+    \cvitem{\languageknowledge{SQL}{2}}{}
+  }
+\end{cvcolumns}
+\subsection{Libraries}
+\begin{cvcolumns}
+  \cvcolumn{}{
+    \cvitem{\languageknowledge{Scala.js}{3}}{}
+    \cvitem{\languageknowledge{Tensorflow}{2}}{}
+    \cvitem{\languageknowledge{Pytorch}{1}}{}
+    \cvitem{\languageknowledge{OpenAI Gym}{2}}{}
+    }
+  \cvcolumn{}{
+    \cvitem{\languageknowledge{Monix}{4}}{}
+    \cvitem{\languageknowledge{Matplotlib}{2}}{}
+    \cvitem{\languageknowledge{Akka}{2}}{}
+  }
+  \cvcolumn{}{
+    \cvitem{\languageknowledge{ScalaPy}{3}}{}
+    \cvitem{\languageknowledge{Cats}{3}}{}
+    \cvitem{\languageknowledge{ZIO}{1}}{}{}
+  }
+\end{cvcolumns}
+\subsection{Software Tools}
+\begin{cvcolumns}
+  \cvcolumn{}{
+    \cvitem{\languageknowledge{Gimp}{2}}{}{}
+    \cvitem{\languageknowledge{Git}{4}}{}{}
+    \cvitem{\languageknowledge{GHA}{2}}{}{}
+    \cvitem{\languageknowledge{Docker}{2}}{}{}
+    }
+  \cvcolumn{}{
+    \cvitem{\languageknowledge{Inkscape}{2}}{}{}
+    \cvitem{\languageknowledge{Blender}{2}}{}{}
+    \cvitem{\languageknowledge{OWL}{1}}{}{}
+    \cvitem{\languageknowledge{Kdenlive}{1}}{}{}
+  }
+  \cvcolumn{}{
+    \cvitem{\languageknowledge{NPM}{1}}{}{}
+    \cvitem{\languageknowledge{SBT}{4}}{}{}
+    \cvitem{\languageknowledge{Hugo}{1}}{}{}
+    \cvitem{\languageknowledge{Gradle}{2}}{}{}
+  }
+\end{cvcolumns}
+\subsection{Software Projects}
+\cventry{2021 -- today}{Co-designer and main contributor of ScaFi-Web}{It is a web-based application allowing in-browser editing, execution, and visualisation of ScaFi programs.}{}{}{\url{https://github.com/scafi/scafi-web}}
+\cventry{2021 -- today}{Designer of scalapy-gym}{It is a Scala facade that enable the usage of open ai gyms in the JVM!}{}{}{\url{https://github.com/cric96/scalapy-gym}}
+\cventry{2020 -- today}{Co-designer of Fluvium}{An IoT project for river controll that uses AWS lambda}{}{}{\url{https://github.com/sbricco-house/fluvium}}
+\subsection{Open Source Contributions}
+\cventry{2018 -- today}{Development of GUI \& simulator for ScaFi}{}{}{}{\url{https://github.com/scafi/scafi}}
+\cventry{2021 -- today}{Contributions to ScaFi incarnations in Alchemist}{}{}{}{\url{https://github.com/AlchemistSimulator/Alchemist}}
+
+
+\section{Miscellaneous}
+\cventry{2022}{Attending @ MOOC}{Introduction to Complexity @ Santa Fe Institute}{}{}{}
+\cventry{2021}{Attending @ PhD Summer School}{22$^{nd}$ European Agent Systems Summer School}{}{}{}
+\cventry{2020}{Student class representative @ Alma Mater Studiorum}{}{}{}{}
+\cventry{2018}{Presenting Snap! @ Notte dei ricercatori}{}{}{}{}
+\cventry{2013-2015}{Student class representative @ ITIS}{}{}{}{}
+
+%\section{References}
+
+% Publications from a BibTeX file without multibib
+%  for numerical labels: \renewcommand{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}% CONSIDER MERGING WITH PREAMBLE PART
+%  to redefine the heading string ("Publications"): \renewcommand{\refname}{Articles}
+
+% Publications from a BibTeX file using the multibib package
+%\section{Publications}
+%\nocitebook{book1,book2}
+%\bibliographystylebook{plain}
+%\bibliographybook{publications}                   % 'publications' is the name of a BibTeX file
+%\nocitemisc{misc1,misc2,misc3}
+%\bibliographystylemisc{plain}
+%\bibliographymisc{publications}                   % 'publications' is the name of a BibTeX file
+
+\clearpage
+
+%\clearpage\end{CJK*}                              % if you are typesetting your resume in Chinese using CJK; the \clearpage is required for fancyhdr to work correctly with CJK, though it kills the page numbering by making \lastpage undefined
+\end{document}
+
+
+%% end of file `template.tex'.
