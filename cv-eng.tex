@@ -6,10 +6,10 @@
 % available at http://www.latex-project.org/lppl/.
 
 
-\documentclass[11pt,a4paper,roman]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
+\documentclass[10pt,a4paper,roman]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
 
 % moderncv themes
-\moderncvstyle{classic}                             % style options are 'casual' (default), 'classic', 'banking', 'oldstyle' and 'fancy'
+\moderncvstyle{banking}                             % style options are 'casual' (default), 'classic', 'banking', 'oldstyle' and 'fancy'
 \moderncvcolor{burgundy}                               % color options 'black', 'blue' (default), 'burgundy', 'green', 'grey', 'orange', 'purple' and 'red'
 %\renewcommand{\familydefault}{\sfdefault}         % to set the default font; use '\sfdefault' for the default sans serif font, '\rmdefault' for the default roman one, or any tex font name
 %\nopagenumbers{}                                  % uncomment to suppress automatic page numbering for CVs longer than one page
@@ -45,7 +45,7 @@
 
 % personal data
 \name{Gianluca}{Aguzzi}
-\title{PhD Student}
+\title{\\Post Doctoral Researcher}
 \address{Via Mulini 23/25}{47521}{Italy, Cesena}
 \email{gianluca.aguzzi@unibo.it}
 \homepage{https://cric96.github.io/}
@@ -70,9 +70,9 @@
 \makecvtitle
 
 \subsection{Current Placement}
-\cventry{2020--today}{PhD in Computer Science And Engineering}%
+\cventry{2023--today}{Postdoctoral Research}%
  {Alma Mater Studiorum -- University of Bologna}{Cesena}
- {}{}
+ {}{I'm currently work on a PRIN project called COMMONS-WEARS in which I deal with engineering collective application in complex layered and multi mobile edge devices}
 \subsection{Research Theme}
 \cvitem{}{
   My current area of research focuses on the coordination of large-scale systems and the application of machine learning algorithms within distributed and multi-agent systems.
@@ -82,6 +82,13 @@
 \section{Education}
 
 %%%%%
+\cventry{2020--2023}{PhD in  Computer Science and Software Engineering}%
+ {Alma Mater Studiorum -- University of Bologna}{Cesena}
+ {\textit{with distinction}}{
+ My PhD was focused on engineering large scale systems through the application of aggregate computing and machine learning algorithms. In particular, I explored the application of multi-agent reinforcement learning in the context of cyber-physical swarms -- a type of large-scale system composed of multiple agents that interact with the physical world.
+ }
+\cvitem{}{Thesis: \emph{A language-based software engineering approach for cyber-physical swarms}}
+\cvitem{}{Supervisors: \emph{Mirko Viroli}}
 \cventry{2018--2020}{Master in  Computer Science and Software Engineering}%
  {Alma Mater Studiorum -- University of Bologna}{Cesena}
  {\textit{110 cum Laude}}{
@@ -104,23 +111,23 @@
 \bibliography{pub}
 
 \subsection{Presentations in International Conferences}
-\cventry{2023}{Scala in machine learning scenario: a personal experience}{Scala Italy}{}{}{}
-\cventry{2023}{Macroswarm: A field-based compositional framework for swarm programming}{International Conference on Coordination Models and Languages - \emph{COORDINATION}}{}{}{}
-\cventry{2023}{Scarlib: A
-framework for cooperative many agent deep reinforcement learning in scalh}{International Conference on Coordination Models and Languages - \emph{COORDINATION}}{}{}{}
-\cventry{2022}{Addressing Collective Computations Efficiency: Towards a Platform-level Reinforcement Learning Approach}{International Conference on Autonomic Computing and Self-Organizing Systems - \emph{ACSOS}}{}{}{}
-
-\cventry{2022}{Machine learning for aggregate computing: a research roadmap}{Workshop on DIStributed COLlective Intelligence}{}{}{}
-
-\cventry{2022}{Towards reinforcement learning-based aggregate computing}{International Conference on Coordination Models and Languages - \emph{COORDINATION}}{}{}{}
-
-\cventry{2021}{Research directions for aggregate computing with machine learning}{Doctoral Symposium International Conference on Autonomic Computing and Self-Organizing Systems - \emph{ACSOS}}{}{}{}
-\cventry{2021}{ScaFi-Web: A Web-Based Application for Field-Based Coordination Programming}{International Conference on Coordination Models and Languages - \emph{COORDINATION}}{}{}{}
+\cventry{}{\textbf{COORDINATION 2024}}{}{}{}{Scafi-blocks: A visual aggregate programming environment for low-code swarm design}
+\cventry{}{\textbf{DISCOLI 2024}}{}{}{}{Engineering distributed collective intelligence in cyber-
+physical swarms}
+\cventry{}{\textbf{ACSOS 2023}}{}{}{}{Field-informed Reinforcement Learning of Collective Tasks with Graph Neural Networks}
+\cventry{}{\textbf{Scala Italy  2023}}{}{}{}{Scala in machine learning scenario: a personal experience}
+\cventry{}{\textbf{COORDINATION 2023}}{}{}{}{Macroswarm: A field-based compositional framework for swarm programming}
+\cventry{}{\textbf{COORDINATION 2023}}{}{}{}{Scarlib: A framework for cooperative many agent deep reinforcement learning in Scala}
+\cventry{}{\textbf{ACSOS 2022}}{}{}{}{Addressing Collective Computations Efficiency: Towards a Platform-level Reinforcement Learning Approach}
+\cventry{}{\textbf{DISCOLI 2023}}{}{}{}{Machine learning for aggregate computing: a research roadmap}
+\cventry{}{\textbf{COORDINATION 2022}}{}{}{}{Towards reinforcement learning-based aggregate computing}
+\cventry{}{\textbf{Doctoral Symposium International @ ACSOS 2021}}{}{}{}{Research directions for aggregate computing with machine learning}
+\cventry{}{\textbf{COORDINATION 2021}}{}{}{}{ScaFi-Web: A Web-Based Application for Field-Based Coordination Programming}
 
 %%%%%%% 
 \subsection{Participation in International Conferences}
 \cventry{2024}{Demo and Poster Committee}{Autonomic Computing and Self-Organizing Systems -- ACSOS}{}{}{}
-\cventry{2024}{Program Chair Committe}{Workshop on DIStributed COLlective Intelligence -- DISCOLI}{}{}{}
+\cventry{2024}{Organising Chair Committe}{Workshop on DIStributed COLlective Intelligence -- DISCOLI}{}{}{}
 \cventry{2024}{Program Chair Committe}{MADTECC}{}{}{}
 \cventry{2023}{Artifact Evaluation Committee}{International Conference on Pervasive Computing and Communications - \emph{PerCom}}{}{}{}
 \cventry{2023}{Program Chair Committe}{Workshop on DIStributed COLlective Intelligence - \emph {DISCOLI}}{}{}{}
@@ -129,20 +136,23 @@ framework for cooperative many agent deep reinforcement learning in scalh}{Inter
 \cventry{2021}{Artifact Evaluation Committee}{International Conference on Autonomic Computing and Self-Organizing Systems - \emph{ACSOS}}{}{}{}
 
 \subsection{Volunteering}
+
 \cventry{2022}{Student Volunteer}{International Conference on Distributed Computing Systems - \emph{ICDCS}}{}{}{}
+\cventry{2022}{Student Volunteer}{Internation Conference on Autonomic Computing and Self-Organising Systems - ACSOS}{}{}{}
+
 \subsection{Visiting}
 \cventry{2023}{Visiting PhD}{Aarhus University -- Lukas Esterle}{Aarhus, Denmark}{}{}
 \subsection{Review Activity}
-\cventry{}{Reviewer for several scientific journals}{}{}{}{ Science of Computer Programming, Scientific Programming, Frontiers in Robotics and AI, Hindawi, Autonomous Agents and Multi-Agent Systems}
+\cventry{}{\textbf{Reviewer for several scientific journals}}{}{}{}{ Science of Computer Programming, Scientific Programming, Frontiers in Robotics and AI, Hindawi, Autonomous Agents and Multi-Agent Systems}
 
-\cventry{}{Reviewer for international conferences and Workshop}{}{}{}{ COORDINATION, ACSOS, DISCOLI, AAMAS, PerCom, ASE NIER}
+\cventry{}{\textbf{Reviewer for international conferences and Workshop}}{}{}{}{ COORDINATION, ACSOS, DISCOLI, AAMAS, PerCom, ASE NIER}
 
 \subsection{Research Group Collaboration}
-\cventry{2021 - }{University of Bologna}{Prof. Mirko Viroli}{In Prof. Viroli's research group, my activities have mainly focused on the topics of aggregate computing and multi-agent reinforcement learning applied to cyber swarms systems.}{}{}
-\cventry{2021 - }{University of Turin}{Prof. Ferruccio Damiani}{
-  In Ferruccio Damini's group, our primary focus was on the application of aggregate computing in swarm robotics. This fruitful collaboration resulted in the publication of the paper titled ``A field-based computing approach for sensing-driven clustering in robot swarms.''}{}{}
-\cventry{2021}{St. Gallen University}{Prof. Guido Salvaneschi}{In collaboration with Guido Salvaneschi, we endeavoured to expand the concepts of pulverized architecture through multitier programming languages. Our joint efforts culminated in the publication of the paper titled ``Towards Pulverized Architectures for Collective Adaptive Systems through Multi-tier Programming''}{}{}
-\cventry{2022 -}{Aarhus Universitat}{Prof. Lukas Esterle}{Throughout my time abroad, our research was centred around exploring distributed collective intelligence within the realm of large-scale systems. Our primary emphasis was on the application of graph neural networks for developing distributed controllers.}{}{}
+\cventry{2021 - }{University of Bologna}{Prof. Mirko Viroli}{}{}{In Prof. Viroli's research group, my activities have mainly focused on the topics of aggregate computing and multi-agent reinforcement learning applied to cyber swarms systems.}
+\cventry{2021 - }{University of Turin}{Prof. Ferruccio Damiani}{}{}{
+  In Ferruccio Damini's group, our primary focus was on the application of aggregate computing in swarm robotics. This fruitful collaboration resulted in the publication of the paper titled ``A field-based computing approach for sensing-driven clustering in robot swarms.''}
+\cventry{2021}{St. Gallen University}{Prof. Guido Salvaneschi}{}{}{In collaboration with Guido Salvaneschi, we endeavoured to expand the concepts of pulverized architecture through multitier programming languages. Our joint efforts culminated in the publication of the paper titled ``Towards Pulverized Architectures for Collective Adaptive Systems through Multi-tier Programming''}
+\cventry{2022 -}{Aarhus Universitat}{Prof. Lukas Esterle}{}{}{Throughout my time abroad, our research was centred around exploring distributed collective intelligence within the realm of large-scale systems. Our primary emphasis was on the application of graph neural networks for developing distributed controllers.}
 
 \subsection{PhD Schools}
 \cventry{2023}{PhD Summer School}{10$^{th}$ DeepLearn Summer School}{}{}{}
@@ -150,7 +160,7 @@ framework for cooperative many agent deep reinforcement learning in scalh}{Inter
 
 \section{Teaching}
 \subsection{Courses}
-\cventry{2023}{Software Design and Development}{Alma Mater Studiorum -- University of Bologna}{Bachelor in Computer Science and Engineering}{}{
+\cventry{2023 - today}{Software Design and Development}{Alma Mater Studiorum -- University of Bologna}{Bachelor in Computer Science and Engineering}{}{
     In this course, we explore the principles of software design and development, focusing on the application of object-oriented programming and design patterns.
   }{}
 \cventry{2023}{Introduction to Reinforcement Learning -- 4 hours}%
@@ -165,39 +175,44 @@ framework for cooperative many agent deep reinforcement learning in scalh}{Inter
  {}{}
 
 \cventry{2018 - 2019}{Snap! courses}{CRIAD Coding}{Grade schools}{}{}
-\subsection{Thesis (Co)Supervisor}
-\cventry{2023}{Master Thesis}{Alma Mater Studiorum -- University of Bologna}{Daily Medical Team Briefings in Ambiente Collaborativo con Schermi Multi-Touch}{}{Student: Bazzocchi, Luca}
-\cventry{2023}{Master Thesis}{Alma Mater Studiorum -- University of Bologna}{Gestione degli effetti in linguaggi di programmazione funzionale: tecniche di modellazione e interpretazione}{}{Student: Cavalieri, Giacomo}
-\cventry{2022}{Bachelor Thesis}{Alma Mater Studiorum -- University of Bologna}{Progettazione di un ambiente di programmazione visuale block-based per ScaFi. }{}{Student: Cerioni, Matteo}
-\cventry{2022}{Bachelor Thesis}{Alma Mater Studiorum -- University of Bologna}{ScaFi: Integration and Performance Analysis with Scala Native.}{}{Student: Mancini, Kevin}
-
+\subsection{Thesis (Co)Supervisor - Selected}
+\cventry{2024}{Master Thesis}{}{}{Student: Luce Deluigi}{\textbf{Design and implementation of a scalable domain specific language foundation for ScaFi with Scala 3.}}
+\cventry{2024}{Master Thesis}{}{}{Student: Davide Domini}{\textbf{Aggregate Computing and Many-Agent Reinforcement Learning: Towards a Hybrid Toolchain}}
+\cventry{2023}{Master Thesis}{}{}{Student: Francesco Dente}{\textbf{A functional-reactive perspective on the Aggregate Computing paradigm}}
+\cventry{2023}{Master Thesis}{}{}{Student: Giacomo Cavalieri}{\textbf{Gestione degli effetti in linguaggi di programmazione funzionale: tecniche di modellazione e interpretazione}}
+\cventry{2022}{Bachelor Thesis}{}{}{Student: Cerioni, Matteo}{\textbf{Progettazione di un ambiente di programmazione visuale block-based per ScaFi.}}
+\cventry{2022}{Bachelor Thesis}{}{}{Student: Mancini, Kevin}{\textbf{ScaFi: Integration and Performance Analysis with Scala Native.}}
+\cventry{}{}{}{}{}{For the complete list of supervised thesis, please visit AMS thesis: \url{https://amslaurea.unibo.it/view/relatore/Aguzzi=3AGianluca=3A=3A/}}{}
 \subsection{Talks}
+\cventry{2023}{\textbf{Multi-Agent Reinforcement Learning - Introduction}}{}{}{}{Advanced Software Modelling and Design}
+\cventry{2024}{\textbf{Deep Reinforcement Learning -- Introduction}}{}{}{}
+{Fundamentals of Artifical Intellingence - University of Urbino}
+\cventry{2024}{\textbf{It’s all about effects - Effect systems in Functional Programming}}{}{}{}{Advanced Software Modelling and Design}
+\cventry{2024}{\textbf{Leveraging Large Language Models in Software Engineering}}{}{}{}{Advanced Software Modelling and Design}
+\cventry{2023}{\textbf{Multi-Agent Reinforcement Learning, Unleashing Collective Intelligence}}{}{}{}{Advanced School in Artificial Intelligence Summer School}
+\cventry{2023}{\textbf{Intro to Deep Reinforcement Learning}}{}{}{}
+{Fundamentals of Artifical Intellingence - University of Urbino}
+\cventry{2022}{\textbf{Engineering Cyber-Physical Swarm}}{}{}{}
+{DIGIT lunch meetings -- Aarhus Universitat}%
+\cventry{2022}{\textbf{Multi-Agent Reinforcement Learning, Introduction}}{}{}{}{Talk @ Pervasive Computing - University of Bologna}%
 
-\cventry{2023}{Multi-Agent Reinforcement Learning, Unleashing Collective Intelligence}{}{Talk @ Advanced School in Artificial Intelligence Summer School}{}{}
-\cventry{2023}{Intro to Deep Reinforcement Learning}{University of Urbino}{Talk @ Fundamentals of Artifical Intellingence}{}{}
-\cventry{2022}{Engineering Cyber-Physical Swarm}{Aarhus Universitat}{Talk @ DIGIT lunch meetings}{}{}%
-\cventry{2022}{Multi-Agent Reinforcement Learning, Introduction}{Alma Mater Studiorum -- Università di}{Talk @ Pervasice Computing}{}{}%
-\cventry{2022}{Scala to the large}%
-{Alma Mater Studiorum -- University of Bologna}{Talk @ Programming and Development Paradigms}
-{}{}
-\cventry{2022}{Cross Platform in Scala}%
-{Alma Mater Studiorum -- University of Bologna}{Talk @ Programming and Development Paradigms}
-{}{}
+\cventry{2022}{\textbf{Scala to the large}}{}{}{}%
+{Programming and Development Paradigms - University of Bologna}
 
-\cventry{2021}{On Collective Reinforcement Learning}%
+\cventry{2022}{\textbf{Cross Platform in Scala}}{}{}{}
+{Programming and Development Paradigms - University of Bologna}
+
+\cventry{2021}{\textbf{On Collective Reinforcement Learning}}{}{}{}
 {Alma Mater Studiorum -- University of Bologna}{Talk @ Pervasive Computing}
-{}{}
 
-\cventry{2021}{MVC meets Monad}%
-{Alma Mater Studiorum -- University of Bologna}{Talk @ Programming and Development Paradigms}
-{}{}
+\cventry{2021}{\textbf{MVC meets Monad}}{}{}{}
+{Programming and Development Paradigms -- University of Bologna}
 
-\cventry{2019}{Crea il tuo videogioco in Snap!}%
-{Talk @ Salone dell'Orientamento, Forlì}{}
-{}{}
+\cventry{2019}{\textbf{Create your own video game in Snap!}}{}{}{}
+{Orientation Fair - Forlì}
 
 \section{Awards}
-\cventry{2023}{Best Master Thesis}{Sergio Focardi Awards}{\emph{https://www.serinar.unibo.it/gianluca-aguzzi-si-aggiudica-la-ii-edizione-del-premio-di-laurea-sergio-focardi/}}{}{}
+\cventry{2023}{Best Master Thesis}{Sergio Focardi Awards}{}{}{\emph{https://www.serinar.unibo.it/gianluca-aguzzi-si-aggiudica-la-ii-edizione-del-premio-di-laurea-sergio-focardi/}}
 \cventry{2017}{Prize for Meritous Students}{Alma Mater Studiorum -- University of Bologna, Campus Cesena}{}{}{}
 %\subsection{Student Supervisor}
 
@@ -284,11 +299,11 @@ framework for cooperative many agent deep reinforcement learning in scalh}{Inter
   }
 \end{cvcolumns}
 \subsection{Software Projects}
-\cventry{2023 -- today}{Designer of Macroswarm}{It is a field-based compositional framework for swarm programming.}{}{}{\url{https://github.com/scafi/macro-swarm}}
-\cventry{2023 -- todat}{CO-deisigner of FRASP}{It is a framework for reactive self-organizing programming}{}{}{\url{https://github.com/cric96/distributed-frp}}
-\cventry{2023 -- today}{Designer of Scarlib}{It is a framework for cooperative many agent deep reinforcement learning in Scala}{}{}{\url{https://github.com/ScaRLib-group/ScaRLib}}
-\cventry{2021 -- today}{Co-designer and main contributor of ScaFi-Web}{It is a web-based application allowing in-browser editing, execution, and visualisation of ScaFi programs.}{}{}{\url{https://github.com/scafi/scafi-web}}
-\cventry{2021 -- today}{Designer of scalapy-gym}{It is a Scala facade that enable the usage of open ai gyms in the JVM!}{}{}{\url{https://github.com/cric96/scalapy-gym}}
+\cventry{2023 -- today}{It is a field-based compositional framework for swarm programming.}{Designer of Macroswarm}{}{}{\url{https://github.com/scafi/macro-swarm}}
+\cventry{2023 -- todat}{It is a framework for reactive self-organizing programming}{CO-deisigner of FRASP}{}{}{\url{https://github.com/cric96/distributed-frp}}
+\cventry{2023 -- today}{It is a framework for cooperative many agent deep reinforcement learning in Scala}{Designer of Scarlib}{}{}{\url{https://github.com/ScaRLib-group/ScaRLib}}
+\cventry{2021 -- today}{It is a web-based application allowing in-browser editing and execution of ScaFi programs.}{Co-designer and main contributor of ScaFi-Web}{}{}{\url{https://github.com/scafi/scafi-web}}
+\cventry{2021 -- today}{It is a Scala facade that enable the usage of open ai gyms in the JVM!}{Designer of scalapy-gym}{}{}{\url{https://github.com/cric96/scalapy-gym}}
 %\cventry{2020 -- today}{Co-designer of Fluvium}{An IoT project for river controll that uses AWS lambda}{}{}{\url{https://github.com/sbricco-house/fluvium}}
 \subsection{Open Source Contributions}
 \cventry{2018 -- today}{Development of GUI \& simulator for ScaFi}{}{}{}{\url{https://github.com/scafi/scafi}}
@@ -296,8 +311,8 @@ framework for cooperative many agent deep reinforcement learning in scalh}{Inter
 
 
 \section{Miscellaneous}
-\cventry{2020}{Student class representative @ Alma Mater Studiorum}{}{}{}{}
-\cventry{2018}{Presenting Snap! @ Researcher Night}{}{}{}{The researcher night is an national event that aims to bring the research to the public. In that occasion I presented Snap! to the public as a tool for teaching the computational thinking to the youngest.}
+\cventry{2020}{\textbf{Student class representative @ Alma Mater Studiorum}}{}{}{}{}
+\cventry{2018}{\textbf{Presenting Snap! @ Researcher Night}}{}{}{}{The researcher night is an national event that aims to bring the research to the public. In that occasion I presented Snap! to the public as a tool for teaching the computational thinking to the youngest.}
 %\cventry{2013-2015}{Student class representative @ ITIS}{}{}{}{}
 
 %\section{References}
