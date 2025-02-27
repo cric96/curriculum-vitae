@@ -61,7 +61,7 @@
 
 % bibliography with mutiple entries
 \usepackage{multibib}
-\newcites{book,misc}{{Books},{Others}}
+\newcites{journals,conferences}{{Journals},{Conference, Workshops, and Chapters}}
 %----------------------------------------------------------------------------------
 %            content
 %----------------------------------------------------------------------------------
@@ -79,13 +79,19 @@
   Specifically, my interests lie in the \textbf{design} and \textbf{implementation} of self-adaptive systems through the use of advanced \emph{modeling techniques}, \emph{programming languages}, and \emph{methodologies}.
   Additionally, I explore the integration of machine learning algorithms, particularly \emph{many-agent reinforcement learning}, to enhance the \textbf{effectiveness}, \textbf{efficiency}, and \textbf{intelligence} of these collective programs.
 }
+\cvitem{Bibliometrics}{}{
+  \begin{itemize}
+    \item \textbf{H-index:} 10 (Google Scholar), 8 (Scopus)
+    \item \textbf{Citations:} 236 (Google Scholar), 155 (Scopus)
+  \end{itemize}
+}
 \section{Education}
 
 %%%%%
 \cventry{2020--2023}{PhD in  Computer Science and Software Engineering}%
  {Alma Mater Studiorum -- University of Bologna}{Cesena}
  {\textit{with distinction}}{
- My PhD was focused on engineering large scale systems through the application of aggregate computing and machine learning algorithms. In particular, I explored the application of multi-agent reinforcement learning in the context of cyber-physical swarms -- a type of large-scale system composed of multiple agents that interact with the physical world.
+My doctoral research centered on the design and engineering of large-scale systems, leveraging aggregate computing and advanced machine learning methods. Specifically, I investigated the integration of multi-agent reinforcement learning within cyber-pysical swarms--complex systems comprising numerous interacting agents operating in dynamic environments.
  }
 \cvitem{}{Thesis: \emph{A language-based software engineering approach for cyber-physical swarms}}
 \cvitem{}{Supervisors: \emph{Mirko Viroli}}
@@ -99,34 +105,21 @@
 \cvitem{}{Supervisors: \emph{Mirko Viroli, Roberto Casadei}}
 %%%%
 \cventry{2015--2018}{Bachelor in Computer Science and Software Engineering}{Alma Mater Studiorum -- University of Bologna}{Cesena}{\textit{110 cum Laude}}{}
-
+\cvitem{}{Awards: \emph{Prize for Meritous Students}}
 \cvitem{}{Thesis: \emph{Sviluppo di un front-end di simulazione per applicazioni aggregate nel framework Scafi}}
 \cvitem{}{Supervisors: \emph{Mirko Viroli, Roberto Casadei}}
 
 \cventry{2015--2018}{High School on Computer Science}{ITIS E. Mattei.}{Urbino}{\textit{100}}{}
 
 \section{Publications}
-\subsection{Journals}
-\nocite{*}
-\bibliographystyle{plainyr-rev}
-\bibliography{conf}
-\subsection{Conferences, Workshops, and Chapters}
-%\bibliography{conf}
+\nocitejournals{*}
+\bibliographystylejournals{plainyr-rev}
+\bibliographyjournals{journals}
 
+\nociteconferences{*}
+\bibliographystyleconferences{plainyr-rev}
+\bibliographyconferences{conf}
 \section{Scientific Activities}
-\subsection{Presentations in International Conferences}
-\cventry{}{\textbf{COORDINATION 2024}}{}{}{}{Scafi-blocks: A visual aggregate programming environment for low-code swarm design}
-\cventry{}{\textbf{DISCOLI 2024}}{}{}{}{Engineering distributed collective intelligence in cyber-
-physical swarms}
-\cventry{}{\textbf{ACSOS 2023}}{}{}{}{Field-informed Reinforcement Learning of Collective Tasks with Graph Neural Networks}
-\cventry{}{\textbf{COORDINATION 2023}}{}{}{}{Macroswarm: A field-based compositional framework for swarm programming}
-\cventry{}{\textbf{COORDINATION 2023}}{}{}{}{Scarlib: A framework for cooperative many agent deep reinforcement learning in Scala}
-\cventry{}{\textbf{ACSOS 2022}}{}{}{}{Addressing Collective Computations Efficiency: Towards a Platform-level Reinforcement Learning Approach}
-\cventry{}{\textbf{DISCOLI 2023}}{}{}{}{Machine learning for aggregate computing: a research roadmap}
-\cventry{}{\textbf{COORDINATION 2022}}{}{}{}{Towards reinforcement learning-based aggregate computing}
-\cventry{}{\textbf{Doctoral Symposium International @ ACSOS 2021}}{}{}{}{Research directions for aggregate computing with machine learning}
-\cventry{}{\textbf{COORDINATION 2021}}{}{}{}{ScaFi-Web: A Web-Based Application for Field-Based Coordination Programming}
-
 %%%%%%% 
 \subsection{Participation in International Conferences}
 
@@ -142,12 +135,35 @@ physical swarms}
 \cventry{2022}{International Conference on Coordination Models and Languages -- DisCoTec}{Artifact Evaluation Committee}{}{}{}
 \cventry{2021}{International Conference on Autonomic Computing and Self-Organizing Systems -- ACSOS}{Artifact Evaluation Committee}{}{}{}
 
+\subsection{Presentations in International Conferences}
+\cventry{}{\textbf{COORDINATION 2024}}{}{}{}{Scafi-blocks: A visual aggregate programming environment for low-code swarm design}
+\cventry{}{\textbf{DISCOLI 2024}}{}{}{}{Engineering distributed collective intelligence in cyber-
+physical swarms}
+\cventry{}{\textbf{ACSOS 2023}}{}{}{}{Field-informed Reinforcement Learning of Collective Tasks with Graph Neural Networks}
+\cventry{}{\textbf{COORDINATION 2023}}{}{}{}{Macroswarm: A field-based compositional framework for swarm programming}
+\cventry{}{\textbf{COORDINATION 2023}}{}{}{}{Scarlib: A framework for cooperative many agent deep reinforcement learning in Scala}
+\cventry{}{\textbf{ACSOS 2022}}{}{}{}{Addressing Collective Computations Efficiency: Towards a Platform-level Reinforcement Learning Approach}
+\cventry{}{\textbf{DISCOLI 2023}}{}{}{}{Machine learning for aggregate computing: a research roadmap}
+\cventry{}{\textbf{COORDINATION 2022}}{}{}{}{Towards reinforcement learning-based aggregate computing}
+\cventry{}{\textbf{Doctoral Symposium International @ ACSOS 2021}}{}{}{}{Research directions for aggregate computing with machine learning}
+\cventry{}{\textbf{COORDINATION 2021}}{}{}{}{ScaFi-Web: A Web-Based Application for Field-Based Coordination Programming}
+
+
+\subsection{Awards}
+\cventry{2025}{Seal of Excellence (Marie Curie)}{European Commission}{}{}{}
+\cventry{2024}{Best Poster Award}{ACSOS 2024}{}{}{\emph{https://github.com/DanySK/poster-2024-acsos-imageonomics-drones}}
+\cventry{2023}{Best Master Thesis}{Sergio Focardi Awards}{}{}{\emph{https://www.serinar.unibo.it/gianluca-aguzzi-si-aggiudica-la-ii-edizione-del-premio-di-laurea-sergio-focardi/}}
+
 \subsection{Volunteering}
 \cventry{2022}{International Conference on Distributed Computing Systems - \emph{ICDCS}}{Student Volunteer}{}{}{}
 \cventry{2022}{Internation Conference on Autonomic Computing and Self-Organising Systems - ACSOS}{Student Volunteer}{}{}{}
 
 \subsection{Visiting}
-\cventry{2023}{Visiting PhD}{Aarhus University -- Lukas Esterle}{Aarhus, Denmark}{}{}
+\cventry{2023}{Visiting PhD}{Aarhus University -- Lukas Esterle}{Aarhus, Denmark}{}{
+  During my visit abroad, I focused on applying graph neural networks to develop distributed controllers.
+  This research culminated in the publication of the paper entitled ``Field-informed reinforcement learning of collective tasks with graph neural network''. 
+  Furthermore, I continued collaboration on federated learning for large-scale systems, an effort that also led to the Marie Curie Seal of Excellence.
+}
 \subsection{Review Activity}
 \cventry{}{\textbf{Reviewer for several scientific journals}}{}{}{}{ Science of Computer Programming, Scientific Programming, Frontiers in Robotics and AI, Hindawi, Autonomous Agents and Multi-Agent Systems, Transactions on Autonomous and Adaptive Systems, PeerJ Computer Science, Journal of Medical Systems}
 
@@ -161,9 +177,22 @@ physical swarms}
 \cventry{2021}{St. Gallen University}{Prof. Guido Salvaneschi}{}{}{In collaboration with Guido Salvaneschi, we endeavoured to expand the concepts of pulverized architecture through multitier programming languages. Our joint efforts culminated in the publication of the paper titled ``Towards Pulverized Architectures for Collective Adaptive Systems through Multi-tier Programming''}
 \cventry{2022 -}{Aarhus Universitat}{Prof. Lukas Esterle}{}{}{Throughout my time abroad, our research was centred around exploring distributed collective intelligence within the realm of large-scale systems. Our primary emphasis was on the application of graph neural networks for developing distributed controllers.}
 
+
 \subsection{PhD Schools}
+\cventry{2023}{PhD Summer School}{Bertinoro Summer School}{}{}{}
 \cventry{2023}{PhD Summer School}{10$^{th}$ DeepLearn Summer School}{}{}{}
 \cventry{2021}{PhD Summer School}{22$^{nd}$ European Agent Systems Summer School}{}{}{}
+
+\section{Software Projects}
+\cventry{2023 -- today}{It is a field-based compositional framework for swarm programming.}{Designer of Macroswarm}{}{}{\url{https://github.com/scafi/macro-swarm}}
+\cventry{2023 -- todat}{It is a framework for reactive self-organizing programming}{CO-designer of FRASP}{}{}{\url{https://github.com/cric96/distributed-frp}}
+\cventry{2023 -- today}{It is a framework for cooperative many agent deep reinforcement learning in Scala}{Designer of Scarlib}{}{}{\url{https://github.com/ScaRLib-group/ScaRLib}}
+\cventry{2021 -- today}{It is a web-based application allowing in-browser editing and execution of ScaFi programs.}{Co-designer and main contributor of ScaFi-Web}{}{}{\url{https://github.com/scafi/scafi-web}}
+\cventry{2021 -- today}{It is a Scala facade that enable the usage of open ai gyms in the JVM!}{Designer of scalapy-gym}{}{}{\url{https://github.com/cric96/scalapy-gym}}
+%\cventry{2020 -- today}{Co-designer of Fluvium}{An IoT project for river controll that uses AWS lambda}{}{}{\url{https://github.com/sbricco-house/fluvium}}
+\subsection{Open Source Contributions}
+\cventry{2018 -- today}{Development of GUI \& simulator for ScaFi}{}{}{}{\url{https://github.com/scafi/scafi}}
+\cventry{2021 -- today}{Contributions to ScaFi incarnations in Alchemist}{}{}{}{\url{https://github.com/AlchemistSimulator/Alchemist}}
 
 \section{Teaching}
 \subsection{Courses}
@@ -218,10 +247,6 @@ physical swarms}
 \cventry{2019}{\textbf{Create your own video game in Snap!}}{}{}{}
 {Orientation Fair - Forlì}
 
-\section{Awards}
-\cventry{2024}{Best Poster Award}{ACSOS 2024}{}{}{\emph{https://github.com/DanySK/poster-2024-acsos-imageonomics-drones}}
-\cventry{2023}{Best Master Thesis}{Sergio Focardi Awards}{}{}{\emph{https://www.serinar.unibo.it/gianluca-aguzzi-si-aggiudica-la-ii-edizione-del-premio-di-laurea-sergio-focardi/}}
-\cventry{2017}{Prize for Meritous Students}{Alma Mater Studiorum -- University of Bologna, Campus Cesena}{}{}{}
 %\subsection{Student Supervisor}
 
 \section{Technical Skills}
@@ -306,19 +331,9 @@ physical swarms}
     \cvitem{\languageknowledge{Gradle}{2}}{}{}
   }
 \end{cvcolumns}
-\subsection{Software Projects}
-\cventry{2023 -- today}{It is a field-based compositional framework for swarm programming.}{Designer of Macroswarm}{}{}{\url{https://github.com/scafi/macro-swarm}}
-\cventry{2023 -- todat}{It is a framework for reactive self-organizing programming}{CO-deisigner of FRASP}{}{}{\url{https://github.com/cric96/distributed-frp}}
-\cventry{2023 -- today}{It is a framework for cooperative many agent deep reinforcement learning in Scala}{Designer of Scarlib}{}{}{\url{https://github.com/ScaRLib-group/ScaRLib}}
-\cventry{2021 -- today}{It is a web-based application allowing in-browser editing and execution of ScaFi programs.}{Co-designer and main contributor of ScaFi-Web}{}{}{\url{https://github.com/scafi/scafi-web}}
-\cventry{2021 -- today}{It is a Scala facade that enable the usage of open ai gyms in the JVM!}{Designer of scalapy-gym}{}{}{\url{https://github.com/cric96/scalapy-gym}}
-%\cventry{2020 -- today}{Co-designer of Fluvium}{An IoT project for river controll that uses AWS lambda}{}{}{\url{https://github.com/sbricco-house/fluvium}}
-\subsection{Open Source Contributions}
-\cventry{2018 -- today}{Development of GUI \& simulator for ScaFi}{}{}{}{\url{https://github.com/scafi/scafi}}
-\cventry{2021 -- today}{Contributions to ScaFi incarnations in Alchemist}{}{}{}{\url{https://github.com/AlchemistSimulator/Alchemist}}
-
 
 \section{Miscellaneous}
+\cventry{2025}{\textbf{Presentation at GENERARE}}{}{}{}{Delivered an engaging talk on Large Language Models, demystifying advanced concepts for a broader audience.}
 \cventry{2024}{\textbf{Presenting Aggregate Computing @ Researcher Night}}{}{}{}{In that occasion I presented Aggregate Computing with physical robots highlighting the potential of the paradigm.}
 \cventry{2023}{\textbf{Scala Italy 2023}}{}{}{}{Scala in machine learning scenario: a personal experience}
 \cventry{2020}{\textbf{Student class representative @ Alma Mater Studiorum}}{}{}{}{}
