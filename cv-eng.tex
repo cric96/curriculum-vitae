@@ -75,9 +75,41 @@
 {}{Currently appointed as a Postdoctoral Research Fellow in the COMMONS-WEARS project (funded as a PRIN), focusing on the engineering collective applications in complex, layered environments with multi-mobile edge computing architectures.}
 \subsection{Research Theme}
 \cvitem{}{
-  My current area of research focuses on the coordination of large-scale systems and the application of machine learning algorithms within distributed and multi-agent systems.
-  Specifically, my interests lie in the \textbf{design} and \textbf{implementation} of self-adaptive systems through the use of advanced \emph{modeling techniques}, \emph{programming languages}, and \emph{methodologies}.
-  Additionally, I explore the integration of machine learning algorithms, particularly \emph{many-agent reinforcement learning}, to enhance the \textbf{effectiveness}, \textbf{efficiency}, and \textbf{intelligence} of these collective programs.
+My research sits at the intersection of \emph{collective adaptive systems engineering} (software engineering) and \emph{machine learning} methodologies for distributed system. Particularly, my work contributes to several specific areas:
+\begin{itemize}
+  \item \textbf{Engineering Collective Behaviors:} In this research area, I focus on advancing the macroprogramming paradigm (programming systems from a global perspective) in the context of very large distributed systems (e.g., swarm robotics, smart cities). 
+  I propose novel solutions for managing groups of robots in a distributed way based on spatial computing principles~\citejournals{aguzzi2023field-sensing}, 
+  along with new programming approaches through frameworks like Macroswarm~\citejournals{aguzzi2025macroswarm}. 
+  My work includes fundamental research on how to engineer such applications, 
+  leading to foundational publications on collective autonomy~\citejournals{casadei2021programming} and comprehensive roadmaps for future development~\cite{casadei2024software}. 
+  This research covers several aspects of the programming pipeline, 
+  including runtime monitoring for system safety~\citeconferences{aguzzi2024optimising}, 
+  programming frameworks like ScaFi~\cite{casadei2022scafi} and Macroswarm~\cite{aguzzi2023macroswarm} and others~\cite{aguzzi2024scafi,aguzzi2021scafi}, 
+  novel reactive models for swarm programming~\cite{casadei2023self},
+  and the development of novel architectural patterns for collective computation~\cite{aguzzi2022dynamic}.
+  \item \textbf{Hybrid Methodologies for Collective Intelligence:} In this research area, building on the advancements from my work on collective behaviors, 
+  I integrate machine learning solutions to improve currently manual design approaches. 
+  The goal is to both enhance system adaptability (through learning) 
+  and improve overall efficiency. 
+  This integration was first outlined through comprehensive roadmaps~\cite{aguzzi2022machine,aguzzi2021research}, 
+  then implemented in several ways: 
+  leveraging Multi-Agent Reinforcement Learning (MARL) for program synthesis~\cite{aguzzi2022towards}, 
+  improving macroprogramming execution with scheduling learned via MARL~\cite{aguzzi2022addressing}, 
+  and enhancing current MARL solutions for swarms by using macroprogramming as a way to represent agent state~\cite{aguzzi2023field}.
+  \item \textbf{Advanced Methodologies for Cooperative and Scalable Learning:} 
+  Based on the insights gained from programming scalable systems with macroprogramming, 
+  I bring these advancements to \emph{cooperative learning}, 
+  highlighting the need for scalable solutions. 
+  In this regard, 
+  I propose novel MARL approaches based on neighborhood policies~\cite{DBLP:conf/sac/MalucelliDAV25} 
+  and explore new federated learning solutions that avoid central points of failure~\cite{domini2024field,domini2024proximity} (work that led to a Marie Curie project with an associated Seal of Excellence award).
+  In this area, I also proposed novel framework for cooperative many agent deep reinforcement learning in Scala~\cite{domini2023scarlib} and novel simulation pipeline for large-scale systems~\cite{DBLP:conf/dsrt/DominiAPV24}.
+  \item \textbf{Generative AI for Modern Applications:} 
+  This area represents a natural continuation of my previous work, 
+  particularly focusing on how to use generative AI for designing modern distributed applications.
+   Initial work explores how to integrate small LLMs in chatbots for healthcare management~\cite{tschope2025novel,magnini2025open}. During this period, I've also supervised several theses on code generation with LLMs for domain-specific languages, 
+   with the aim of integrating these advancements with macroprogramming paradigms to further enhance collective system development.
+\end{itemize}
 }
 \cvitem{Bibliometrics}{}{
   \begin{itemize}
@@ -101,6 +133,7 @@ My doctoral research centered on the design and engineering of large-scale syste
   In this master I focused on the study of programming languages, software engineering, and distributed systems. I also explored the application of aggregate computing in the development of large-scale systems.
   Moreover, I developed a strong interest in the application of machine learning algorithms in the context of distributed systems, particularly in the field of multi-agent reinforcement learning.
  }
+\cvitem{}{Awards: \emph{Best Master Thesis, Ca Foscari Award}}{}
 \cvitem{}{Thesis: \emph{Scafi web: a Scala-JavaScript platform for executing, simulating, and controlling aggregate computing systems}}
 \cvitem{}{Supervisors: \emph{Mirko Viroli, Roberto Casadei}}
 %%%%
@@ -136,17 +169,17 @@ My doctoral research centered on the design and engineering of large-scale syste
 \cventry{2021}{International Conference on Autonomic Computing and Self-Organizing Systems -- ACSOS}{Artifact Evaluation Committee}{}{}{}
 
 \subsection{Presentations in International Conferences}
-\cventry{}{\textbf{COORDINATION 2024}}{}{}{}{Scafi-blocks: A visual aggregate programming environment for low-code swarm design}
+\cventry{}{\textbf{COORDINATION 2024}}{}{}{}{Scafi-blocks: A visual aggregate programming environment for low-code swarm design~\citeconferences{aguzzi2024scafi}}
 \cventry{}{\textbf{DISCOLI 2024}}{}{}{}{Engineering distributed collective intelligence in cyber-
-physical swarms}
-\cventry{}{\textbf{ACSOS 2023}}{}{}{}{Field-informed Reinforcement Learning of Collective Tasks with Graph Neural Networks}
-\cventry{}{\textbf{COORDINATION 2023}}{}{}{}{Macroswarm: A field-based compositional framework for swarm programming}
-\cventry{}{\textbf{COORDINATION 2023}}{}{}{}{Scarlib: A framework for cooperative many agent deep reinforcement learning in Scala}
-\cventry{}{\textbf{ACSOS 2022}}{}{}{}{Addressing Collective Computations Efficiency: Towards a Platform-level Reinforcement Learning Approach}
-\cventry{}{\textbf{DISCOLI 2023}}{}{}{}{Machine learning for aggregate computing: a research roadmap}
-\cventry{}{\textbf{COORDINATION 2022}}{}{}{}{Towards reinforcement learning-based aggregate computing}
-\cventry{}{\textbf{Doctoral Symposium International @ ACSOS 2021}}{}{}{}{Research directions for aggregate computing with machine learning}
-\cventry{}{\textbf{COORDINATION 2021}}{}{}{}{ScaFi-Web: A Web-Based Application for Field-Based Coordination Programming}
+physical swarms~\citeconferences{aguzzi2024engineering}}
+\cventry{}{\textbf{ACSOS 2023}}{}{}{}{Field-informed Reinforcement Learning of Collective Tasks with Graph Neural Networks~\citeconferences{aguzzi2023field}}
+\cventry{}{\textbf{COORDINATION 2023}}{}{}{}{Macroswarm: A field-based compositional framework for swarm programming~\citeconferences{aguzzi2023macroswarm}}
+\cventry{}{\textbf{COORDINATION 2023}}{}{}{}{Scarlib: A framework for cooperative many agent deep reinforcement learning in Scala~\citeconferences{domini2023scarlib}}
+\cventry{}{\textbf{ACSOS 2022}}{}{}{}{Addressing Collective Computations Efficiency: Towards a Platform-level Reinforcement Learning Approach~\citeconferences{aguzzi2022addressing}}
+\cventry{}{\textbf{DISCOLI 2023}}{}{}{}{Machine learning for aggregate computing: a research roadmap~\citeconferences{aguzzi2022machine}}
+\cventry{}{\textbf{COORDINATION 2022}}{}{}{}{Towards reinforcement learning-based aggregate computing~\citeconferences{aguzzi2022towards}}
+\cventry{}{\textbf{Doctoral Symposium International @ ACSOS 2021}}{}{}{}{Research directions for aggregate computing with machine learning~\citeconferences{aguzzi2021research}}
+\cventry{}{\textbf{COORDINATION 2021}}{}{}{}{ScaFi-Web: A Web-Based Application for Field-Based Coordination Programming~\citeconferences{aguzzi2021scafi}}
 
 
 \subsection{Awards}
