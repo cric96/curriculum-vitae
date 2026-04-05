@@ -15,11 +15,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  success:
+  Setup-Compile-Deploy:
     permissions:
       contents: write
     runs-on: ubuntu-latest
     steps:
-      - uses: DanySK/compile-and-publish-all-latex@2.0.28
+      - uses: DanySK/compile-and-publish-all-latex@2.2.3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
