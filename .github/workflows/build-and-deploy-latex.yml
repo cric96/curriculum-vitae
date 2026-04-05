@@ -1,25 +1,50 @@
-name: Build LaTeX and deploy on GitHub Releases
+name: Build and Release CV
+
 on:
   push:
-    tags: '*'
-    branches-ignore:
-      - 'autodelivery**'
-      - 'bump-**'
-      - 'renovate/**'
-    paths-ignore:
-      - 'README.md'
-      - 'CHANGELOG.md'
-      - 'LICENSE'
-      - 'renovate.json'
+    branches: [ main ]
+    tags: [ 'v*' ]
   pull_request:
+    branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  Setup-Compile-Deploy:
-    permissions:
-      contents: write
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: DanySK/compile-and-publish-all-latex@2.2.3
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compile LaTeX
+        uses: xu-cheng/latex-action@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          root_file: cv-eng.tex
+          args: -pdf -interaction=nonstopmode -halt-on-error
+
+      - name: Generate version tag
+        id: tag_version
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: anothrNick/github-tag-action@1.67.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          DEFAULT_BUMP: patch
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cv-eng-pdf
+          path: cv-eng.pdf
+
+      - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/') || (github.ref == 'refs/heads/main' && steps.tag_version.outputs.new_tag != '')
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag_version.outputs.new_tag || github.ref_name }}
+          files: cv-eng.pdf
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
