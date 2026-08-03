@@ -75,6 +75,7 @@
 % adjust the page margins
 \usepackage[scale=0.75]{geometry}
 \usepackage{needspace}
+\usepackage{multicol}
 %\setlength{\hintscolumnwidth}{3cm}                % if you want to change the width of the column with the dates
 %\setlength{\makecvheadnamewidth}{10cm}            % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
 % setting the colours according to \moderncvcolor
@@ -179,6 +180,31 @@
    \item\relax}%
   {\end{list}}
 
+% Enumerations of venues (review activity, service) read as an undifferentiated run-on
+% when separated by middots. This lists them one per line, aligned with the main column
+% like \cvprose, but balanced over #1 columns so a long list still stays compact.
+% \multicols needs a real \columnwidth, which the surrounding list supplies via
+% \linewidth, hence the explicit assignment. It also refuses a one-column request
+% ("doesn't seem a good idea") and silently gives two instead, so [1] -- for lists whose
+% items are too long to share a line -- has to bypass the environment altogether.
+\makeatletter
+\newcount\cvlist@cols
+\newenvironment{cvlist}[1][2]%
+  {\begin{cvprose}%
+   \cvlist@cols=#1\relax
+   \setlength{\multicolsep}{0pt}%
+   \setlength{\columnsep}{1.2em}%
+   \setlength{\columnwidth}{\linewidth}%
+   \ifnum\cvlist@cols>\@ne\begin{multicols}{#1}\fi
+   \begin{itemize}%
+     \setlength{\itemsep}{.1ex}%
+     \setlength{\parskip}{0pt}%
+     \setlength{\topsep}{0pt}}%
+  {\end{itemize}%
+   \ifnum\cvlist@cols>\@ne\end{multicols}\fi
+   \end{cvprose}}
+\makeatother
+
 % Year band: groups the entries beneath it, the way the reference CV separates
 % academic years. The year is one of the few places bold is allowed.
 \newcommand{\cvyear}[1]{%
@@ -217,10 +243,11 @@
 
 \cvsection{Highlights}
 \cvitem{Education}{PhD with distinction; IEEE TCSC \underline{Outstanding PhD Dissertation Award}. See Education and Scientific Activities.}
+\cvitem{Qualification}{\underline{Italian National Scientific Qualification (ASN)} as Associate Professor, sector 09/H1, valid 2026--2038. See National Scientific Qualification.}
 \cvitem{Appointment}{Postdoctoral Research Fellow, University of Bologna, on two consecutive contracts: November 2023--November 2025 and November 2025--November 2026. See Research Positions.}
 \cvitem{Publications}{63 publications: 20 journal articles, 26 conference papers, 11 workshop papers, 3 book chapters, and 3 preprints. See Publications.}
 \cvitem{Bibliometrics}{605 citations, h-index 15 (Google Scholar); 419 citations, h-index 13 (Scopus). See Research Profile.}
-\cvitem{Teaching}{326 course hours and 240 tutoring hours; 39 supervised theses. See Teaching.}
+\cvitem{Teaching}{326 course hours and 240 tutoring hours; 39 supervised theses; 2 PhD students mentored. See Teaching.}
 \cvitem{Recognition}{Five major awards, including the IEEE TCSC dissertation award and the \underline{Seal of Excellence (Marie Curie)}, European Commission 2025; USD 40,000 in Google research awards. See Scientific Activities.}
 %\cvitem{Leadership}{AAMAS Area Chair; ACSOS Web and AI Chair; COORDINATION Artifact Evaluation Chair; two editorial appointments; visiting period at Aarhus University; seven invited talks. See Scientific Activities.}
 \cvitem{Software}{Principal research software: Phyelds, MacroSwarm, FRASP, ScaRLib, and ScaFi-Web. See Software Projects.}
@@ -288,6 +315,13 @@ My research sits at the intersection of \emph{collective adaptive systems engine
 \cventry{2018--2020}{Master in CS \& Software Engineering}{UniBO}{Cesena}{110/110 cum laude}{Focus: Distributed systems, aggregate computing, and MARL. \newline \textbf{Awarded Best Master Thesis (Sergio Focardi Award)}. \newline Thesis: \emph{ScaFi Web: a Scala-JavaScript platform for executing, simulating, and controlling aggregate computing systems}.}
 \cventry{2015--2018}{Bachelor in CS \& Software Engineering}{UniBO}{Cesena}{110/110 cum laude}{\textbf{Awarded Prize for Meritous Students}. \newline Thesis: \emph{Sviluppo di un front-end di simulazione per applicazioni aggregate nel framework Scafi}.}
 \cventry{2010--2015}{High School on Computer Science}{ITIS E. Mattei}{Urbino}{100/100}{}
+
+\cvsection{National Scientific Qualification}
+\cvitem{Qualification}{Italian National Scientific Qualification (\emph{Abilitazione Scientifica Nazionale}, ASN) as \textbf{Associate Professor} (Fascia II).}
+\cvitem{Sector}{09/H1 --- \emph{Sistemi di Elaborazione delle Informazioni} (Information Processing Systems).}
+\cvitem{Session}{ASN 2023 round, sixth quadrimester (procedure: 22 December 2025 --- 22 July 2026).}
+\cvitem{Validity}{30 July 2026 --- 30 July 2038.}
+\cvitem{Official result}{\href{https://asn23.cineca.it/pubblico/miur/esito/09\%252FH1/2/6}{asn23.cineca.it --- 09/H1, Fascia II, 6\textsuperscript{th} quadrimester}}
 
 \cvsection{Publications}
 Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which the paper is published in a range from the year it is accepted to the year of publication (e.g., if a paper is accepted in 2023, I took the max quartile of 2022 - 2023).
@@ -450,6 +484,11 @@ Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which 
 \cvitem{}{\emph{Bachelor's thesis}}
 \cvitem{D. Grushchak}{Piattaforma a Supporto del Monitoraggio di Sistemi di Computazione Aggregata: Caso di Studio ScaFi-Web~\citeconferences{grushchak2024decentralized}}
 
+\cvsubsection{PhD Mentorship}
+\cvitem{Summary}{Two PhD students mentored at the University of Bologna (DISI), under the formal supervision of Prof. Mirko Viroli. Day-to-day research guidance: problem framing, experimental design, and paper writing.}
+\cvitem{D. Domini}{Davide Domini (PhD student, former Master's student): I have been a de-facto co-supervisor of Davide since his Master's thesis (2023) and throughout his PhD (2023--2026). Davide's research has focussed on decentralised federated learning and many-agent reinforcement learning for collective adaptive systems. The mentoring is also witnessed by 18 co-authored publications during his PhD --- 15 peer-reviewed (6 journal articles, 8 conference papers, 1 workshop paper) and 3 preprints --- and by the Marie Curie Seal of Excellence obtained on this line of work.}
+\cvitem[.7em]{N. Farabegoli}{Nicolas Farabegoli (PhD student): I have been mentoring Nicolas during his PhD (2023--2026). Nicolas' research has focussed on distributed middlewares and deployment platforms for collective computing systems. The mentoring is also witnessed by 9 co-authored publications during his PhD (3 journal articles, 5 conference papers, 1 workshop paper).}
+
 \cvsubsection{Tutoring}
 \cvitem{Summary}{240 hours over four academic years (2022--2025), as tutor for two Master's courses at the University of Bologna: 30 hours per course per year. Laboratory and exercise activities.}
 
@@ -517,8 +556,33 @@ Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which 
 \cventry{2025}{Managing Guest Editor}{MDPI Applied Sciences (IF 2.5)}{}{}{Special issue: \emph{Emerging Techniques in Engineering Intelligent Agents and Multi-Agent Systems}. \url{https://www.mdpi.com/journal/applsci/special_issues/36128M0RBR}}
 
 \cvsubsection{Review Activity}
-\cvitem{Journals}{Nature Communications $\cdot$ ACM Transactions on Autonomous and Adaptive Systems $\cdot$ Autonomous Agents and Multi-Agent Systems $\cdot$ Future Generation Computer Systems $\cdot$ Pervasive and Mobile Computing $\cdot$ Artificial Intelligence Review $\cdot$ Frontiers in Robotics and AI $\cdot$ BMJ Open $\cdot$ Elsevier Journal of Medical Systems $\cdot$ Science of Computer Programming $\cdot$ Logical Methods in Computer Science $\cdot$ Elsevier IoT $\cdot$ PeerJ Computer Science $\cdot$ MDPI Sensors $\cdot$ MDPI AI $\cdot$ Scientific Programming}
-\cvitem{Conferences}{COORDINATION (2023--2025) $\cdot$ ACSOS (2023--2026) $\cdot$ AAMAS (2023, 2025) $\cdot$ PerCom (2023) $\cdot$ ICAART (2023)}
+\cvitem{Journals}{16 venues.}
+\begin{cvlist}
+  \item Nature Communications
+  \item ACM Transactions on Autonomous and Adaptive Systems
+  \item Autonomous Agents and Multi-Agent Systems
+  \item Future Generation Computer Systems
+  \item Pervasive and Mobile Computing
+  \item Artificial Intelligence Review
+  \item Frontiers in Robotics and AI
+  \item BMJ Open
+  \item Springer Journal of Medical Systems
+  \item Science of Computer Programming
+  \item Logical Methods in Computer Science
+  \item Elsevier Internet of Things
+  \item PeerJ Computer Science
+  \item MDPI Sensors
+  \item MDPI AI
+  \item Scientific Programming
+\end{cvlist}
+\cvitem{Conferences}{5 venues.}
+\begin{cvlist}
+  \item COORDINATION (2023--2025)
+  \item ACSOS (2023--2026)
+  \item AAMAS (2023, 2025)
+  \item PerCom (2023)
+  \item ICAART (2023)
+\end{cvlist}
 
 \cvsubsection{Visiting}
 \cventry{August--November 2023}{Visiting PhD Researcher}{Aarhus University}{Denmark}{}{Host: Prof. Lukas Esterle. Developed graph-neural-network-based distributed controllers, leading to work on field-informed reinforcement learning; continued collaboration on federated learning for large-scale systems contributed to the Marie Curie Seal of Excellence.}
@@ -773,7 +837,37 @@ Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which 
 \cventry{2018}{Presenting Snap! @ Researcher Night}{}{}{}{In that occasion I presented Snap! to the public as a tool for teaching the computational thinking to the youngest.}
 %\cventry{2013-2015}{Student class representative @ ITIS}{}{}{}{}
 
-%\section{References}
+% Keep the heading with both named referees; splitting them across a page reads as if
+% the section had ended.
+\Needspace{16\baselineskip}
+\cvsection{Referees}
+\cvitem{M. Viroli}{Prof. Mirko Viroli, Full Professor, Department of Computer Science and Engineering (DISI), Alma Mater Studiorum --- Università di Bologna.\newline Prof. Viroli was my Master's thesis and PhD advisor, and is my supervisor on both postdoctoral contracts. The collaboration is witnessed by 48 co-authored publications (2021--2026).}
+\cvitem[.7em]{R. Casadei}{Prof. Roberto Casadei, Senior Assistant Professor, Department of Computer Science and Engineering (DISI), Alma Mater Studiorum --- Università di Bologna.\newline Prof. Casadei has been my closest research collaborator since my PhD, with 20 co-authored publications (2021--2026) on macroprogramming and collective adaptive systems, including the ScaFi framework~\citejournals{casadei2022scafi}.}
+\cvitem[.7em]{D. Pianini}{Prof. Danilo Pianini, Associate Professor, Department of Computer Science and Engineering (DISI), Alma Mater Studiorum --- Università di Bologna.\newline Prof. Pianini has been a long-standing collaborator, with 15 co-authored publications (2021--2026), notably on simulation infrastructure and toolchains for large-scale collective systems~\citeconferences{domini2024reusable}.}
+
+\cvsubsection{Further Referees from Academia}
+\cvitem{}{Further referees for my academic profile include:}
+\begin{cvlist}[1]
+  \item Prof. Lukas Esterle --- Aarhus University, Denmark (host of my visiting period; 7 co-authored publications)
+  \item Prof. Guido Salvaneschi --- University of St.\ Gallen, Switzerland
+  \item Prof. Alessandro Papadopoulos --- Mälardalen University, Sweden
+  \item Prof. Ivana Dusparic --- Trinity College Dublin, Ireland
+  \item Prof. Kenji Tei --- Waseda University, Japan
+  \item Prof. Sara Montagna --- University of Urbino Carlo Bo, Italy 
+  \item Prof. Andrea Omicini --- Alma Mater Studiorum, Università di Bologna, Italy
+  \item Prof. Alessandro Ricci --- Alma Mater Studiorum, Università di Bologna, Italy (co-author on generative AI for agent-oriented programming~\citeconferences{ciatto2025exploiting})
+  \item Prof. Ferruccio Damiani --- University of Turin, Italy
+  \item Prof. Gianluca Torta --- University of Turin, Italy
+  \item Prof. Giorgio Audrito --- University of Turin, Italy 
+  \item Prof. Walter Cazzola --- University of Milan, Italy (co-author on differentiable simulators for efficient training~\citeconferences{bertolotti2025shac++})
+  \item Prof. Stefano Ferretti --- University of Bologna, Italy (5 co-authored publications)
+  \item Prof. Franco Zambonelli --- University of Modena and Reggio Emilia, Italy
+  \item Prof. Stefano Mariani --- University of Modena and Reggio Emilia, Italy
+  \item Prof. Claudio Savaglio --- University of Calabria, Italy 
+  \item Prof. Antonio Liotta --- Free University of Bozen-Bolzano, Italy
+  \item Prof. Martino Francesco Pengo --- Istituto Auxologico Italiano IRCCS and University of Milano-Bicocca, Italy 
+\end{cvlist}
+
 
 % Publications from a BibTeX file without multibib
 %  for numerical labels: \renewcommand{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}% CONSIDER MERGING WITH PREAMBLE PART
