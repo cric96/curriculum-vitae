@@ -9,8 +9,63 @@
 \documentclass[10pt,a4paper,roman]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
 
 % moderncv themes
-\moderncvstyle{banking}                             % style options are 'casual' (default), 'classic', 'banking', 'oldstyle' and 'fancy'
-\moderncvcolor{burgundy}                               % color options 'black', 'blue' (default), 'burgundy', 'green', 'grey', 'orange', 'purple' and 'red'
+% The 'classic' style gives the hint-column body: every label sits in a right-aligned
+% column of its own instead of being bolded inline. The layout then carries the
+% structure, so bold is free to mean actual emphasis (see the emphasis policy below).
+\moderncvstyle{classic}
+\moderncvhead[nodetails]{3}                         % banking's centred name head
+
+%----------------------------------------------------------------------------------
+%            typography
+%----------------------------------------------------------------------------------
+% XCharter (a modernised Charter) for running text, Fira Sans for the name, headings
+% and the hint column. The serif/sans contrast is what marks structure, which keeps
+% bold free to mean actual emphasis (see the emphasis policy below). Both are OpenType
+% families shipped with TeX Live, so the CI build needs no extra fonts.
+\usepackage[T1]{fontenc}
+\usepackage{XCharter}
+\usepackage[scaled=0.94]{FiraSans}                  % Fira's x-height runs large; scale it to Charter
+\usepackage[charter]{newtxmath}                     % matching math for the bullets/middots
+\usepackage{microtype}                              % protrusion + the \textls used by \section
+
+\renewcommand*{\namefont}{\sffamily\fontsize{22}{26}\selectfont\bfseries}
+\renewcommand*{\titlefont}{\sffamily\fontsize{12}{16}\selectfont\mdseries}
+\renewcommand*{\sectionfont}{\sffamily\normalsize\bfseries}
+\renewcommand*{\subsectionfont}{\sffamily\normalsize\bfseries}
+\renewcommand*{\hintfont}{\sffamily\small}
+\renewcommand*{\pagenumberfont}{\sffamily\scriptsize}
+
+%----------------------------------------------------------------------------------
+%            colour
+%----------------------------------------------------------------------------------
+% One accent hue, used only on structure: the name, the section rules, the dates and
+% the links. Heading words and body text stay near-black, so the CV still reads
+% correctly in greyscale print.
+\moderncvcolor{black}                               % base palette; color1/color2 overridden below
+\definecolor{accent}{HTML}{24456B}                  % slate blue
+\colorlet{color1}{accent}
+\colorlet{color2}{black!55}
+% The style files \colorlet the semantic colours *before* the palette above exists, so
+% they captured the defaults and every one of them has to be re-issued here.
+\colorlet{firstnamecolor}{accent!65}
+\colorlet{lastnamecolor}{accent}
+\colorlet{namecolor}{accent}
+\colorlet{titlecolor}{black!55}
+\colorlet{addresscolor}{black!55}
+\colorlet{quotecolor}{black!70}
+\colorlet{sectioncolor}{black!88}
+\colorlet{subsectioncolor}{black!88}
+\colorlet{bodyrulecolor}{accent}
+\colorlet{hintstylecolor}{black!62}
+\colorlet{datecolor}{accent}                        % years in the hint column, and year bands
+\colorlet{skillmatrixfullcolor}{accent}
+\colorlet{skillmatrixemptycolor}{black!15}
+% moderncv's icon set uses a hollow circle for first-level bullets; a small solid dot
+% sits better against the serif body.
+\renewcommand*{\labelitemi}{\strut\textcolor{accent}{\tiny\faCircle}}
+% hyperref is loaded by moderncv at the end of the preamble, so \hypersetup has to wait
+% for it; this hook is registered after moderncv's own and therefore runs later.
+\AtEndPreamble{\hypersetup{colorlinks=true,urlcolor=accent,linkcolor=accent,citecolor=accent}}
 %\renewcommand{\familydefault}{\sfdefault}         % to set the default font; use '\sfdefault' for the default sans serif font, '\rmdefault' for the default roman one, or any tex font name
 %\nopagenumbers{}                                  % uncomment to suppress automatic page numbering for CVs longer than one page
 % character encoding
@@ -19,34 +74,36 @@
 
 % adjust the page margins
 \usepackage[scale=0.75]{geometry}
+\usepackage{needspace}
 %\setlength{\hintscolumnwidth}{3cm}                % if you want to change the width of the column with the dates
 %\setlength{\makecvheadnamewidth}{10cm}            % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
 % setting the colours according to \moderncvcolor
-\colorlet{languagecolor}{color1}
-\colorlet{nolanguagecolor}{color2}
+\colorlet{languagecolor}{accent}
+\colorlet{nolanguagecolor}{black!15}
 \newcount\languagecount
+% One skill row: name first (plain — the dots carry the rating), then the level dots.
+% Emits its own line break so it can sit directly inside a \cvcolumn cell; it must NOT
+% be wrapped in \cvitem, which would nest a full-width tabular inside a narrow column.
 \newcommand\languageknowledge[2]
   {%
-    % if you change the 4cm you can change the distance, the 4cm is the space
-    % reserved for the language's name, immediately after it the dots are
-    % printed.
-    %\hfill % if you want the dots to be at the right margin
     \languagecount=0
-    \loop\ifnum\languagecount<#2
-      \advance\languagecount1
-      \textcolor{languagecolor}{$\bullet$}%
-    \repeat
-    \loop\ifnum\languagecount<5
-      \advance\languagecount1
-      \textcolor{nolanguagecolor}{$\bullet$}%
-    \repeat
-    \makebox[3cm][l]{ \textbf{#1}}%
+    \makebox[\linewidth][l]{%
+      #1\hfill
+      \loop\ifnum\languagecount<#2
+        \advance\languagecount1
+        \textcolor{languagecolor}{$\bullet$}%
+      \repeat
+      \loop\ifnum\languagecount<5
+        \advance\languagecount1
+        \textcolor{nolanguagecolor}{$\bullet$}%
+      \repeat}%
+    \\%
   }
 
 % personal data
 \name{Gianluca}{Aguzzi}
-\title{\\Postdoctoral Researcher}
-\address{Via Mulini 23/25}{47521}{Italy, Cesena}
+\title{Postdoctoral Researcher}
+\address{Via dell'Università, 50 --- 47521 Cesena, Italy}{}{}
 \email{gianluca.aguzzi@unibo.it}
 \homepage{gianluca.aguzzi.dev/}
 \social[orcid]{0000-0002-1553-4561}
@@ -59,39 +116,151 @@
 %   to redefine the bibliography heading string ("Publications")
 %\renewcommand{\refname}{Articles}
 
-% bibliography with mutiple entries
+% bibliography with multiple publication categories
 \usepackage{multibib}
-\newcites{journals,conferences}{{Journals},{Conference, Workshops, and Chapters}}
+\newcites{journals,conferences,workshops,chapters,preprints}%
+  {{Journal Articles},{Conference Papers},{Workshop Papers},{Book Chapters},{Preprints}}
+%----------------------------------------------------------------------------------
+%            layout refinements
+%----------------------------------------------------------------------------------
+% Section headings: letterspaced sans capitals at the left margin over a thin accent
+% rule, rather than moderncv-classic's heavy bar in the hint column. Lighter, and it
+% lets the heading span the page instead of competing with the entries beneath it.
+% Subsections keep title case and carry no rule, so the two levels stay distinct.
+\makeatletter
+\RenewDocumentCommand{\section}{sm}{%
+  \par\addvspace{2.6ex}%
+  \phantomsection{}%
+  \addcontentsline{toc}{section}{#2}%
+  \noindent{\sectionfont\textcolor{sectioncolor}{\textls[90]{\MakeUppercase{#2}}}}%
+  \par\nobreak\vskip.6ex%
+  \noindent{\color{bodyrulecolor}\rule{\textwidth}{.7pt}}%
+  \par\nobreak\addvspace{1.1ex}\@afterheading}
+
+\RenewDocumentCommand{\subsection}{sm}{%
+  \par\addvspace{1.6ex}%
+  \phantomsection{}%
+  \addcontentsline{toc}{subsection}{#2}%
+  \noindent{\subsectionfont\textcolor{subsectioncolor}{#2}}%
+  \par\nobreak\addvspace{.6ex}\@afterheading}
+\makeatother
+
+% Dates belong to the structure, so they take the accent; the other hint-column labels
+% (Role, Hours, Audience...) stay grey. \cvitem wraps the hint in \hintstyle, whose
+% \textcolor is the outer one -- the \textcolor here is applied last and therefore wins.
+\renewcommand*{\cventry}[7][.25em]{%
+  \cvitem[#1]{\textcolor{datecolor}{#2}}{%
+    {\bfseries#3}%
+    \ifthenelse{\equal{#4}{}}{}{, {\slshape#4}}%
+    \ifthenelse{\equal{#5}{}}{}{, #5}%
+    \ifthenelse{\equal{#6}{}}{}{, #6}%
+    \strut%
+    \ifx&#7&%
+    \else{\newline{}\begin{minipage}[t]{\linewidth}\small#7\end{minipage}}\fi}}
+
+% Long-form prose aligned with the main column. \cvitem wraps its content in a
+% tabular, which cannot break across pages -- a multi-page block put inside one
+% would be shunted whole to the next page, leaving a half-empty one behind. This
+% indents by the hint column instead, so the text flows and breaks normally.
+% Built as a list rather than by shifting \leftskip: LaTeX's \list overwrites \leftskip
+% from \@totalleftmargin, so a nested itemize would outdent back out of the column.
+\newenvironment{cvprose}%
+  {\begin{list}{}{%
+     \setlength{\leftmargin}{\dimexpr\hintscolumnwidth+\separatorcolumnwidth\relax}%
+     \setlength{\rightmargin}{0pt}%
+     \setlength{\listparindent}{0pt}%
+     \setlength{\itemindent}{0pt}%
+     \setlength{\labelwidth}{0pt}%
+     % \labelsep is deliberately left alone: nested lists inherit it, and zeroing it
+     % here would butt the bullets of an inner itemize against their text.
+     \setlength{\topsep}{.25em}%
+     \setlength{\parsep}{.5em}%
+     \setlength{\partopsep}{0pt}}%
+   \item\relax}%
+  {\end{list}}
+
+% Year band: groups the entries beneath it, the way the reference CV separates
+% academic years. The year is one of the few places bold is allowed.
+\newcommand{\cvyear}[1]{%
+  \par\addvspace{1.1ex}\Needspace{5\baselineskip}%
+  \cvitem[.35ex]{\textcolor{datecolor}{\textbf{#1}}\\[-.75ex]%
+    {\color{bodyrulecolor}\rule{\hintscolumnwidth}{.5pt}}}{}%
+  \par\nobreak}
+
+% Consistent section spacing and enough room to keep headings with their first entry.
+\newcommand{\cvsection}[1]{\Needspace{6\baselineskip}\section{#1}}
+\newcommand{\cvsubsection}[1]{\Needspace{4\baselineskip}\subsection{#1}}
 %----------------------------------------------------------------------------------
 %            content
 %----------------------------------------------------------------------------------
 \begin{document}
+% moderncv initially measures the footer using page 1; widen it for two digits.
+\ifcsdef{pagenumberwidth}{\settowidth{\pagenumberwidth}{%
+  \color{color2}\pagenumberfont\strut 88/88}}{}
 
 \makecvtitle
 
-\subsection{Current Placement}
-\cventry{2023 November -- 2026 November }{Postdoctoral Fellow (``assegno di ricerca'')}%
-{Alma Mater Studiorum -- University of Bologna}{Cesena}
-{}{Currently appointed as a Postdoctoral Research Fellow in the COMMONS-WEARS project (funded as a PRIN), focusing on the engineering collective applications in complex, layered environments with multi-mobile edge computing architectures.}
-\subsection{Research Profile}
-\cvitem{}{
-My research sits at the intersection of \emph{collective adaptive systems engineering} (software engineering) and \emph{machine learning} methodologies for distributed system. Particularly, my work contributes to several specific areas:
+\cvsection{Statement of Truth}
+\cvitem{}{I hereby certify that all content reported in this document is true. This document is digitally signed by the undersigned.}
+
+\cvsection{Personal Data}
+\cvitem{Citizenship}{Italian}
+\cvitem{Affiliation}{Department of Computer Science and Engineering (DISI), Alma Mater Studiorum --- University of Bologna}
+\cvitem{Address}{Via dell'Università, 50 --- 47521 Cesena (FC), Italy}
+\cvitem{Institutional email}{\href{mailto:gianluca.aguzzi@unibo.it}{gianluca.aguzzi@unibo.it}}
+\cvitem{ORCID}{\href{https://orcid.org/0000-0002-1553-4561}{0000-0002-1553-4561}}
+\cvitem{Personal website}{\href{https://gianluca.aguzzi.dev/}{https://gianluca.aguzzi.dev/}}
+\cvitem{GitHub}{\href{https://github.com/cric96}{https://github.com/cric96}}
+
+\cvsection{Short Bio}
+\cvitem{}{Gianluca Aguzzi is a Postdoctoral Research Fellow at the Department of Computer Science and Engineering of the University of Bologna. His research combines software engineering, collective adaptive systems, and machine learning to build dependable, scalable distributed applications. His principal contributions advance macroprogramming for cyber-physical swarms, field-based coordination, cooperative multi-agent reinforcement learning, decentralized federated learning, and generative-AI support for modern software systems. He has designed or co-designed research software including Phyelds, MacroSwarm, FRASP, ScaRLib, and ScaFi-Web. He received his PhD with distinction in Computer Science and Software Engineering, earning the IEEE TCSC Outstanding PhD Dissertation Award. Alongside research, he teaches software design, advanced programming, distributed systems, reinforcement learning, and generative AI, and supervises Master's and Bachelor's theses.}
+
+\cvsection{Highlights}
+\cvitem{Education}{PhD with distinction; IEEE TCSC \underline{Outstanding PhD Dissertation Award}. See Education and Scientific Activities.}
+\cvitem{Appointment}{Postdoctoral Research Fellow, University of Bologna, on two consecutive contracts: November 2023--November 2025 and November 2025--November 2026. See Research Positions.}
+\cvitem{Publications}{63 publications: 20 journal articles, 26 conference papers, 11 workshop papers, 3 book chapters, and 3 preprints. See Publications.}
+\cvitem{Bibliometrics}{605 citations, h-index 15 (Google Scholar); 419 citations, h-index 13 (Scopus). See Research Profile.}
+\cvitem{Teaching}{326 course hours and 240 tutoring hours; 39 supervised theses. See Teaching.}
+\cvitem{Recognition}{Five major awards, including the IEEE TCSC dissertation award and the \underline{Seal of Excellence (Marie Curie)}, European Commission 2025; USD 40,000 in Google research awards. See Scientific Activities.}
+%\cvitem{Leadership}{AAMAS Area Chair; ACSOS Web and AI Chair; COORDINATION Artifact Evaluation Chair; two editorial appointments; visiting period at Aarhus University; seven invited talks. See Scientific Activities.}
+\cvitem{Software}{Principal research software: Phyelds, MacroSwarm, FRASP, ScaRLib, and ScaFi-Web. See Software Projects.}
+
+\cvsection{Research Positions}
+\cvyear{2025--2026}
+\cvitem{Period}{November 2025 --- November 2026}
+\cvitem{Position}{Postdoctoral Research Fellow (``assegno di ricerca''), second contract}
+\cvitem{Institution}{Alma Mater Studiorum --- University of Bologna, Cesena}
+\cvitem{Project}{COMMONS-WEARS (PRIN-funded)}
+\cvitem{Supervisor}{Prof. Mirko Viroli}
+\cvitem{Description}{Renewal on the same project: engineering collective applications for layered, multi-mobile edge environments.}
+
+\cvyear{2023--2025}
+\cvitem{Period}{November 2023 --- November 2025}
+\cvitem{Position}{Postdoctoral Research Fellow (``assegno di ricerca''), first contract}
+\cvitem{Institution}{Alma Mater Studiorum --- University of Bologna, Cesena}
+\cvitem{Project}{COMMONS-WEARS (PRIN-funded)}
+\cvitem{Supervisor}{Prof. Mirko Viroli}
+\cvitem{Description}{Engineering collective applications for layered, multi-mobile edge environments.}
+
+\cvsection{Research Profile}
+\begin{cvprose}
+My research sits at the intersection of \emph{collective adaptive systems engineering} (software engineering) and \emph{machine learning} methodologies for distributed systems. In particular, my work contributes to several specific areas:
 \begin{itemize}
   \item \textbf{Software Engineering for Collective Behaviors:} In this research area, I focus on advancing the macroprogramming paradigm (programming systems from a global perspective) in the context of very large distributed systems (e.g., swarm robotics, smart cities). 
   I propose novel solutions for managing groups of robots in a distributed way based on spatial computing principles~\citejournals{aguzzi2023field-sensing}, 
-  along with new programming approaches through frameworks like Macroswarm~\citejournals{aguzzi2025macroswarm}. 
+  along with new programming approaches through frameworks like MacroSwarm~\citejournals{aguzzi2025macroswarm}. 
   My work includes fundamental research on how to engineer such applications, 
   leading to foundational publications on collective autonomy~\citejournals{casadei2021programming} and comprehensive roadmaps for future development~\citejournals{casadei2025software}. 
   This research covers several aspects of the programming pipeline, 
-  including runtime monitoring for system safety~\citeconferences{aguzzi2024optimising,torta2025aggregate}, 
-  programming frameworks like ScaFi~\citejournals{casadei2022scafi} and Macroswarm~\citeconferences{aguzzi2023macroswarm}, low-code design tools like ScaFi-Blocks~\citejournals{aguzzi2026low}, and others~\citeconferences{aguzzi2024scafi,aguzzi2021scafi}, 
+  including runtime monitoring for system safety~\citeworkshops{aguzzi2024optimising} and~\citeconferences{torta2025aggregate},
+  programming frameworks like ScaFi~\citejournals{casadei2022scafi} and MacroSwarm~\citeconferences{aguzzi2023macroswarm}, low-code design tools like ScaFi-Blocks~\citejournals{aguzzi2026low}, and others~\citeconferences{aguzzi2024scafi,aguzzi2021scafi}, 
   novel reactive models for swarm programming~\citeconferences{casadei2023self} and field-based strategies for runtime replanning~\citeconferences{aguzzi2025field},
   and the development of novel architectural patterns for collective computation~\citejournals{aguzzi2022dynamic}.
   \item \textbf{Hybrid Methodologies for Collective Intelligence:} In this research area, building on the advancements from my work on collective behaviors, 
   I integrate machine learning solutions to improve currently manual design approaches. 
   The goal is to both enhance system adaptability (through learning) 
   and improve overall efficiency. 
-  This integration was first outlined through comprehensive roadmaps~\citeconferences{aguzzi2022machine,aguzzi2021research}, 
+  This integration was first outlined through comprehensive roadmaps~\citeworkshops{aguzzi2022machine,aguzzi2021research},
   then implemented in several ways: 
   leveraging Multi-Agent Reinforcement Learning (MARL) for program synthesis~\citeconferences{aguzzi2022towards}, 
   improving macroprogramming execution with scheduling learned via MARL~\citeconferences{aguzzi2022addressing}, 
@@ -107,295 +276,494 @@ My research sits at the intersection of \emph{collective adaptive systems engine
   \item \textbf{Generative AI for Modern Applications:} 
   This area represents a natural continuation of my previous work, 
   particularly focusing on how to use generative AI for designing modern distributed applications.
-   Initial work explores how to integrate small LLMs and RAG-enhanced solutions in chatbots for healthcare management~\citejournals{aguzzi2025rag,tschope2025novel,magnini2025open}. Recently, I've proposed a language-based approach to macroprogramming through LLMs~\citejournals{aguzzi2025language} and explored GenAI for plan generation in BDI agents~\citeconferences{ciatto2025exploiting}. During this period, I've also supervised several theses on code generation with LLMs for domain-specific languages, 
+   Initial work explores how to integrate small LLMs and RAG-enhanced solutions in chatbots for healthcare management~\citejournals{aguzzi2025rag,montagna2025privacy,magnini2025open}. Recently, I've proposed a language-based approach to macroprogramming through LLMs~\citejournals{aguzzi2025language} and explored GenAI for plan generation in BDI agents~\citeconferences{ciatto2025exploiting}. During this period, I've also supervised several theses on code generation with LLMs for domain-specific languages,
    with the aim of integrating these advancements with macroprogramming paradigms to further enhance collective system development.
 \end{itemize}
-}
-\cvitem{Bibliometrics}{}{
-  \begin{itemize}
-    \item \textbf{H-index:} 15 (Google Scholar), 12 (Scopus)
-    \item \textbf{Citations:} 510 (Google Scholar), 333 (Scopus)
-  \end{itemize}
-}
-\section{Education}
-\cventry{2020--2023}{PhD in CS \& Software Engineering}{UniBO}{Cesena}{with distinction}{Focus: Design and engineering of large-scale systems, multi-agent reinforcement learning, and cyber-physical swarms. \newline Thesis: \emph{A language-based software engineering approach for cyber-physical swarms}. Supervisor: Prof. M. Viroli.}
-\cventry{2018--2020}{Master in CS \& Software Engineering}{UniBO}{Cesena}{110/110 cum laude}{Focus: Distributed systems, aggregate computing, and MARL. \newline \textbf{Awarded Best Master Thesis (Sergio Focardi Award)}. \newline Thesis: \emph{Scafi web: a Scala-JavaScript platform for executing, simulating, and controlling aggregate computing systems}.}
+\end{cvprose}
+\Needspace{4\baselineskip}
+\cvitem{H-index}{15 (Google Scholar), 13 (Scopus).}
+\cvitem{Citations}{605 (Google Scholar), 419 (Scopus).}
+\cvsection{Education}
+\cventry{2020--2023}{PhD in CS \& Software Engineering}{UniBO}{Cesena}{with distinction}{Focus: Design and engineering of large-scale systems, multi-agent reinforcement learning, and cyber-physical swarms. \newline \textbf{Awarded Outstanding PhD Dissertation Award (IEEE TCSC)}. \newline Thesis: \emph{A language-based software engineering approach for cyber-physical swarms}. Supervisor: Prof. M. Viroli.}
+\cventry{2018--2020}{Master in CS \& Software Engineering}{UniBO}{Cesena}{110/110 cum laude}{Focus: Distributed systems, aggregate computing, and MARL. \newline \textbf{Awarded Best Master Thesis (Sergio Focardi Award)}. \newline Thesis: \emph{ScaFi Web: a Scala-JavaScript platform for executing, simulating, and controlling aggregate computing systems}.}
 \cventry{2015--2018}{Bachelor in CS \& Software Engineering}{UniBO}{Cesena}{110/110 cum laude}{\textbf{Awarded Prize for Meritous Students}. \newline Thesis: \emph{Sviluppo di un front-end di simulazione per applicazioni aggregate nel framework Scafi}.}
 \cventry{2010--2015}{High School on Computer Science}{ITIS E. Mattei}{Urbino}{100/100}{}
 
-\section{Publications}
+\cvsection{Publications}
 Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which the paper is published in a range from the year it is accepted to the year of publication (e.g., if a paper is accepted in 2023, I took the max quartile of 2022 - 2023).
 \nocitejournals{*}
 \bibliographystylejournals{plainyr-rev}
-\bibliographyjournals{journals}
+\bibliographyjournals{bibliography/journal_articles}
 
 \nociteconferences{*}
 \bibliographystyleconferences{plainyr-rev}
-\bibliographyconferences{conf}
+\bibliographyconferences{bibliography/conference_papers}
 
-\section{Participation in Research Projects}
-\cvitem{2023--2025}{\textbf{COMMONS-WEARS}: 
-I participated in this PRIN project on community-oriented wearable computing, collective systems, 
-and machine learning for healthcare and emergency response.
-My main contributions were federated learning solutions for decentralized 
-and large-scale applications~\cite{domini2024field,domini2024proximity,domini2025decentralized,domini2026fbfl,domini2025sparse} as well as modern approaches for engineering collective applications in this domain~\cite{aguzzi2024engineering,aguzzi2024optimising,torta2025aggregate}
-}
-\cvitem{2022--2024}{\textbf{FLUIDWARE}: 
-I participated in this PRIN project on programming models for large-scale IoT services, field-based coordination, 
-and event-flow management in the edge-cloud continuum. 
-I took part in this project as a PhD student and mainly contributed to the development of novel programming models for large-scale IoT services~\cite{aguzzi2023field,aguzzi2023macroswarm,domini2023scarlib} and to the integration of machine learning in this domain~\cite{aguzzi2022towards,aguzzi2022addressing}; see also the chapter in the book~\cite{aguzzi2024learning}
-}
+\nociteworkshops{*}
+\bibliographystyleworkshops{plainyr-rev}
+\bibliographyworkshops{bibliography/workshop_papers}
 
-\section{Scientific Activities}
-\subsection{Conference Service}
-\textit{Legend: \textbf{PC} (Program Committee), \textbf{AEC} (Artifact Evaluation Committee)} \\
-\cvitem{2026}{ACSOS (\underline{Web Chair}) $\cdot$ COORDINATION (\underline{Artifact Evaluation Chair}) $\cdot$ PerCom (AEC)}
-\cvitem{2025}{AAAI (PC) $\cdot$ iFM (AEC) $\cdot$ ACSOS (\underline{Poster and Demo Session Organiser}) $\cdot$ ECOOP (AEC)}
+\nocitechapters{*}
+\bibliographystylechapters{plainyr-rev}
+\bibliographychapters{bibliography/book_chapters}
+
+\nocitepreprints{*}
+\bibliographystylepreprints{plainyr-rev}
+\bibliographypreprints{bibliography/preprints}
+
+\cvsection{Teaching}
+\cvsubsection{Courses}
+\cvitem{Summary}{326 documented course hours through 2026, across degree courses at the University of Bologna and invited teaching at PhD schools and partner universities.}
+
+\cvyear{2026}
+\cvitem{Course}{Advanced Software Modelling and Design}
+\cvitem{Role}{Module 3}
+\cvitem{Hours}{20}
+\cvitem{Audience}{Master's in Computer Science and Engineering (English), University of Bologna}
+\cvitem[.9em]{Topics}{Software modelling, development practices, testing, verification, and computational models for intelligent and distributed systems. \href{https://www.unibo.it/it/studiare/insegnamenti-competenze-trasversali-moocs/insegnamenti/insegnamento/2026/558652}{Course page}.}
+
+\cvitem{Course}{Advanced Software Engineering and Development}
+\cvitem{Role}{Module 2}
+\cvitem{Hours}{20}
+\cvitem{Audience}{Master's in Computer Science and Engineering, University of Bologna}
+\cvitem[.9em]{Topics}{Functional programming with Scala, logic programming with Prolog, software quality, refactoring, agile testing, and advanced design patterns.}
+
+\cvitem{Course}{Software Design and Development}
+\cvitem{Role}{Module 2}
+\cvitem{Hours}{30}
+\cvitem{Audience}{Professional Bachelor's in Information Systems Technologies, University of Bologna}
+\cvitem{Topics}{Object-oriented programming, design patterns, Java, software architecture, testing, and agile methodologies.}
+
+\cvyear{2025}
+\cvitem{Course}{Advanced Software Modelling and Design}
+\cvitem{Role}{Module 2}
+\cvitem{Hours}{30}
+\cvitem{Audience}{Master's in Computer Science and Engineering (English), University of Bologna}
+\cvitem[.9em]{Topics}{Testing, simulation, verification, aggregate computing, reinforcement learning, multi-agent systems, and generative AI for software engineering.}
+
+\cvitem{Course}{Programming and Development Paradigms}
+\cvitem{Role}{Module 2}
+\cvitem{Hours}{30}
+\cvitem[.9em]{Audience}{Master's in Computer Science and Engineering, University of Bologna}
+
+\cvitem{Course}{Software Design and Development}
+\cvitem{Role}{Module 2}
+\cvitem{Hours}{60}
+\cvitem[.9em]{Audience}{Professional Bachelor's in Information Systems Technologies, University of Bologna}
+
+\cvitem{Course}{Aggregate Programming for the Internet of Things (July 2025)}
+\cvitem{Role}{Lecturer}
+\cvitem{Hours}{12}
+\cvitem{Audience}{PhD School (English), University of Turin}
+\cvitem[.9em]{Topics}{Time independence, spatial algorithms, and runtime verification; co-organised under the supervision of Prof. Ferruccio Damiani.}
+
+\cvitem{Course}{Compose in Android Development (April 2025)}
+\cvitem{Role}{Teaching module}
+\cvitem{Hours}{10}
+\cvitem{Audience}{Bachelor's in Computer Science (English), Western Norway University of Applied Sciences (HVL), Norway}
+\cvitem{Topics}{Declarative UI programming with Compose, composable functions, state management, and UI design principles.}
+
+\cvyear{2024}
+\cvitem{Course}{Advanced Software Modelling and Design}
+\cvitem{Role}{Module 2}
+\cvitem{Hours}{20}
+\cvitem[.9em]{Audience}{Master's in Computer Science and Engineering (English), University of Bologna}
+
+\cvitem{Course}{Software Design and Development}
+\cvitem{Role}{Course lead, Module 1}
+\cvitem{Hours}{60}
+\cvitem{Audience}{Professional Bachelor's in Information Systems Technologies, University of Bologna}
+
+\cvyear{2023}
+\cvitem{Course}{Software Design and Development}
+\cvitem{Role}{Module 2}
+\cvitem{Hours}{30}
+\cvitem[.9em]{Audience}{Professional Bachelor's in Information Systems Technologies, University of Bologna}
+
+\cvitem{Course}{Introduction to Reinforcement Learning (July 2023)}
+\cvitem{Role}{Lecturer}
+\cvitem{Hours}{4}
+\cvitem{Audience}{Advanced School in Artificial Intelligence. \href{https://asai-er.github.io/services/docenti/}{Course information}.}
+
+\cvsubsection{Thesis (Co-)Supervision}
+\cvitem{Summary}{39 supervised theses: 18 Master's (LM-DM270) and 21 Bachelor's (L-DM270). Several led to peer-reviewed publications co-authored with the student, marked below.}
+\cvitem{Source}{Verifiable on the University of Bologna thesis repository: \href{https://amslaurea.unibo.it/view/relatore/Aguzzi=3AGianluca=3A=3A/}{AMSLaurea --- Aguzzi, Gianluca}}
+
+\cvyear{2026}
+\cvitem{}{\emph{Master's theses}}
+\cvitem{L. Pasini}{A Comparative Analysis of Agentic AI Frameworks via an Automatic Quiz Correction Case Study}
+\cvitem[.7em]{A. Venturini}{Effectful Aggregate Computation: towards a monadic view}
+\cvitem{}{\emph{Bachelor's theses}}
+\cvitem{A. Casali}{Studio delle tecniche di localizzazione indoor mediante Ultra-Wideband}
+\cvitem{A. Gardini}{Progettazione di un framework protocol-agnostic per il coordinamento di sciami nel contesto di Project Emerge}
+\cvitem{D. Marchetti}{Un sistema di realtà aumentata per la Robotica di sciame}
+\cvitem{F. Mariani}{Progettazione di un Chatbot Agentico per il Controllo di Sciami di Droni}
+\cvitem{L. Rossi}{Progettazione di meccanismi di offloading computazionale in sistemi robotici e IoT}
+\cvitem{L. M. Spitaleri}{Zenoh network per Aggregate Computing in Rust: verso comunicazioni peer-to-peer su reti eterogenee}
+
+\cvyear{2025}
+\cvitem{}{\emph{Master's theses}}
+\cvitem{R. Battistini}{Exploiting GenAI for Plan Generation in BDI Agents~\citeconferences{ciatto2025exploiting}}
+\cvitem{A. Spadoni}{Processo di Transizione e Reingegnerizzazione di un Pannello Web per DNS Filtering}
+\cvitem[.7em]{L. Tassinari}{Scala-based Cross-platform and Polyglot Systems: General Architecture and Incarnation for Aggregate Computing~\citeconferences{farabegoli2026scalatropy}}
+\cvitem{}{\emph{Bachelor's theses}}
+\cvitem{S. Bollini}{Integrazione di RAG e LLM nello Sviluppo del Software}
+\cvitem{G. Bucci}{Sviluppo di un assistente AI prototipale per Visual Studio Code}
+\cvitem{K. Osti}{Evoluzione e Apprendimento per Rinforzo: Un Approccio Integrato per Agenti Autonomi in Contesti Videoludici}
+\cvitem{N. Ricci}{Controllo di sciami robotici in ambiente ibrido fisico-virtuale: un dimostrativo}
+
+\cvyear{2024}
+\cvitem{}{\emph{Master's theses}}
+\cvitem{G. Accursi}{Progettazione e sviluppo di un prototipo di simulatore ad eventi discreti reattivo}
+\cvitem{J. G. Cesario}{Event-driven simulation and verification of FRASP systems against spatio-temporal properties}
+\cvitem{L. Deluigi}{Design and implementation of a scalable domain specific language foundation for ScaFi with Scala 3}
+\cvitem{N. Malucelli}{Neighboring-based Strategies for Multi-Agent Reinforcement Learning~\citeconferences{malucelli2025neighbor}}
+\cvitem{L. Micelli}{Design and development of a Rust-based execution platform for Aggregate Computing}
+\cvitem{G. P. Salcuni}{Utilizzo di tecniche RAG per la Valutazione e Comparazione dei Modelli LLM in ambito medico~\citeworkshops{aguzzi2024applying}}
+\cvitem{F. Venturini}{Multi-Agent Reinforcement Learning of Swarm Behaviours with Graph Neural Networks: prototype and first experiments~\citejournals{aguzzi2025scaling}}
+\cvitem[.7em]{F. Vissani}{Feasibility of Reactive Aggregate Programming via Kotlin Flows}
+\cvitem{}{\emph{Bachelor's theses}}
+\cvitem{A. Arfelli}{Utilizzo di ChatGPT come supporto nello Sviluppo Software: Un'Analisi Completa}
+\cvitem{L. Bacchini}{Sviluppo di un sistema di visione artificiale per la rilevazione e localizzazione di marker ArUco in un contesto di aggregate computing~\citeconferences{aguzzi2025demonstrator}}
+\cvitem{G. Garofalo}{Quarkdown --- Typesetting versatile di documenti articolati}
+\cvitem{E. Perlika}{Eterogeneità dei sistemi di Aggregate Programming: un caso studio con WaveRobot e ThymioRobot}
+\cvitem{M. Terenzi}{Utilizzo di Neverlang per la modellazione di Domain Specific Languages}
+\cvitem{L. Tosi}{Simulazione di fenomeni emergenti in Alchemist: il caso dell'aggregazione di ``slime-mold''}
+
+\cvyear{2023}
+\cvitem{}{\emph{Master's theses}}
+\cvitem{L. Bazzocchi}{Daily Medical Team Briefings in Ambiente Collaborativo con Schermi Multi-Touch}
+\cvitem{G. Cavalieri}{Gestione degli effetti in linguaggi di programmazione funzionale: tecniche di modellazione e interpretazione}
+\cvitem{F. Dente}{A functional-reactive perspective on the Aggregate Computing paradigm~\citeconferences{casadei2023self}}
+\cvitem{D. Domini}{Aggregate Computing and Many-Agent Reinforcement Learning: Towards a Hybrid Toolchain~\citeconferences{domini2023scarlib}}
+\cvitem[.7em]{A. Filaseta}{Distributed monitoring and control with dynamic offloading: the case of the Alchemist Simulator}
+\cvitem{}{\emph{Bachelor's theses}}
+\cvitem{F. Bonetti}{Prototipazione di una applicazione collaborativa e distribuita per schermi multi-touch}
+
+\cvyear{2022}
+\cvitem{}{\emph{Bachelor's theses}}
+\cvitem{M. Cerioni}{Progettazione di un ambiente di programmazione visuale block-based per ScaFi~\citejournals{aguzzi2026low}}
+\cvitem{D. Chavez Rejas}{Prototipazione di applicazioni collaborative e distribuite per schermi Touch}
+\cvitem{K. Mancini}{ScaFi: Integration and Performance Analysis with Scala Native}
+
+\cvyear{2021}
+\cvitem{}{\emph{Bachelor's thesis}}
+\cvitem{D. Grushchak}{Piattaforma a Supporto del Monitoraggio di Sistemi di Computazione Aggregata: Caso di Studio ScaFi-Web~\citeconferences{grushchak2024decentralized}}
+
+\cvsubsection{Tutoring}
+\cvitem{Summary}{240 hours over four academic years (2022--2025), as tutor for two Master's courses at the University of Bologna: 30 hours per course per year. Laboratory and exercise activities.}
+
+\cvyear{2025}
+\cvitem{Course}{Concurrent and Distributed Programming}
+\cvitem{Role}{Tutor}
+\cvitem[.9em]{Hours}{30}
+\cvitem{Course}{Programming and Development Paradigms}
+\cvitem{Role}{Tutor}
+\cvitem{Hours}{30}
+
+\cvyear{2024}
+\cvitem{Course}{Concurrent and Distributed Programming}
+\cvitem{Role}{Tutor}
+\cvitem[.9em]{Hours}{30}
+\cvitem{Course}{Programming and Development Paradigms}
+\cvitem{Role}{Tutor}
+\cvitem{Hours}{30}
+
+\cvyear{2023}
+\cvitem{Course}{Concurrent and Distributed Programming}
+\cvitem{Role}{Tutor}
+\cvitem[.9em]{Hours}{30}
+\cvitem{Course}{Programming and Development Paradigms}
+\cvitem{Role}{Tutor}
+\cvitem{Hours}{30}
+
+\cvyear{2022}
+\cvitem{Course}{Concurrent and Distributed Programming}
+\cvitem{Role}{Tutor}
+\cvitem[.9em]{Hours}{30}
+\cvitem{Course}{Programming and Development Paradigms}
+\cvitem{Role}{Tutor}
+\cvitem{Hours}{30}
+
+\cvsection{Scientific Activities}
+\cvsubsection{Awards}
+\cventry{November 2025}{Outstanding PhD Dissertation Award}{IEEE Technical Community on Scalable Computing}{}{}{\url{https://www.ieee-tcsc.org/thesis.php}}
+\cventry{October 2025}{Best Student Paper Award}{ACSOS 2025}{}{}{\emph{A Field-based Approach for Runtime Replanning in Swarm Robotics Missions}~\citeconferences{aguzzi2025field}.}
+\cventry{March 2025}{Seal of Excellence (Marie Sk\l{}odowska-Curie Actions)}{European Commission}{}{}{Awarded to a proposal on decentralised federated learning for large-scale systems, developed from the collaboration begun during the visiting period at Aarhus University.}
+\cventry{September 2024}{Best Poster Award}{ACSOS 2024}{}{}{\url{https://github.com/DanySK/poster-2024-acsos-imageonomics-drones}}
+\cventry{November 2023}{Best Master Thesis --- Sergio Focardi Award}{}{}{}{\emph{ScaFi Web: a Scala-JavaScript platform for executing, simulating, and controlling aggregate computing systems}.}
+
+\cvsubsection{Research Grants}
+\cvitem{2025}{\textbf{Gemma 3 Research Award (Google) --- USD 30,000}. Credits supported research on healthcare chatbots~\citejournals{aguzzi2025rag,montagna2025privacy,magnini2025open} and work presented at AIME~\citeconferences{aguzzi2025fine}.}
+\cvitem{2024}{\textbf{Gemma 2 Research Award (Google) --- USD 10,000}. Credits supported research on human--LLM comparison in educational scenarios~\citejournals{braccini2026unraveling}.}
+
+\cvsubsection{Conference Service}
+\cvitem{Legend}{PC: Program Committee; AEC: Artifact Evaluation Committee.}
+\cvitem{2026}{ACSOS (\textbf{Web Chair; AI Chair}) $\cdot$ COORDINATION (\textbf{Artifact Evaluation Chair}) $\cdot$ PerCom (AEC) $\cdot$ AAMAS (\textbf{Area Chair})}
+\cvitem{2025}{AAAI (PC) $\cdot$ iFM (AEC) $\cdot$ ACSOS (\textbf{Poster and Demo Session Organiser}) $\cdot$ ECOOP (AEC)}
 \cvitem{2024}{SLE (AEC) $\cdot$ ACSOS (Demo and Poster Committee) $\cdot$ SAC (PC)}
 \cvitem{2023}{PerCom (AEC)}
 \cvitem{2022}{DisCoTec (AEC)}
 \cvitem{2021}{ACSOS (AEC)}
 
-\subsection{Workshop Service}
-\cvitem{2026}{DIGITA (PC) $\cdot$ HotDiML (PC) $\cdot$ DISCOLI (PC)}
-\cvitem{2025}{EmotionSense (PC) $\cdot$ NSE (PC) $\cdot$ SISSY (Special Invitation) $\cdot$ WoA (\underline{Session Chair}) $\cdot$ Hot Topics in Distributed ML (PC) $\cdot$ LoStaN (PC) $\cdot$ DISCOLI (PC) $\cdot$ DIGITA (PC)}
-\cvitem{2024}{NSE (PC) $\cdot$ DISCOLI (\underline{Organising Chair}) $\cdot$ MADTECC (PC)}
+\cvsubsection{Workshop Service}
+\cvitem{2026}{DIGITA (PC) $\cdot$ HotDiML (PC) $\cdot$ DISCOLI (PC) $\cdot$ AI4AS (PC)}
+\cvitem{2025}{EmotionSense (PC) $\cdot$ NSE (PC) $\cdot$ SISSY (Special Invitation) $\cdot$ WoA (\textbf{Session Chair}) $\cdot$ Hot Topics in Distributed ML (PC) $\cdot$ LoStaN (PC) $\cdot$ DISCOLI (PC) $\cdot$ DIGITA (PC)}
+\cvitem{2024}{NSE (PC) $\cdot$ DISCOLI (\textbf{Organising Chair}) $\cdot$ MADTECC (PC)}
 \cvitem{2023}{DISCOLI (PC)}
 
-\subsection{Service in International Journals}
-\cventry{2025 -- Today}{Guest Editor}{Springer's Discover Computing}{}{}{Engineering Foundational Models for Intelligent Robotic and Multi-agent Systems}
-\cventry{2025}{Managing Guest Editor}{MDPI's Applied Science (IF 2.5)}{}{}{Emerging Techniques in Engineering Intelligent Agents and Multi-Agent Systems \ \url{https://www.mdpi.com/journal/applsci/special_issues/36128M0RBR}}
+\cvsubsection{Service in International Journals}
+\cventry{2025 -- present}{Guest Editor}{Springer Discover Computing}{}{}{Special issue: \emph{Engineering Foundational Models for Intelligent Robotic and Multi-agent Systems}.}
+\cventry{2025}{Managing Guest Editor}{MDPI Applied Sciences (IF 2.5)}{}{}{Special issue: \emph{Emerging Techniques in Engineering Intelligent Agents and Multi-Agent Systems}. \url{https://www.mdpi.com/journal/applsci/special_issues/36128M0RBR}}
 
-\subsection{Review Activity}
-\cvitem{Journals}{Pervasive and Mobile Computing $\cdot$ Future Generation Computer Systems $\cdot$ MDPI Sensors $\cdot$ MDPI AI $\cdot$ Elsevier IoT $\cdot$ Science of Computer Programming $\cdot$ Scientific Programming $\cdot$ Frontiers in Robotics and AI $\cdot$ Autonomous Agents and Multi-Agent Systems $\cdot$ ACM Transactions on Autonomous and Adaptive Systems $\cdot$ PeerJ Computer Science $\cdot$ Elsevier Journal of Medical Systems $\cdot$ BMJ Open $\cdot$ Artificial Intelligence Review $\cdot$ Logical Methods in Computer Science $\cdot$ Nature Communications}
+\cvsubsection{Review Activity}
+\cvitem{Journals}{Nature Communications $\cdot$ ACM Transactions on Autonomous and Adaptive Systems $\cdot$ Autonomous Agents and Multi-Agent Systems $\cdot$ Future Generation Computer Systems $\cdot$ Pervasive and Mobile Computing $\cdot$ Artificial Intelligence Review $\cdot$ Frontiers in Robotics and AI $\cdot$ BMJ Open $\cdot$ Elsevier Journal of Medical Systems $\cdot$ Science of Computer Programming $\cdot$ Logical Methods in Computer Science $\cdot$ Elsevier IoT $\cdot$ PeerJ Computer Science $\cdot$ MDPI Sensors $\cdot$ MDPI AI $\cdot$ Scientific Programming}
 \cvitem{Conferences}{COORDINATION (2023--2025) $\cdot$ ACSOS (2023--2026) $\cdot$ AAMAS (2023, 2025) $\cdot$ PerCom (2023) $\cdot$ ICAART (2023)}
 
-\subsection{Presentations in International Conferences}
-\cventry{2025}{\textbf{ACSOS}}{}{}{}{A Field-based Approach for Runtime Replanning in Swarm Robotics Missions~\citeconferences{aguzzi2025field}}
-\cventry{2024}{\textbf{COORDINATION}}{}{}{}{Scafi-blocks: A visual aggregate programming environment for low-code swarm design~\citeconferences{aguzzi2024scafi}}
-\cventry{2024}{\textbf{DISCOLI}}{}{}{}{Engineering distributed collective intelligence in cyber-physical swarms~\citeconferences{aguzzi2024engineering}}
-\cventry{2023}{\textbf{ACSOS}}{}{}{}{Programming (and learning) self-adaptive \& self-organising behaviour with scafi: for swarms, edge-cloud ecosystems, and more~\citeconferences{casadei2023programming}}
-\cventry{2023}{\textbf{ACSOS}}{}{}{}{Field-informed Reinforcement Learning of Collective Tasks with Graph Neural Networks~\citeconferences{aguzzi2023field}}
-\cventry{2023}{\textbf{COORDINATION}}{}{}{}{Macroswarm: A field-based compositional framework for swarm programming~\citeconferences{aguzzi2023macroswarm}}
-\cventry{2023}{\textbf{COORDINATION}}{}{}{}{Scarlib: A framework for cooperative many agent deep reinforcement learning in Scala~\citeconferences{domini2023scarlib}}
-\cventry{2022}{\textbf{ACSOS}}{}{}{}{Addressing Collective Computations Efficiency: Towards a Platform-level Reinforcement Learning Approach~\citeconferences{aguzzi2022addressing}}
-\cventry{2023}{\textbf{DISCOLI}}{}{}{}{Machine learning for aggregate computing: a research roadmap~\citeconferences{aguzzi2022machine}}
-\cventry{2022}{\textbf{COORDINATION}}{}{}{}{Towards reinforcement learning-based aggregate computing~\citeconferences{aguzzi2022towards}}
-\cventry{2021}{\textbf{ACSOS DS}}{}{}{}{Research directions for aggregate computing with machine learning~\citeconferences{aguzzi2021research}}
-\cventry{2021}{\textbf{COORDINATION}}{}{}{}{ScaFi-Web: A Web-Based Application for Field-Based Coordination Programming~\citeconferences{aguzzi2021scafi}}
+\cvsubsection{Visiting}
+\cventry{August--November 2023}{Visiting PhD Researcher}{Aarhus University}{Denmark}{}{Host: Prof. Lukas Esterle. Developed graph-neural-network-based distributed controllers, leading to work on field-informed reinforcement learning; continued collaboration on federated learning for large-scale systems contributed to the Marie Curie Seal of Excellence.}
 
-\subsection{Awards}
-\cventry{October 2025}{ACSOS 2025}{\textbf{Best Student Paper Award}}{}{}{A Field-based Approach for Runtime Replanning in Swarm Robotics Missions~\citeconferences{aguzzi2025field}}
-\cventry{November 2025}{IEEE TCSC: \url{https://www.ieee-tcsc.org/thesis.php}}{\textbf{Outstanding PhD Dissertation Award}}{}{}{}
-\cventry{March 2025}{European Commission}{\textbf{Seal of Excellence (Marie Curie)}}{}{}{}
-\cventry{September 2024}{ACSOS 2024}{\textbf{Best Poster Award}}{}{}{\url{https://github.com/DanySK/poster-2024-acsos-imageonomics-drones}}
-\cventry{November 2023}{Sergio Focardi Awards}{\textbf{Best Master Thesis}}{}{}{Scafi web: a Scala-JavaScript platform for executing, simulating, and controlling aggregate computing systems.}
+\cvsubsection{Invited Talks}
+\cvyear{2025}
+\cvitem{Title}{Autonomous Agents with Language Chains}
+\cvitem{Venue}{Mini School, Workshop from Objects to Agents (WoA)}
+\cvitem[.7em]{Duration}{1 hour}
+\cvitem{Title}{Introduction to LangChain}
+\cvitem{Venue}{Deep Learning, University of Urbino}
+\cvitem{Duration}{1 hour}
 
-\subsection{Research Grant}
-\cvitem{2025}{Gemma 3 Research Award (Google) -- 30k USD. Credits used to support research on healthcare chatbots~\citejournals{aguzzi2025rag,tschope2025novel,magnini2025open} and work presented at the AIME conference~\citeconferences{aguzzi2025fine}.}
-\cvitem{2024}{Gemma 2 Research Award (Google) -- 10k USD. Credits used to support research on human-LLM comparison in educational scenarios~\citejournals{braccini2026unraveling}.}
+\cvyear{2024}
+\cvitem{Title}{Oltre l'IA Individuale: Il Potenziale dell'Intelligenza Artificiale Collettiva}
+\cvitem[.7em]{Venue}{University of Urbino}
+\cvitem{Title}{Deep Reinforcement Learning: Introduction}
+\cvitem{Venue}{Fundamentals of Artificial Intelligence, University of Urbino}
+\cvitem{Duration}{1 hour}
 
-\subsection{Visiting}
-\cventry{August 2023 - November 2023}{Visiting PhD}{Aarhus University -- Prof. Lukas Esterle}{Denmark}{}{Focused on applying graph neural networks to develop distributed controllers. This research culminated in the publication of the paper entitled ``Field-informed reinforcement learning of collective tasks with graph neural network''. Continued collaboration on federated learning for large-scale systems, leading to the Marie Curie Seal of Excellence.}
+\cvyear{2023}
+\cvitem{Title}{Multi-Agent Reinforcement Learning: Unleashing Collective Intelligence}
+\cvitem{Venue}{Advanced School in Artificial Intelligence Summer School}
+\cvitem[.7em]{Duration}{3 hours}
+\cvitem{Title}{Introduction to Deep Reinforcement Learning}
+\cvitem{Venue}{Fundamentals of Artificial Intelligence, University of Urbino}
+\cvitem{Duration}{2 hours}
 
-\subsection{PhD Schools}
+\cvyear{2022}
+\cvitem{Title}{Engineering Cyber-Physical Swarms}
+\cvitem{Venue}{DIGIT Lunch Meetings, Aarhus University}
+\cvitem{Duration}{1 hour}
+
+\cvsubsection{Presentations at International Conferences}
+\cvitem{2025}{ACSOS: \emph{A Field-based Approach for Runtime Replanning in Swarm Robotics Missions}~\citeconferences{aguzzi2025field}.}
+\cvitem{2024}{COORDINATION: \emph{ScaFi-Blocks: A visual aggregate programming environment for low-code swarm design}~\citeconferences{aguzzi2024scafi}.}
+\cvitem{2024}{DISCOLI: \emph{Engineering distributed collective intelligence in cyber-physical swarms}~\citeconferences{aguzzi2024engineering}.}
+\cvitem{2023}{ACSOS: \emph{Programming (and learning) self-adaptive \& self-organising behaviour with ScaFi: for swarms, edge-cloud ecosystems, and more}~\citeworkshops{casadei2023programming}.}
+\cvitem{2023}{ACSOS: \emph{Field-informed Reinforcement Learning of Collective Tasks with Graph Neural Networks}~\citeconferences{aguzzi2023field}.}
+\cvitem{2023}{COORDINATION: \emph{MacroSwarm: A field-based compositional framework for swarm programming}~\citeconferences{aguzzi2023macroswarm}.}
+\cvitem{2023}{COORDINATION: \emph{Scarlib: A framework for cooperative many agent deep reinforcement learning in Scala}~\citeconferences{domini2023scarlib}.}
+\cvitem{2023}{DISCOLI: \emph{Machine learning for aggregate computing: a research roadmap}~\citeworkshops{aguzzi2022machine}.}
+\cvitem{2022}{ACSOS: \emph{Addressing Collective Computations Efficiency: Towards a Platform-level Reinforcement Learning Approach}~\citeconferences{aguzzi2022addressing}.}
+\cvitem{2022}{COORDINATION: \emph{Towards reinforcement learning-based aggregate computing}~\citeconferences{aguzzi2022towards}.}
+\cvitem{2021}{ACSOS DS: \emph{Research directions for aggregate computing with machine learning}~\citeworkshops{aguzzi2021research}.}
+\cvitem{2021}{COORDINATION: \emph{ScaFi-Web: A Web-Based Application for Field-Based Coordination Programming}~\citeconferences{aguzzi2021scafi}.}
+
+\cvsubsection{PhD Schools}
 \cvitem{2023}{10$^{th}$ DeepLearn Summer School (Gran Canaria, Spain)}
 \cvitem{2022}{Bertinoro International Spring School (Bertinoro, Italy)}
-\cvitem{2021}{22$^{nd}$ European Agent Systems Summer School (Online)}
+\cvitem{2021}{22$^{nd}$ European Agent Systems Summer School (online)}
 
+\cvsection{Participation in Research Projects}
+\cvitem{2023--2025}{\textbf{COMMONS-WEARS (PRIN)}. Research on community-oriented wearable computing, collective systems, and machine learning for healthcare and emergency response. Principal contributions addressed federated learning for decentralised, large-scale applications~\citeconferences{domini2024field,domini2024proximity,domini2025sparse} and~\citejournals{domini2025decentralized,domini2026fbfl}, and engineering collective applications~\citeconferences{aguzzi2024engineering,torta2025aggregate} and~\citeworkshops{aguzzi2024optimising}.}
+\cvitem{2022--2024}{\textbf{FLUIDWARE (PRIN)}. Research on programming models for large-scale IoT services, field-based coordination, and event-flow management in the edge--cloud continuum. As a PhD student, contributed programming models~\citeconferences{aguzzi2023field,aguzzi2023macroswarm,domini2023scarlib}, machine-learning integration~\citeconferences{aguzzi2022towards,aguzzi2022addressing}, and a related book chapter~\citechapters{aguzzi2024learning}.}
 
-\section{Teaching}
-\subsection{Courses}
-\cventry{July 2025}{PhD School (taught in English)}{Aggregate Programming for Internet Of Things -- 12 hours}{}{Turin}{
-In this course I teach some advanced stuff in aggregate computing, which implies understanding 
-the notion of time independence, spatial algorithms (gradient, data collection) and 
-introduction for runtime verification.
-This course was co-organized with the University of Turin with the supervision of Damiani Ferruccio
-}
-\cventry{April 2025}{Bachelor in Computer Science (taught in English)}{Compose in Android Development -- 10 hours (teaching module)}%
-{HVL, Norway}{}{
-  In this course, I teach the Compose library in Android development, focusing on its declarative programming model and how it simplifies UI development. The curriculum covers the fundamentals of Compose, including composable functions, state management, and UI design principles. Students engage in hands-on projects to apply their knowledge in real-world Android applications.
-  }{}
-
-\cventry{2024 -- today}{Laurea Magistrale in Ingegneria e Scienze Informatiche (taught in English)}{Advanced Software Design and Modelling (teaching module)}{University of Bologna}{}{
-    In this advanced course, I lead modules on integrating generative AI into software engineering practices (\underline{20h} in \textbf{2024}, \underline{30h} in \textbf{2025}), with particular emphasis on leveraging large language models for automated code generation, design pattern implementation, and technical documentation. Additionally, I teach cutting-edge reinforcement learning concepts with focus on multi-agent systems and distributed intelligence architectures.
-      }{}
-\cventry{2023 -- today}{\small Laurea Professionalizzante in Tecnologie dei Sistemi Informatici}{Software Design and Development}{University of Bologna}{}{
-    In this course, I teach fundamental software design and development principles (\underline{30h} as module in \textbf{2023}, \underline{60h} as \emph{in charge} in \textbf{2024}, \underline{60h} as module in \textbf{2025}), emphasizing object-oriented programming concepts, design patterns, and agile methodologies. The curriculum covers software architecture, testing strategies, and best practices for building maintainable and scalable applications.
-    }{}
-\cventry{2025 -- today}{Laurea Magistrale in Ingegneria e Scienze Informatiche}{Programming and Development Paradigms (teaching module)}{University of Bologna}{}{
-    In this course, I lead the module on advanced programming and development paradigms (\underline{30h} in \textbf{2025}). The curriculum provides specialist knowledge on techniques and methodologies for advanced software development, including declarative programming (functional programming with Scala and logic programming with Prolog), software quality (clean coding, refactoring, agile testing), and advanced design patterns.
-    }{}
-\cventry{July 2023}{Introduction to Reinforcement Learning -- 4 hours}%
-{Advanced School in Artificial Intelligence}{\url{https://asai-er.github.io/services/docenti/}}
- {}{}
-
-\subsection{Tutoring}
-\cventry{2022--2025}{Master in Computer Science and Engineering -- 30 hours}%
- {Concurrent and Distributed Programming}{University of Bologna}
- {}{}
-\cventry{2022--2025}{Master in Computer Science and Engineering -- 30 hours}%
- {Programming and Development Paradigms}{University of Bologna}
- {}{}
-
-\subsection{Thesis (Co)Supervisor}
-\cventry{2025}{Master Thesis}{}{}{Student: Alberto Spadoni}{\textbf{Processo di Transizione e Reingegnerizzazione di un Pannello Web per DNS Filtering.}}
-\cventry{2024}{Master Thesis}{}{}{Student: Giacomo Accursi}{\textbf{Progettazione e sviluppo di un prototipo di simulatore ad eventi discreti reattivo.}}
-\cventry{2024}{Master Thesis}{}{}{Student: Jahrim Gabriele Cesario}{\textbf{Event-driven simulation and verification of FRASP systems against spatio-temporal properties.}}
-\cventry{2024}{Master Thesis}{}{}{Student: Luca Deluigi}{\textbf{Design and implementation of a scalable domain specific language foundation for ScaFi with Scala 3.}}
-\cventry{2024}{Master Thesis}{}{}{Student: Nicolò Malucelli}{\textbf{Neighboring-based Strategies for Multi-Agent Reinforcement Learning.}}
-\cventry{2024}{Master Thesis}{}{}{Student: Leonardo Micelli}{\textbf{Design and development of a Rust-based execution platform for Aggregate Computing.}}
-\cventry{2024}{Master Thesis}{}{}{Student: Giuseppe Pio Salcuni}{\textbf{Utilizzo di tecniche RAG per la Valutazione e Comparazione dei Modelli LLM in ambito medico.}}
-\cventry{2024}{Master Thesis}{}{}{Student: Filippo Venturini}{\textbf{Multi-Agent Reinforcement Learning of Swarm Behaviours with Graph Neural Networks: prototype and first experiments.}}
-\cventry{2024}{Master Thesis}{}{}{Student: Filippo Vissani}{\textbf{Feasibility of Reactive Aggregate Programming via Kotlin Flows.}}
-\cventry{2023}{Master Thesis}{}{}{Student: Luca Bazzocchi}{\textbf{Daily Medical Team Briefings in Ambiente Collaborativo con Schermi Multi-Touch.}}
-\cventry{2023}{Master Thesis}{}{}{Student: Giacomo Cavalieri}{\textbf{Gestione degli effetti in linguaggi di programmazione funzionale: tecniche di modellazione e interpretazione.}}
-\cventry{2023}{Master Thesis}{}{}{Student: Francesco Dente}{\textbf{A functional-reactive perspective on the Aggregate Computing paradigm.}}
-\cventry{2023}{Master Thesis}{}{}{Student: Davide Domini}{\textbf{Aggregate Computing and Many-Agent Reinforcement Learning: Towards a Hybrid Toolchain.}}
-\cventry{2023}{Master Thesis}{}{}{Student: Angelo Filaseta}{\textbf{Distributed monitoring and control with dynamic offloading: the case of the Alchemist Simulator.}}%\cventry{}{}{}{}{}{For a complete list of supervised theses (over 20 thesis), please visit AMS thesis: \url{https://amslaurea.unibo.it/view/relatore/Aguzzi=3AGianluca=3A=3A/}}{}
-\cventry{2025}{Bachelor Thesis}{}{}{Student: Simone Bollini}{\textbf{Integrazione di RAG e LLM nello Sviluppo del Software.}}
-\cventry{2024}{Bachelor Thesis}{}{}{Student: Axel Arfelli}{\textbf{Utilizzo di ChatGPT come supporto nello Sviluppo Software: Un’Analisi Completa.}}
-\cventry{2024}{Bachelor Thesis}{}{}{Student: Lorenzo Bacchini}{\textbf{Sviluppo di un sistema di visione artificiale per la rilevazione e localizzazione di marker ArUco in un contesto di aggregate computing.}}
-\cventry{2024}{Bachelor Thesis}{}{}{Student: Giorgio Garofalo}{\textbf{Quarkdown - Typesetting versatile di documenti articolati.}}
-\cventry{2024}{Bachelor Thesis}{}{}{Student: Elvis Perlika}{\textbf{Eterogeneità dei sistemi di Aggregate Programming: un caso studio con WaveRobot e ThymioRobot.}}
-\cventry{2024}{Bachelor Thesis}{}{}{Student: Mirco Terenzi}{\textbf{Utilizzo di Neverlang per la modellazione di Domain Specific Languages.}}
-\cventry{2024}{Bachelor Thesis}{}{}{Student: Lorenzo Tosi}{\textbf{Simulazione di fenomeni emergenti in Alchemist: il caso dell'aggregazione di ``slime-mold''.}}
-\cventry{2023}{Bachelor Thesis}{}{}{Student: Federico Bonetti}{\textbf{Prototipazione di una applicazione collaborativa e distribuita per schermi multi-touch.}}
-\cventry{2022}{Bachelor Thesis}{}{}{Student: Matteo Cerioni}{\textbf{Progettazione di un ambiente di programmazione visuale block-based per ScaFi.}}
-\cventry{2022}{Bachelor Thesis}{}{}{Student: Daniela Chavez Rejas}{\textbf{Prototipazione di applicazioni collaborative e distribuite per schermi Touch.}}
-\cventry{2022}{Bachelor Thesis}{}{}{Student: Kevin Mancini}{\textbf{ScaFi: Integration and Performance Analysis with Scala Native.}}
-\cventry{2021}{Bachelor Thesis}{}{}{Student: Denys Grushchak}{\textbf{Piattaforma a Supporto del Monitoraggio di Sistemi di Computazione Aggregata: Caso di Studio ScaFi-Web.}}
-\subsection{Invited Talks}
-\cventry{2025}{\textbf{Autonomous Agents with Language Chains -- 1 hour}}{}{}{}{Mini School Workshop on Object to Agents -- WoA}
-\cventry{2025}{Seminar: \textbf{Introduction of LangChain -- 1 hour}}{}{}{}{Deep Learning - University of Urbino}
-\cventry{2024}{\textbf{Oltre l’IA Individuale: Il Potenziale dell’Intelligenza Artificiale Collettiva}}{}{}{}{University of Urbino}
-\cventry{2024}{Seminar: \textbf{Deep Reinforcement Learning -- Introduction -- 1 hour}}{}{}{}
-{Fundamentals of Artifical Intellingence - University of Urbino}
-\cventry{2023}{Mini School: \textbf{Multi-Agent Reinforcement Learning, Unleashing Collective Intelligence -- 3 hours}}{}{}{}{Advanced School in Artificial Intelligence Summer School}
-\cventry{2023}{Seminar: \textbf{Intro to Deep Reinforcement Learning -- 2 hours}}{}{}{}
-{Fundamentals of Artificial Intelligence - University of Urbino}
-\cventry{2022}{Talk: \textbf{Engineering Cyber-Physical Swarm -- 1 hours}}{}{}{}
-{DIGIT lunch meetings -- Aarhus Universitat}%
-
-%\subsection{Student Supervisor}
-
-\section{Software Projects}
-\cventry{2025 -- today}{It is a framework which implemented a ``python'' version of Aggregate computing.}{Designer of Phyelds}{}{}{\url{https://github.com/phyelds/phyelds}}
-\cventry{2023 -- today}{It is a field-based compositional framework for swarm programming.}{Designer of Macroswarm~\citejournals{aguzzi2025macroswarm}}{}{}{\url{https://github.com/scafi/macro-swarm}}
-\cventry{2023 -- today}{It is a framework for reactive self-organizing programming}{CO-designer of FRASP~\citeconferences{casadei2023self}}{}{}{\url{https://github.com/cric96/distributed-frp}}
-\cventry{2023 -- today}{It is a framework for cooperative many agent deep reinforcement learning in Scala}{Designer of Scarlib~\citejournals{domini2024scarlib}}{}{}{\url{https://github.com/ScaRLib-group/ScaRLib}}
-\cventry{2021 -- today}{It is a web-based application allowing in-browser editing and execution of ScaFi programs.}{Co-designer and main contributor of ScaFi-Web~\citeconferences{aguzzi2021scafi}}{}{}{\url{https://github.com/scafi/scafi-web}}
-\cventry{2021 -- today}{It is a Scala facade that enable the usage of open ai gyms in the JVM!}{Designer of scalapy-gym}{}{}{\url{https://github.com/cric96/scalapy-gym}}
+\cvsection{Software Projects}
+\cventry{2025 -- present}{Phyelds}{Designer}{}{}{Python framework for aggregate computing. \url{https://github.com/phyelds/phyelds}}
+\cventry{2023 -- present}{MacroSwarm}{Designer}{}{}{Field-based compositional framework for swarm programming~\citejournals{aguzzi2025macroswarm}. \url{https://github.com/scafi/macro-swarm}}
+\cventry{2023 -- present}{FRASP}{Co-designer}{}{}{Framework for reactive self-organising programming~\citeconferences{casadei2023self}. \url{https://github.com/cric96/distributed-frp}}
+\cventry{2023 -- present}{ScaRLib}{Designer}{}{}{Framework for cooperative many-agent deep reinforcement learning in Scala~\citejournals{domini2024scarlib}. \url{https://github.com/ScaRLib-group/ScaRLib}}
+\cventry{2021 -- present}{ScaFi-Web}{Co-designer and main contributor}{}{}{In-browser editing and execution of ScaFi programs~\citeconferences{aguzzi2021scafi}. \url{https://github.com/scafi/scafi-web}}
+\cventry{2021 -- present}{scalapy-gym}{Designer}{}{}{Scala facade for using OpenAI Gym environments on the JVM. \url{https://github.com/cric96/scalapy-gym}}
 %\cventry{2020 -- today}{Co-designer of Fluvium}{An IoT project for river controll that uses AWS lambda}{}{}{\url{https://github.com/sbricco-house/fluvium}}
-\subsection{Open Source Contributions}
-\cventry{2018 -- today}{Development of GUI \& simulator for ScaFi}{}{}{}{\url{https://github.com/scafi/scafi}}
-\cventry{2021 -- today}{Contributions to ScaFi incarnations in Alchemist}{}{}{}{\url{https://github.com/AlchemistSimulator/Alchemist}}
+\cvsubsection{Open Source Contributions}
+\cventry{2018 -- present}{Development of GUI \& simulator for ScaFi}{}{}{}{\url{https://github.com/scafi/scafi}}
+\cventry{2021 -- present}{Contributions to ScaFi incarnations in Alchemist}{}{}{}{\url{https://github.com/AlchemistSimulator/Alchemist}}
 
-\section{Professional Experience}
-\cventry{2025}{Invited Lectures on AI-assisted coding}{Emilia-Romagna Region}{Bologna, Italy}{}{Specialized training on leveraging artificial intelligence for software development efficiency. 8 hours of lectures focused on practical applications of AI tools in coding, debugging, and software design.}
-\cventry{2025 -- Today}{Software Engineering Consultant}{SOILMEC S.p.A.}{Cesena, Italy}{}{Providing strategic technical consulting focused on legacy system modernization and architectural improvements to enhance code maintainability and development efficiency.}
-\cventry{2024 -- Today}{Software Engineering Consultant}{Flash Start}{Cesena, Italy}{}{Delivering specialized consulting services in software architecture redesign and implementation of modern development practices to optimize existing systems.}
-\section{Technical Skills}
+\cvsection{Professional Experience}
+\cventry{2026 -- present}{AI-Assisted Software Engineering Consultant}{Mixer S.p.A.}{}{}{Consulting on coding-agent adoption, software-development workflows, code generation, and developer productivity.}
+\cventry{2025}{Invited Lectures on AI-assisted Coding}{Emilia-Romagna Region}{Bologna, Italy}{8 hours}{Training on applying AI tools to coding, debugging, and software design.}
+\cventry{2025 -- present}{Software Engineering Consultant}{SOILMEC S.p.A.}{Cesena, Italy}{}{Strategic consulting on legacy-system modernisation and architectural improvements.}
+\cventry{2024 -- present}{Software Engineering Consultant}{Flash Start}{Cesena, Italy}{}{Software architecture redesign and adoption of modern development practices.}
+\cvsection{Technical Skills}
+\cvitem{How to read the scale}{\textbf{1}: used once or basic exposure; \textbf{2}: limited practical experience; \textbf{3}: regular working knowledge; \textbf{4}: able to give a seminar on the subject; \textbf{5}: able to write a book on the subject.}
 
-\subsection{Programming Languages}
+\cvsubsection{Programming Languages}
 \begin{cvcolumns}
   \cvcolumn{}{
-    \cvitem{\languageknowledge{Scala}{5}}{}
-    \cvitem{\languageknowledge{Java}{4}}{}
-    \cvitem{\languageknowledge{Python}{5}}{}
-    \cvitem{\languageknowledge{C\#}{3}}{}
+    \languageknowledge{Bash}{3}
+    \languageknowledge{C}{4}
+    \languageknowledge{C++}{4}
+    \languageknowledge{C\#}{3}
   }
   \cvcolumn{}{
-    \cvitem{\languageknowledge{Kotlin}{3}}{}
-    \cvitem{\languageknowledge{JavaScript}{3}}{}
-    \cvitem{\languageknowledge{Bash}{2}}{}
-    \cvitem{\languageknowledge{C}{2}}{}
+    \languageknowledge{Haskell}{1}
+    \languageknowledge{Java}{5}
+    \languageknowledge{JavaScript}{4}
+    \languageknowledge{Kotlin}{4}
   }
   \cvcolumn{}{
-    \cvitem{\languageknowledge{Prolog}{1}}{}
-    \cvitem{\languageknowledge{TypeScript}{1}}{}
-    \cvitem{\languageknowledge{Haskell}{1}}{}
-    \cvitem{\languageknowledge{C++}{2}}{}
+    \languageknowledge{Python}{5}
+    \languageknowledge{Prolog}{4}
+    \languageknowledge{Scala}{5}
+    \languageknowledge{TypeScript}{2}
   }
 \end{cvcolumns}
 
-\subsection{Other Languages}
+
+\cvsubsection{Other Languages}
 \begin{cvcolumns}
   \cvcolumn{}{
-    \cvitem{\languageknowledge{HTML}{3}}{}
-    \cvitem{\languageknowledge{XML}{2}}{}
-    \cvitem{\languageknowledge{JSON}{3}}{}
-    \cvitem{\languageknowledge{RDF}{1}}{}{}
+    \languageknowledge{CSS}{3}
+    \languageknowledge{HTML}{3}
+    \languageknowledge{JSON}{3}
+    \languageknowledge{LaTeX}{4}
     }
   \cvcolumn{}{
-    \cvitem{\languageknowledge{Markdown}{3}}{}
-    \cvitem{\languageknowledge{LaTeX}{4}}{}
-    \cvitem{\languageknowledge{OWL}{1}}{}
-  }
-  \cvcolumn{}{
-    \cvitem{\languageknowledge{SPARQL}{1}}{}
-    \cvitem{\languageknowledge{YAML}{2}}{}
-    \cvitem{\languageknowledge{SQL}{2}}{}
-    \cvitem{\languageknowledge{Typst}{3}}{}
-  }
-\end{cvcolumns}
-\subsection{Libraries}
-\begin{cvcolumns}
-  \cvcolumn{}{
-    \cvitem{\languageknowledge{Torch}{4}}{}
-    \cvitem{\languageknowledge{Torch geometric}{3}}{}
-    \cvitem{\languageknowledge{Torch\_rl}{2}}{}
-    \cvitem{\languageknowledge{Gym}{3}}{}
-    \cvitem{\languageknowledge{Pettingzoo}{2}}{}
+    \languageknowledge{Markdown}{3}
+    \languageknowledge{OWL}{1}
+    \languageknowledge{RDF}{1}
+    \languageknowledge{SPARQL}{1}
     }
   \cvcolumn{}{
-    \cvitem{\languageknowledge{VMAS}{2}}{}
-    \cvitem{\languageknowledge{Monix}{4}}{}
-    \cvitem{\languageknowledge{Matplotlib}{2}}{}
-    \cvitem{\languageknowledge{Akka}{2}}{}
-    \cvitem{\languageknowledge{Scala.js}{3}}{}
-  }
-  \cvcolumn{}{
-    \cvitem{\languageknowledge{ScalaPy}{3}}{}
-    \cvitem{\languageknowledge{Cats}{3}}{}
-    \cvitem{\languageknowledge{ZIO}{1}}{}{}
-    \cvitem{\languageknowledge{Tensorflow}{1}}{}
-    \cvitem{\languageknowledge{LangChain}{2}}{}
-    \cvitem{\languageknowledge{LangChain4j}{2}}{}
+    \languageknowledge{SQL}{2}
+    \languageknowledge{Typst}{3}
+    \languageknowledge{XML}{2}
+    \languageknowledge{YAML}{2}
   }
 \end{cvcolumns}
-\subsection{Software Tools}
+\begingroup
+\scriptsize
+\cvsubsection{Libraries and Frameworks}
 \begin{cvcolumns}
   \cvcolumn{}{
-    \cvitem{\languageknowledge{Gimp}{2}}{}{}
-    \cvitem{\languageknowledge{Git}{4}}{}{}
-    \cvitem{\languageknowledge{GHA}{2}}{}{}
-    \cvitem{\languageknowledge{Docker}{2}}{}{}
+    \languageknowledge{Akka}{4}
+    \languageknowledge{Astro}{2}
+    \languageknowledge{Cats}{3}
+    \languageknowledge{Gymnasium}{3}
+    \languageknowledge{Jetpack Compose}{4}
+    \languageknowledge{Kotlin Multiplatform}{2}
+    \languageknowledge{Matplotlib}{3}
+    \languageknowledge{Monix}{4}
+    \languageknowledge{Mockito}{2}
+    \languageknowledge{MUnit}{2}
     }
   \cvcolumn{}{
-    \cvitem{\languageknowledge{Inkscape}{2}}{}{}
-    \cvitem{\languageknowledge{Blender}{2}}{}{}
-    \cvitem{\languageknowledge{OWL}{1}}{}{}
-    \cvitem{\languageknowledge{Kdenlive}{1}}{}{}
+    \languageknowledge{NetworkX}{2}
+    \languageknowledge{NumPy}{3}
+    \languageknowledge{Pandas}{3}
+    \languageknowledge{PettingZoo}{3}
+    \languageknowledge{Plotly}{2}
+    \languageknowledge{pytest}{3}
+    \languageknowledge{PyTorch}{4}
+    \languageknowledge{PyTorch Geometric}{3}
+    \languageknowledge{React}{3}
+    \languageknowledge{Scala.js}{3}
   }
   \cvcolumn{}{
-    \cvitem{\languageknowledge{NPM}{1}}{}{}
-    \cvitem{\languageknowledge{SBT}{4}}{}{}
-    \cvitem{\languageknowledge{Hugo}{1}}{}{}
-    \cvitem{\languageknowledge{Gradle}{2}}{}{}
-    \cvitem{\languageknowledge{Ollama}{3}}{}{}
+    \languageknowledge{Scala Native}{4}
+    \languageknowledge{ScalaTest}{4}
+    \languageknowledge{scikit-learn}{3}
+    \languageknowledge{SciPy}{2}
+    \languageknowledge{Seaborn}{2}
+    \languageknowledge{TensorFlow}{2}
+    \languageknowledge{TorchRL}{2}
+    \languageknowledge{VMAS}{3}
+    \languageknowledge{Vue}{3}
+    \languageknowledge{ZIO}{1}
   }
 \end{cvcolumns}
-
-\section{Miscellaneous}
-\cventry{2025}{\textbf{Presenting Project Emerge @ Researcher Night}}{}{}{}{Demonstrated ``Project Emerge'', an open-source swarm robotics platform, to promote science and technology among the general public. \url{https://experiment.com/projects/project-emerge-an-open-source-swarm-robotics-platform}}
-\cventry{2025}{\textbf{Presentation at GENERARE}}{}{}{}{Delivered an engaging talk on Large Language Models, demystifying advanced concepts for a broader audience.}
-\cventry{2024}{\textbf{Presenting Aggregate Computing @ Researcher Night}}{}{}{}{In that occasion I presented Aggregate Computing with physical robots highlighting the potential of the paradigm.}
-\cventry{2023}{\textbf{Scala Italy 2023}}{}{}{}{Scala in machine learning scenario: a personal experience}
-\cventry{2020}{\textbf{Student class representative @ Alma Mater Studiorum}}{}{}{}{}
-\cventry{2019}{\textbf{Seminar: Create your own video game in Snap!}}{}{}{}{Orientation Fair - Forlì}
-\cventry{2018 - 2019}{\textbf{Snap! courses}}{CRIAD Coding}{Grade schools}{}{}
-\cventry{2018}{\textbf{Presenting Snap! @ Researcher Night}}{}{}{}{In that occasion I presented Snap! to the public as a tool for teaching the computational thinking to the youngest.}
+\cvsubsection{LLM and RAG Tools}
+\begin{cvcolumns}
+  \cvcolumn{}{
+    \languageknowledge{ChromaDB}{3}
+    \languageknowledge{DeepEval}{3}
+    \languageknowledge{FAISS}{3}
+    \languageknowledge{Hugging Face}{2}
+    \languageknowledge{LangChain}{4}
+  }
+  \cvcolumn{}{
+    \languageknowledge{LangChain4j}{4}
+    \languageknowledge{LangGraph}{3}
+    \languageknowledge{llama.cpp}{2}
+    \languageknowledge{Ollama}{4}
+    \languageknowledge{Qdrant}{3}
+  }
+  \cvcolumn{}{
+    \languageknowledge{Google Gen AI SDK}{2}
+    \languageknowledge{OpenAI SDK}{3}
+    \languageknowledge{Ragas}{3}
+    \languageknowledge{vLLM}{2}
+  }
+\end{cvcolumns}
+\cvsubsection{Development Tools and Platforms}
+\begin{cvcolumns}
+  \cvcolumn{}{
+    \languageknowledge{Claude Code}{3}
+    \languageknowledge{Codex}{3}
+    \languageknowledge{Docker}{4}
+    \languageknowledge{Docker Compose}{3}
+    \languageknowledge{Gemini CLI}{2}
+    \languageknowledge{Git}{4}
+    \languageknowledge{GitHub Actions}{3}
+    \languageknowledge{Gradle}{3}
+    \languageknowledge{Hugo}{2}
+  }
+  \cvcolumn{}{
+    \languageknowledge{IntelliJ IDEA}{4}
+    \languageknowledge{Jupyter}{3}
+    \languageknowledge{Linux}{4}
+    \languageknowledge{Maven}{3}
+    \languageknowledge{Node.js}{3}
+    \languageknowledge{npm}{2}
+    \languageknowledge{OpenCode}{2}
+    \languageknowledge{pip}{3}
+    \languageknowledge{Poetry}{2}
+  }
+  \cvcolumn{}{
+    \languageknowledge{PyCharm}{3}
+    \languageknowledge{Python venv}{4}
+    \languageknowledge{Qwen CLI}{2}
+    \languageknowledge{sbt}{4}
+    \languageknowledge{SLURM}{2}
+    \languageknowledge{SSH}{3}
+    \languageknowledge{uv}{4}
+    \languageknowledge{VS Code}{4}
+  }
+\end{cvcolumns}
+\cvsubsection{Creative and Communication Tools}
+\begin{cvcolumns}
+  \cvcolumn{}{
+    \languageknowledge{Blender}{2}
+    \languageknowledge{Canva}{2}
+  }
+  \cvcolumn{}{
+    \languageknowledge{draw.io}{3}
+    \languageknowledge{GIMP}{3}
+  }
+  \cvcolumn{}{
+    \languageknowledge{Inkscape}{4}
+    \languageknowledge{Kdenlive}{2}
+  }
+\end{cvcolumns}
+\endgroup
+\cvsection{Miscellaneous}
+\cventry{2026}{Presentation at UniJunior: ``Collective Intelligence: From Nature to Robots''}{}{}{}{Outreach lesson for children aged 11--13 on collective intelligence, swarm robotics, and how groups of robots can cooperate, inspired by collective behaviours in nature. \url{https://www.unijunior.it/calendario/campus-di-cesena-romagna/lintelligenza-collettiva-dalla-natura-ai-robot-cesena}}
+\cventry{2025}{Presenting Project Emerge @ Researcher Night}{}{}{}{Demonstrated ``Project Emerge'', an open-source swarm robotics platform, to promote science and technology among the general public. \url{https://experiment.com/projects/project-emerge-an-open-source-swarm-robotics-platform}}
+\cventry{2025}{Presentation at GENERARE}{}{}{}{Delivered an engaging talk on Large Language Models, demystifying advanced concepts for a broader audience.}
+\cventry{2024}{Presenting Aggregate Computing @ Researcher Night}{}{}{}{In that occasion I presented Aggregate Computing with physical robots highlighting the potential of the paradigm.}
+\cventry{2023}{Scala Italy 2023}{}{}{}{Scala in machine learning scenario: a personal experience}
+\cventry{2020}{Student class representative @ Alma Mater Studiorum}{}{}{}{}
+\cventry{2019}{Seminar: Create your own video game in Snap!}{}{}{}{Orientation Fair - Forlì}
+\cventry{2018 - 2019}{Snap! courses}{CRIAD Coding}{Grade schools}{}{}
+\cventry{2018}{Presenting Snap! @ Researcher Night}{}{}{}{In that occasion I presented Snap! to the public as a tool for teaching the computational thinking to the youngest.}
 %\cventry{2013-2015}{Student class representative @ ITIS}{}{}{}{}
 
 %\section{References}
@@ -413,14 +781,9 @@ This course was co-organized with the University of Turin with the supervision o
 %\bibliographystylemisc{plain}
 %\bibliographymisc{publications}                   % 'publications' is the name of a BibTeX file
 
-\vfill
-\begin{flushleft}
-\today\\
-\end{flushleft}
-\begin{flushright}
-\vspace{1cm}
-Gianluca Aguzzi
-\end{flushright}
+\enlargethispage{3\baselineskip}
+\vspace{0.15cm}
+\noindent\today\hfill Gianluca Aguzzi
 
 %\clearpage\end{CJK*}                              % if you are typesetting your resume in Chinese using CJK; the \clearpage is required for fancyhdr to work correctly with CJK, though it kills the page numbering by making \lastpage undefined
 \end{document}
