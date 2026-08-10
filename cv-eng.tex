@@ -60,6 +60,64 @@
 \colorlet{datecolor}{accent}                        % years in the hint column, and year bands
 \colorlet{skillmatrixfullcolor}{accent}
 \colorlet{skillmatrixemptycolor}{black!15}
+% Quartile badges keep the journal bibliography compact while making the ranking
+% immediately scannable. Q4 is defined for future entries, even though no current
+% journal entry uses it.
+\definecolor{quartileqone}{HTML}{C4475A}
+\definecolor{quartileqtwo}{HTML}{D47722}
+\definecolor{quartileqthree}{HTML}{9A7912}
+\definecolor{quartileqfour}{HTML}{378B6A}
+\newcommand*{\quartilebadgewithcolor}[2]{%
+  \tikz[baseline=-.65ex]\node[
+    circle,
+    draw=#1,
+    text=#1,
+    line width=.45pt,
+    inner sep=.85pt,
+    font=\sffamily\scriptsize\bfseries
+  ]{#2};%
+}
+\newcommand*{\quartilebadge}[1]{%
+  \ifstrequal{#1}{Q1}{\quartilebadgewithcolor{quartileqone}{Q1}}{%
+    \ifstrequal{#1}{Q2}{\quartilebadgewithcolor{quartileqtwo}{Q2}}{%
+      \ifstrequal{#1}{Q3}{\quartilebadgewithcolor{quartileqthree}{Q3}}{%
+        \ifstrequal{#1}{Q4}{\quartilebadgewithcolor{quartileqfour}{Q4}}{#1}%
+      }%
+    }%
+  }%
+}
+% Conference marks use the current ICORE/CORE notation. The official top rank is
+% A* (the macro also accepts A+ as an alias); non-ranked venues use a neutral label.
+\definecolor{conferencerankastar}{HTML}{7A1F3D}
+\definecolor{conferenceranka}{HTML}{C4475A}
+\definecolor{conferencerankb}{HTML}{D47722}
+\definecolor{conferencerankc}{HTML}{378B6A}
+\newcommand*{\conferencerankbadgewithcolor}[2]{%
+  \tikz[baseline=-.65ex]\node[
+    circle,
+    draw=#1,
+    text=#1,
+    line width=.45pt,
+    inner sep=.85pt,
+    font=\sffamily\scriptsize\bfseries
+  ]{#2};%
+}
+\newcommand*{\conferencestatus}[1]{%
+  \textcolor{black!58}{\sffamily\scriptsize\itshape #1}%
+}
+\newcommand*{\conferencerank}[1]{%
+  \ifstrequal{#1}{A*}{\conferencerankbadgewithcolor{conferencerankastar}{A*}}{%
+    \ifstrequal{#1}{A+}{\conferencerankbadgewithcolor{conferencerankastar}{A+}}{%
+      \ifstrequal{#1}{A}{\conferencerankbadgewithcolor{conferenceranka}{A}}{%
+        \ifstrequal{#1}{B}{\conferencerankbadgewithcolor{conferencerankb}{B}}{%
+          \ifstrequal{#1}{C}{\conferencerankbadgewithcolor{conferencerankc}{C}}{%
+            \conferencestatus{#1}%
+          }%
+        }%
+      }%
+    }%
+  }%
+}
 % moderncv's icon set uses a hollow circle for first-level bullets; a small solid dot
 % sits better against the serif body.
 \renewcommand*{\labelitemi}{\strut\textcolor{accent}{\tiny\faCircle}}
@@ -316,7 +374,7 @@ My research sits at the intersection of \emph{collective adaptive systems engine
 \cventry{2020--2023}{PhD in CS \& Software Engineering}{UniBO}{Cesena}{with distinction}{Focus: Design and engineering of large-scale systems, multi-agent reinforcement learning, and cyber-physical swarms. \newline \textbf{Awarded Outstanding PhD Dissertation Award (IEEE TCSC)}. \newline Thesis: \emph{A language-based software engineering approach for cyber-physical swarms}. Supervisor: Prof. M. Viroli.}
 \cventry{2018--2020}{Master in CS \& Software Engineering}{UniBO}{Cesena}{110/110 cum laude}{Focus: Distributed systems, aggregate computing, and MARL. \newline \textbf{Awarded Best Master Thesis (Sergio Focardi Award)}. \newline Thesis: \emph{ScaFi Web: a Scala-JavaScript platform for executing, simulating, and controlling aggregate computing systems}.}
 \cventry{2015--2018}{Bachelor in CS \& Software Engineering}{UniBO}{Cesena}{110/110 cum laude}{\textbf{Awarded Prize for Meritous Students}. \newline Thesis: \emph{Sviluppo di un front-end di simulazione per applicazioni aggregate nel framework Scafi}.}
-\cventry{2010--2015}{High School on Computer Science}{ITIS E. Mattei}{Urbino}{100/100}{}
+\cventry{2010--2015}{High School on Computer Science}{ITIS E. Mattei}{Urbino}{100/100}{\textbf{Awarded a prize as one of the ten most deserving students.}}
 
 \cvsection{National Scientific Qualification}
 \cvitem{Qualification}{Italian National Scientific Qualification (\emph{Abilitazione Scientifica Nazionale}, ASN) as \textbf{Associate Professor} (Fascia II).}
@@ -564,6 +622,7 @@ Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which 
 \cvitem{2023}{DISCOLI (PC)}
 
 \cvsubsection{Service in International Journals}
+\cventry{2026 -- present}{Guest Editor}{Elsevier Computer Science Journal}{}{}{Submission: \emph{Selected Software Artifacts from the Papers of DisCoTec 2026 --- 21st International Federated Conference on Distributed Computing Techniques}.}
 \cventry{2025 -- present}{Guest Editor}{Springer Discover Computing}{}{}{Special issue: \emph{Engineering Foundational Models for Intelligent Robotic and Multi-agent Systems}.}
 \cventry{2025}{Managing Guest Editor}{MDPI Applied Sciences (IF 2.5)}{}{}{Special issue: \emph{Emerging Techniques in Engineering Intelligent Agents and Multi-Agent Systems}. \url{https://www.mdpi.com/journal/applsci/special_issues/36128M0RBR}}
 
@@ -671,7 +730,7 @@ Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which 
   \item Collaboration with \textbf{Prof. Silvia Mirri} and Dr Giovanni Delnevo (University of Bologna, Italy) on deep-learning and gamification techniques for encouraging waste sorting, producing one paper in the proceedings of an international conference. (2021)
 \end{cvlist}
 
-\cvsection{Participation in Research Projects}
+\cvsection{Participation in Research Projects}  
 \cvitem{2026--present}{\textbf{FoMaSE (FIS 3)} --- Foundations for Macro-programming-based Software Engineering. Member of the AI team, contributing to scalable AI methods for large-scale collective systems, including hybrid AI-based approaches for understanding, development, interpretability, and validation.}
 \cvitem{2023--2025}{\textbf{COMMONS-WEARS (PRIN)}. Research on community-oriented wearable computing, collective systems, and machine learning for healthcare and emergency response. Principal contributions addressed federated learning for decentralised, large-scale applications~\citeconferences{domini2024field,domini2024proximity,domini2025sparse} and~\citejournals{domini2025decentralized,domini2026fbfl}, and engineering collective applications~\citeconferences{aguzzi2024engineering,torta2025aggregate} and~\citeworkshops{aguzzi2024optimising}.}
 \cvitem{2022--2024}{\textbf{FLUIDWARE (PRIN)}. Research on programming models for large-scale IoT services, field-based coordination, and event-flow management in the edge--cloud continuum. As a PhD student, contributed programming models~\citeconferences{aguzzi2023field,aguzzi2023macroswarm,domini2023scarlib}, machine-learning integration~\citeconferences{aguzzi2022towards,aguzzi2022addressing}, and a related book chapter~\citechapters{aguzzi2024learning}.}
