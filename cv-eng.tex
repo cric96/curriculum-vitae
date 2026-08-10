@@ -5,7 +5,6 @@
 % conditions of the LaTeX Project Public License version 1.3c,
 % available at http://www.latex-project.org/lppl/.
 
-
 \documentclass[10pt,a4paper,roman]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
 
 % moderncv themes
@@ -190,7 +189,6 @@
 \RenewDocumentCommand{\section}{sm}{%
   \par\addvspace{2.6ex}%
   \phantomsection{}%
-  \addcontentsline{toc}{section}{#2}%
   \noindent{\sectionfont\textcolor{sectioncolor}{\textls[90]{\MakeUppercase{#2}}}}%
   \par\nobreak\vskip.6ex%
   \noindent{\color{bodyrulecolor}\rule{\textwidth}{.7pt}}%
@@ -199,9 +197,9 @@
 \RenewDocumentCommand{\subsection}{sm}{%
   \par\addvspace{1.6ex}%
   \phantomsection{}%
-  \addcontentsline{toc}{subsection}{#2}%
   \noindent{\subsectionfont\textcolor{subsectioncolor}{#2}}%
   \par\nobreak\addvspace{.6ex}\@afterheading}
+
 \makeatother
 
 % Dates belong to the structure, so they take the accent; the other hint-column labels
@@ -274,6 +272,40 @@
 % Consistent section spacing and enough room to keep headings with their first entry.
 \newcommand{\cvsection}[1]{\Needspace{6\baselineskip}\section{#1}}
 \newcommand{\cvsubsection}[1]{\Needspace{4\baselineskip}\subsection{#1}}
+% Domain-level heading: a strong visual marker for the primary conceptual clusters.
+\newcommand{\cvgroup}[1]{%
+  \par\addvspace{3.5ex}\Needspace{7\baselineskip}%
+  \noindent\colorbox{gray}{%
+    \parbox{\dimexpr\textwidth-2\fboxsep\relax}{%
+      \sffamily\bfseries\Large\color{white}\strut #1\strut}}%
+  \par\nobreak\addvspace{1.2ex}}
+
+% Compact selected-publication row. The full author list and bibliographic metadata
+% remain canonical in the journal bibliography; the citation number links the two.
+\newcommand{\selectedjournalpaper}[6]{%
+  \cvitem{\quartilebadge{#3}}{%
+    \textbf{#1}~\citejournals{#2}. \emph{#6}.%
+    \space\textcolor{black!58}{\sffamily\scriptsize JIF #4 (#5)}}}
+
+\newcommand{\cvmetricsdate}{10 August 2026}
+
+% Compact administrative identity placed directly below the name. The closing
+% section retains only the declaration itself.
+\newcommand{\makecvidentity}{%
+  \vspace{-1.2em}%
+  \begin{center}
+    \begin{minipage}{.96\textwidth}
+      \centering\sffamily\small\color{black!65}
+       Department of Computer Science and Engineering
+      (DISI), Alma Mater Studiorum --- University of Bologna\\[.25ex]
+      Via dell'Università, 50 --- 47521 Cesena (FC), Italy $\cdot$
+      \href{mailto:gianluca.aguzzi@unibo.it}{gianluca.aguzzi@unibo.it}\\[.25ex]
+      \href{https://orcid.org/0000-0002-1553-4561}{ORCID 0000-0002-1553-4561} $\cdot$
+      \href{https://gianluca.aguzzi.dev/}{gianluca.aguzzi.dev} $\cdot$
+      \href{https://github.com/cric96}{GitHub cric96}
+    \end{minipage}
+  \end{center}
+  \vspace{1.1em}}
 %----------------------------------------------------------------------------------
 %            content
 %----------------------------------------------------------------------------------
@@ -283,35 +315,23 @@
   \color{color2}\pagenumberfont\strut 88/88}}{}
 
 \makecvtitle
+\makecvidentity
 
-\cvsection{Statement of Truth}
-\cvitem{}{I hereby certify that all content reported in this document is true. This document is digitally signed by the undersigned.}
+%\cvgroup{Overview}
+\cvsection{Academic Overview}\label{sec:overview}
+\cvitem{Profile}{\textbf{Postdoctoral Research Fellow at the University of Bologna} working at the intersection of software engineering, collective adaptive systems, and machine learning. My research develops dependable and scalable methods for macroprogramming, cyber-physical swarms, cooperative learning, decentralised federated learning, and generative-AI-assisted software systems.}
+\cvitem{Position}{Postdoctoral Research Fellow on \textbf{COMMONS-WEARS}, University of Bologna, November 2023--November 2026. See \hyperref[sec:positions]{Research Positions}.}
+\cvitem{Qualification}{Italian National Scientific Qualification (ASN) as \textbf{Associate Professor}, sector 09/H1, valid 2026--2038. See \hyperref[sec:qualification]{National Scientific Qualification}.}
+\cvitem{Research record}{\textbf{63 publications}: 20 journal articles, 26 conference papers, 11 workshop papers, 3 book chapters, and 3 preprints. \textbf{H-index 15 with 605 citations} on Google Scholar; h-index 13 with 419 citations on Scopus (as of \cvmetricsdate). See \hyperref[sec:publications]{Publications}.}
+\cvitem{Teaching}{\textbf{326 course hours and 240 tutoring hours}; \textbf{39 supervised theses}; PhD mentorship of Davide Domini and Nicolas Farabegoli. See \hyperref[sec:teaching]{Teaching and Supervision}.}
+\cvitem{Recognition}{\textbf{IEEE TCSC Outstanding PhD Dissertation Award}; ACSOS Best Student Paper; Marie Sk\l{}odowska-Curie Actions Seal of Excellence; \textbf{USD 40,000} in Google research credits. See \hyperref[sec:awards]{Awards and Distinctions}.}
+\cvitem{Software}{Designer or co-designer of Phyelds, MacroSwarm, FRASP, ScaRLib, and ScaFi-Web. See \hyperref[sec:software]{Research Software}.}
+\cvitem{Mobility}{Three-month visiting PhD period at Aarhus University, hosted by Prof. Lukas Esterle. See \hyperref[sec:mobility]{International Experience}.}
 
-\cvsection{Personal Data}
-\cvitem{Citizenship}{Italian}
-\cvitem{Affiliation}{Department of Computer Science and Engineering (DISI), Alma Mater Studiorum --- University of Bologna}
-\cvitem{Address}{Via dell'Università, 50 --- 47521 Cesena (FC), Italy}
-\cvitem{Institutional email}{\href{mailto:gianluca.aguzzi@unibo.it}{gianluca.aguzzi@unibo.it}}
-\cvitem{ORCID}{\href{https://orcid.org/0000-0002-1553-4561}{0000-0002-1553-4561}}
-\cvitem{Personal website}{\href{https://gianluca.aguzzi.dev/}{https://gianluca.aguzzi.dev/}}
-\cvitem{GitHub}{\href{https://github.com/cric96}{https://github.com/cric96}}
+%\clearpage
+%\cvgroup{Overview continued: Career and Research Profile}
 
-\cvsection{Short Bio}
-\cvitem{}{Gianluca Aguzzi is a Postdoctoral Research Fellow at the Department of Computer Science and Engineering of the University of Bologna. His research combines software engineering, collective adaptive systems, and machine learning to build dependable, scalable distributed applications. His principal contributions advance macroprogramming for cyber-physical swarms, field-based coordination, cooperative multi-agent reinforcement learning, decentralized federated learning, and generative-AI support for modern software systems. He has designed or co-designed research software including Phyelds, MacroSwarm, FRASP, ScaRLib, and ScaFi-Web. He received his PhD with distinction in Computer Science and Software Engineering, earning the IEEE TCSC Outstanding PhD Dissertation Award. Alongside research, he teaches software design, advanced programming, distributed systems, reinforcement learning, and generative AI, and supervises Master's and Bachelor's theses.}
-
-\cvsection{Highlights}
-\cvitem{Education}{PhD with distinction; IEEE TCSC \underline{Outstanding PhD Dissertation Award}. See Education and Scientific Activities.}
-\cvitem{Qualification}{\underline{Italian National Scientific Qualification (ASN)} as Associate Professor, sector 09/H1, valid 2026--2038. See National Scientific Qualification.}
-\cvitem{Appointment}{Postdoctoral Research Fellow, University of Bologna, on two consecutive contracts: November 2023--November 2025 and November 2025--November 2026. See Research Positions.}
-\cvitem{Publications}{63 publications: 20 journal articles, 26 conference papers, 11 workshop papers, 3 book chapters, and 3 preprints. See Publications.}
-\cvitem{Bibliometrics}{605 citations, h-index 15 (Google Scholar); 419 citations, h-index 13 (Scopus). See Research Profile.}
-\cvitem{Teaching}{326 course hours and 240 tutoring hours; 39 supervised theses; 2 PhD students mentored. See Teaching.}
-\cvitem{Supervision}{Mentoring: 2 PhD students (Gianluca Aguzzi, Nicolas Farabegoli), 1 researcher, and 21 MEng/BEng students (11 MEng and 10 BEng). See Teaching.}
-\cvitem{Recognition}{Five major awards, including the IEEE TCSC dissertation award and the \underline{Seal of Excellence (Marie Curie)}, European Commission 2025; USD 40,000 in Google research awards. See Scientific Activities and Scholarships and Grants.}
-%\cvitem{Leadership}{AAMAS Area Chair; ACSOS Web and AI Chair; COORDINATION Artifact Evaluation Chair; two editorial appointments; visiting period at Aarhus University; seven invited talks. See Scientific Activities.}
-\cvitem{Software}{Principal research software: Phyelds, MacroSwarm, FRASP, ScaRLib, and ScaFi-Web. See Software Projects.}
-
-\cvsection{Research Positions}
+\cvsection{Research Positions}\label{sec:positions}
 \cvyear{2025--2026}
 \cvitem{Period}{November 2025 --- November 2026}
 \cvitem{Position}{Postdoctoral Research Fellow (``assegno di ricerca''), second contract}
@@ -328,7 +348,7 @@
 \cvitem{Supervisor}{Prof. Mirko Viroli}
 \cvitem{Description}{Engineering collective applications for layered, multi-mobile edge environments.}
 
-\cvsection{Research Profile}
+\cvsection{Research Themes}\label{sec:research-themes}
 \begin{cvprose}
 My research sits at the intersection of \emph{collective adaptive systems engineering} (software engineering) and \emph{machine learning} methodologies for distributed systems. In particular, my work contributes to several specific areas:
 \begin{itemize}
@@ -357,8 +377,8 @@ My research sits at the intersection of \emph{collective adaptive systems engine
   highlighting the need for scalable solutions. 
   In this regard, 
   I propose novel MARL approaches based on neighborhood policies~\citeconferences{malucelli2025neighbor} 
-  and explore new federated learning solutions that avoid central points of failure~\citeconferences{domini2024field,domini2024proximity}, decentralized proximity-aware clustering~\citejournals{domini2025decentralized}, and strategies for managing data heterogeneity~\citejournals{domini2026fbfl} or improving energy efficiency~\citeconferences{domini2025sparse} (work that led to a Marie Curie project with an associated Seal of Excellence award).
-  In this area, I also proposed novel framework for cooperative many agent deep reinforcement learning in Scala~\citeconferences{domini2023scarlib} and novel simulation pipeline for large-scale systems~\citeconferences{domini2024reusable}.
+  and explore new federated learning solutions that avoid central points of failure~\citeconferences{domini2024field,domini2024proximity}, decentralized proximity-aware clustering~\citejournals{domini2025decentralized}, and strategies for managing data heterogeneity~\citejournals{domini2026fbfl} or improving energy efficiency~\citeconferences{domini2025sparse} (work that led to a Marie Sk\l{}odowska-Curie Actions proposal with an associated Seal of Excellence).
+  In this area, I also proposed a novel framework for cooperative many-agent deep reinforcement learning in Scala~\citeconferences{domini2023scarlib} and a novel simulation pipeline for large-scale systems~\citeconferences{domini2024reusable}.
   \item \textbf{Generative AI for Modern Applications:} 
   This area represents a natural continuation of my previous work, 
   particularly focusing on how to use generative AI for designing modern distributed applications.
@@ -367,21 +387,22 @@ My research sits at the intersection of \emph{collective adaptive systems engine
 \end{itemize}
 \end{cvprose}
 \Needspace{4\baselineskip}
-\cvitem{H-index}{15 (Google Scholar), 13 (Scopus).}
-\cvitem{Citations}{605 (Google Scholar), 419 (Scopus).}
+\cvitem{Bibliometrics}{H-index 15 with 605 citations on Google Scholar; h-index 13 with 419 citations on Scopus (as of \cvmetricsdate).}
 
-\cvsection{Education}
-\cventry{2020--2023}{PhD in CS \& Software Engineering}{UniBO}{Cesena}{with distinction}{Focus: Design and engineering of large-scale systems, multi-agent reinforcement learning, and cyber-physical swarms. \newline \textbf{Awarded Outstanding PhD Dissertation Award (IEEE TCSC)}. \newline Thesis: \emph{A language-based software engineering approach for cyber-physical swarms}. Supervisor: Prof. M. Viroli.}
-\cventry{2018--2020}{Master in CS \& Software Engineering}{UniBO}{Cesena}{110/110 cum laude}{Focus: Distributed systems, aggregate computing, and MARL. \newline \textbf{Awarded Best Master Thesis (Sergio Focardi Award)}. \newline Thesis: \emph{ScaFi Web: a Scala-JavaScript platform for executing, simulating, and controlling aggregate computing systems}.}
-\cventry{2015--2018}{Bachelor in CS \& Software Engineering}{UniBO}{Cesena}{110/110 cum laude}{\textbf{Awarded Prize for Meritous Students}. \newline Thesis: \emph{Sviluppo di un front-end di simulazione per applicazioni aggregate nel framework Scafi}.}
-\cventry{2010--2015}{High School on Computer Science}{ITIS E. Mattei}{Urbino}{100/100}{\textbf{Awarded a prize as one of the ten most deserving students.}}
-
-\cvsection{National Scientific Qualification}
+\cvsection{National Scientific Qualification}\label{sec:qualification}
 \cvitem{Qualification}{Italian National Scientific Qualification (\emph{Abilitazione Scientifica Nazionale}, ASN) as \textbf{Associate Professor} (Fascia II).}
 \cvitem{Sector}{09/H1 --- \emph{Sistemi di Elaborazione delle Informazioni} (Information Processing Systems).}
 \cvitem{Session}{ASN 2023 round, sixth quadrimester (procedure: 22 December 2025 --- 22 July 2026).}
 \cvitem{Validity}{30 July 2026 --- 30 July 2038.}
 \cvitem{Official result}{\href{https://asn23.cineca.it/pubblico/miur/esito/09\%252FH1/2/6}{asn23.cineca.it --- 09/H1, Fascia II, 6\textsuperscript{th} quadrimester}}
+
+\cvgroup{Track Record}
+\cvsection{Awards and Distinctions}\label{sec:awards}
+\cventry{November 2025}{Outstanding PhD Dissertation Award}{IEEE Technical Community on Scalable Computing}{}{}{\url{https://www.ieee-tcsc.org/thesis.php}}
+\cventry{October 2025}{Best Student Paper Award}{ACSOS 2025}{}{}{\emph{A Field-based Approach for Runtime Replanning in Swarm Robotics Missions}~\citeconferences{aguzzi2025field}.}
+\cventry{March 2025}{Seal of Excellence}{Marie Sk\l{}odowska-Curie Actions, European Commission}{}{}{Awarded to a proposal on decentralised federated learning for large-scale systems, developed from the collaboration begun during the visiting period at Aarhus University.}
+\cventry{September 2024}{Best Poster Award}{ACSOS 2024}{}{}{\url{https://github.com/DanySK/poster-2024-acsos-imageonomics-drones}}
+\cventry{November 2023}{Best Master's Thesis --- Sergio Focardi Award}{}{}{}{\emph{ScaFi Web: a Scala-JavaScript platform for executing, simulating, and controlling aggregate computing systems}.}
 
 \cvsection{Scholarships and Grants}
 \cvsubsection{Research Grants}
@@ -397,12 +418,27 @@ My research sits at the intersection of \emph{collective adaptive systems engine
 \cvitem{2023}{\textbf{ACSOS Travel Grant}. Competitive support awarded by the ACSOS 2023 Organizing Committee toward attending the conference in Toronto, Canada, where I presented \emph{Field-informed Reinforcement Learning of Collective Tasks with Graph Neural Networks}~\citeconferences{aguzzi2023field}.}
 \cvitem{2023}{\textbf{IFIP Student Travel Grant --- DisCoTec 2023}. Competitive travel support provided by IFIP for participation in DisCoTec/COORDINATION 2023 in Lisbon, Portugal, where I presented work on MacroSwarm and ScaRLib~\citeconferences{aguzzi2023macroswarm,domini2023scarlib}.}
 
+\cvsection{Selected Journal Publications by Venue Impact}
+\cvitem{Method}{Twelve journal articles, selected first by journal quartile and then ordered by the latest available JIF within each quartile. Metrics were checked on \cvmetricsdate.}
+\selectedjournalpaper{RAG-Enhanced Open SLMs for Hypertension Management Chatbots}{aguzzi2025rag}{Q1}{8.8}{2025}{Journal of Medical Systems}
+\selectedjournalpaper{Decentralized Proximity-Aware Clustering for Collective Self-Federated Learning}{domini2025decentralized}{Q1}{7.6}{2024}{Internet of Things}
+\selectedjournalpaper{Software Engineering for Collective Cyber-Physical Ecosystems}{casadei2025software}{Q1}{6.9}{2025}{ACM Transactions on Software Engineering and Methodology}
+\selectedjournalpaper{Scaling Swarm Coordination with GNNs---How Far Can We Go?}{aguzzi2025scaling}{Q1}{6.5}{2025}{AI}
+\selectedjournalpaper{Heterogeneous GNN for Collective-Task Offloading in Cloud-Edge via Deep Q-Learning}{farabegoli2026heterogeneous}{Q1}{6.1}{2024}{Future Generation Computer Systems}
+\selectedjournalpaper{A Programming Approach to Collective Autonomy}{casadei2021programming}{Q1}{4.8}{2025}{Journal of Sensor and Actuator Networks}
+\selectedjournalpaper{Dynamic Decentralization Domains for the Internet of Things}{aguzzi2022dynamic}{Q1}{4.5}{2025}{IEEE Internet Computing}
+\selectedjournalpaper{Java Academic Benchmark: Exam-Based Evaluation of LLMs on Object-Oriented Programming}{cocchieri2026java}{Q1}{4.1}{2024}{Journal of Systems and Software}
+\selectedjournalpaper{A Language-Based Approach to Macroprogramming for IoT Systems through Large Language Models}{aguzzi2025language}{Q1}{3.7}{2024}{ACM Transactions on Internet of Things}
+\selectedjournalpaper{Unraveling Creativity through Variability: A Comparison of LLMs and Humans in an Educational Q\&A Scenario}{braccini2026unraveling}{Q1}{3.5}{2024}{Technology, Knowledge and Learning}
+\selectedjournalpaper{Privacy-Preserving LLM-Based Chatbots for Hypertensive Patient Self-Management}{montagna2025privacy}{Q2}{3.4}{2025}{Smart Health}
+\selectedjournalpaper{A Field-Based Computing Approach to Sensing-Driven Clustering in Robot Swarms}{aguzzi2023field-sensing}{Q2}{2.5}{2025}{Swarm Intelligence}
+
 \Needspace{14\baselineskip}
-\cvsection{Peer-Reviewed Publications and Bibliometrics}
+\cvsection{Peer-Reviewed Publications and Bibliometrics}\label{sec:publications}
 \cvsubsection{Bibliometrics}
 \begin{itemize}
-  \item \textbf{H-index:} 15 (Google Scholar), 13 (Scopus).
-  \item \textbf{Number of citations:} 605 (Google Scholar), 419 (Scopus).
+  \item \textbf{H-index:} 15 (Google Scholar), 13 (Scopus), as of \cvmetricsdate.
+  \item \textbf{Number of citations:} 605 (Google Scholar), 419 (Scopus), as of \cvmetricsdate.
   \item \textbf{Number of publications:} 63 (20 journal articles, 26 conference papers, 11 workshop papers, 3 book chapters, 3 preprints).
   \item \textbf{Number of journal publications:} 20.
   \begin{itemize}
@@ -434,7 +470,19 @@ Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which 
 \bibliographystylepreprints{plainyr-rev}
 \bibliographypreprints{bibliography/preprints}
 
-\cvsection{Teaching}
+\cvsection{Research Software}\label{sec:software}
+\cventry{2025 -- present}{Phyelds}{Designer}{}{}{Python framework for aggregate computing. \url{https://github.com/phyelds/phyelds}}
+\cventry{2023 -- present}{MacroSwarm}{Designer}{}{}{Field-based compositional framework for swarm programming~\citejournals{aguzzi2025macroswarm}. \url{https://github.com/scafi/macro-swarm}}
+\cventry{2023 -- present}{FRASP}{Co-designer}{}{}{Framework for reactive self-organising programming~\citeconferences{casadei2023self}. \url{https://github.com/cric96/distributed-frp}}
+\cventry{2023 -- present}{ScaRLib}{Designer}{}{}{Framework for cooperative many-agent deep reinforcement learning in Scala~\citejournals{domini2024scarlib}. \url{https://github.com/ScaRLib-group/ScaRLib}}
+\cventry{2021 -- present}{ScaFi-Web}{Co-designer and main contributor}{}{}{In-browser editing and execution of ScaFi programs~\citeconferences{aguzzi2021scafi}. \url{https://github.com/scafi/scafi-web}}
+\cventry{2021 -- present}{scalapy-gym}{Designer}{}{}{Scala facade for using OpenAI Gym environments on the JVM. \url{https://github.com/cric96/scalapy-gym}}
+\cvsubsection{Open-Source Contributions}
+\cventry{2018 -- present}{Development of GUI \& simulator for ScaFi}{}{}{}{\url{https://github.com/scafi/scafi}}
+\cventry{2021 -- present}{Contributions to ScaFi incarnations in Alchemist}{}{}{}{\url{https://github.com/AlchemistSimulator/Alchemist}}
+
+\cvgroup{Teaching and Supervision}
+\cvsection{Teaching}\label{sec:teaching}
 \cvsubsection{Courses}
 \cvitem{Summary}{326 documented course hours through 2026, across degree courses at the University of Bologna and invited teaching at PhD schools and partner universities.}
 
@@ -613,14 +661,8 @@ Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which 
 \cvitem{Role}{Tutor}
 \cvitem{Hours}{30}
 
-\cvsection{Scientific Activities}
-\cvsubsection{Awards}
-\cventry{November 2025}{Outstanding PhD Dissertation Award}{IEEE Technical Community on Scalable Computing}{}{}{\url{https://www.ieee-tcsc.org/thesis.php}}
-\cventry{October 2025}{Best Student Paper Award}{ACSOS 2025}{}{}{\emph{A Field-based Approach for Runtime Replanning in Swarm Robotics Missions}~\citeconferences{aguzzi2025field}.}
-\cventry{March 2025}{Seal of Excellence (Marie Sk\l{}odowska-Curie Actions)}{European Commission}{}{}{Awarded to a proposal on decentralised federated learning for large-scale systems, developed from the collaboration begun during the visiting period at Aarhus University.}
-\cventry{September 2024}{Best Poster Award}{ACSOS 2024}{}{}{\url{https://github.com/DanySK/poster-2024-acsos-imageonomics-drones}}
-\cventry{November 2023}{Best Master Thesis --- Sergio Focardi Award}{}{}{}{\emph{ScaFi Web: a Scala-JavaScript platform for executing, simulating, and controlling aggregate computing systems}.}
-
+\cvgroup{Research Activity}
+\cvsection{Research Community Service and Dissemination}
 \cvsubsection{Conference Service}
 \cvitem{Legend}{Venue and role acronyms are expanded once under \emph{Abbreviations}, at the end of this section.}
 \cvitem{2026}{ACSOS (\textbf{Web Chair; AI Chair}) $\cdot$ COORDINATION (\textbf{Artifact Evaluation Chair}) $\cdot$ PerCom (AEC) $\cdot$ AAMAS (\textbf{Area Chair})}
@@ -670,8 +712,8 @@ Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which 
   \item ICAART (2023)
 \end{cvlist}
 
-\cvsubsection{Visiting}
-\cventry{August--November 2023}{Visiting PhD Researcher}{Aarhus University}{Denmark}{}{Host: Prof. Lukas Esterle. Developed graph-neural-network-based distributed controllers, leading to work on field-informed reinforcement learning; continued collaboration on federated learning for large-scale systems contributed to the Marie Curie Seal of Excellence.}
+\cvsubsection{International Experience}\label{sec:mobility}
+\cventry{August--November 2023}{Visiting PhD Researcher}{Aarhus University}{Denmark}{}{Host: Prof. Lukas Esterle. Developed graph-neural-network-based distributed controllers, leading to work on field-informed reinforcement learning; continued collaboration on federated learning for large-scale systems contributed to the Marie Sk\l{}odowska-Curie Actions Seal of Excellence.}
 
 \cvsubsection{Invited Talks}
 \cvyear{2025}
@@ -729,7 +771,7 @@ Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which 
 \cvitem{Workshops}{\small AI4AS --- Artificial Intelligence for Autonomous Computing Systems (at ACSOS) $\cdot$ DIGITA --- Digital Twins Ecosystems and Applications (at PerCom) $\cdot$ DISCOLI --- DIStributed COLlective Intelligence (at ICDCS, DCOSS-IoT) $\cdot$ EmotionSense --- Human-centred Emotion-Awareness and Sensing in Pervasive Computing (at PerCom) $\cdot$ HotDiML --- Hot Topics in Distributed Machine Learning (at ICDCS) $\cdot$ LoStaN --- Logic, Statistical and Neural AI (at JELIA) $\cdot$ MADTECC --- Medical Applications with Digital Twins and Edge-Cloud Continuum (at PerCom) $\cdot$ NSE --- Neuro-Symbolic Software Engineering (at ICSE) $\cdot$ SISSY --- Self-Improving System Integration (at ACSOS) $\cdot$ WoA --- Workshop ``From Objects to Agents''}
 
 
-\cvsection{Participations/Collaborations in Research Groups}
+\cvsection{Participation and Collaboration in Research Groups}
 \begin{cvlist}[1]
   \item Participation in the research activity of the group coordinated by \textbf{Prof. Mirko Viroli} (University of Bologna, Italy), notably including \textbf{Prof. Roberto Casadei} and \textbf{Prof. Danilo Pianini}. This is the research group with which I have collaborated most extensively, on aggregate computing, macroprogramming, collective adaptive systems, cyber-physical swarms, and cooperative learning. The collaboration has produced 48+ co-authored outputs listed in this CV, including 16 journal articles. (2021--present)
   \item Collaboration with the research group coordinated by \textbf{Prof. Ferruccio Damiani} (University of Turin, Italy), notably including \textbf{Prof. Giorgio Audrito} and \textbf{Prof. Gianluca Torta}, on field-based coordination, swarm robotics, software engineering for collective systems, and distributed runtime verification. The collaboration has produced 5 co-authored publications, including 2 journal articles. (2021--present)
@@ -745,28 +787,46 @@ Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which 
   \item Collaboration with \textbf{Prof. Silvia Mirri} and Dr Giovanni Delnevo (University of Bologna, Italy) on deep-learning and gamification techniques for encouraging waste sorting, producing one paper in the proceedings of an international conference. (2021)
 \end{cvlist}
 
+
 \cvsection{Participation in Research Projects}  
+% TODO(cv-gap): Add project leadership, work-package/task responsibility, awarded
+% budget, and proposal-writing roles where these can be documented.
 \cvitem{2026--present}{\textbf{FoMaSE (FIS 3)} --- Foundations for Macro-programming-based Software Engineering. Member of the AI team, contributing to scalable AI methods for large-scale collective systems, including hybrid AI-based approaches for understanding, development, interpretability, and validation.}
 \cvitem{2023--2025}{\textbf{COMMONS-WEARS (PRIN)}. Research on community-oriented wearable computing, collective systems, and machine learning for healthcare and emergency response. Principal contributions addressed federated learning for decentralised, large-scale applications~\citeconferences{domini2024field,domini2024proximity,domini2025sparse} and~\citejournals{domini2025decentralized,domini2026fbfl}, and engineering collective applications~\citeconferences{aguzzi2024engineering,torta2025aggregate} and~\citeworkshops{aguzzi2024optimising}.}
 \cvitem{2022--2024}{\textbf{FLUIDWARE (PRIN)}. Research on programming models for large-scale IoT services, field-based coordination, and event-flow management in the edge--cloud continuum. As a PhD student, contributed programming models~\citeconferences{aguzzi2023field,aguzzi2023macroswarm,domini2023scarlib}, machine-learning integration~\citeconferences{aguzzi2022towards,aguzzi2022addressing}, and a related book chapter~\citechapters{aguzzi2024learning}.}
 
-\cvsection{Software Projects}
-\cventry{2025 -- present}{Phyelds}{Designer}{}{}{Python framework for aggregate computing. \url{https://github.com/phyelds/phyelds}}
-\cventry{2023 -- present}{MacroSwarm}{Designer}{}{}{Field-based compositional framework for swarm programming~\citejournals{aguzzi2025macroswarm}. \url{https://github.com/scafi/macro-swarm}}
-\cventry{2023 -- present}{FRASP}{Co-designer}{}{}{Framework for reactive self-organising programming~\citeconferences{casadei2023self}. \url{https://github.com/cric96/distributed-frp}}
-\cventry{2023 -- present}{ScaRLib}{Designer}{}{}{Framework for cooperative many-agent deep reinforcement learning in Scala~\citejournals{domini2024scarlib}. \url{https://github.com/ScaRLib-group/ScaRLib}}
-\cventry{2021 -- present}{ScaFi-Web}{Co-designer and main contributor}{}{}{In-browser editing and execution of ScaFi programs~\citeconferences{aguzzi2021scafi}. \url{https://github.com/scafi/scafi-web}}
-\cventry{2021 -- present}{scalapy-gym}{Designer}{}{}{Scala facade for using OpenAI Gym environments on the JVM. \url{https://github.com/cric96/scalapy-gym}}
-%\cventry{2020 -- today}{Co-designer of Fluvium}{An IoT project for river controll that uses AWS lambda}{}{}{\url{https://github.com/sbricco-house/fluvium}}
-\cvsubsection{Open Source Contributions}
-\cventry{2018 -- present}{Development of GUI \& simulator for ScaFi}{}{}{}{\url{https://github.com/scafi/scafi}}
-\cventry{2021 -- present}{Contributions to ScaFi incarnations in Alchemist}{}{}{}{\url{https://github.com/AlchemistSimulator/Alchemist}}
-
-\cvsection{Professional Experience}
+\cvgroup{Academic, Professional, and Social Engagement}
+% TODO(cv-gap): Add national evaluation panels, university boards and committees,
+% elected institutional roles, and professional-society memberships if applicable.
+\cvsection{Professional and Industry Experience}
 \cventry{2026 -- present}{AI-Assisted Software Engineering Consultant}{Mixer S.p.A.}{}{}{Consulting on coding-agent adoption, software-development workflows, code generation, and developer productivity.}
 \cventry{2025}{Invited Lectures on AI-assisted Coding}{Emilia-Romagna Region}{Bologna, Italy}{8 hours}{Training on applying AI tools to coding, debugging, and software design.}
 \cventry{2025 -- present}{Software Engineering Consultant}{SOILMEC S.p.A.}{Cesena, Italy}{}{Strategic consulting on legacy-system modernisation and architectural improvements.}
 \cventry{2024 -- present}{Software Engineering Consultant}{Flash Start}{Cesena, Italy}{}{Software architecture redesign and adoption of modern development practices.}
+
+\cvsection{Institutional Activity}
+\cventry{2020}{Student Class Representative}{Alma Mater Studiorum --- University of Bologna}{}{}{}
+
+\cvsection{Third Mission and Public Engagement}
+\cventry{2026}{Presentation at UniJunior: ``Collective Intelligence: From Nature to Robots''}{}{}{}{Outreach lesson for children aged 11--13 on collective intelligence, swarm robotics, and cooperation in robot groups, inspired by collective behaviours in nature. \url{https://www.unijunior.it/calendario/campus-di-cesena-romagna/lintelligenza-collettiva-dalla-natura-ai-robot-cesena}}
+\cventry{March 2025}{Speaker at Forum Young Campus}{}{}{}{Talk on software engineering, distributed artificial intelligence, and generative AI. \url{https://www.forumyoung.it/it/speakers/format/young-campus-2025/}}
+\cventry{2025}{Presenting Project Emerge at Researchers' Night}{}{}{}{Demonstrated Project Emerge, an open-source swarm-robotics platform, to the general public. \url{https://experiment.com/projects/project-emerge-an-open-source-swarm-robotics-platform}}
+\cventry{2025}{Presentation at GENERARE}{}{}{}{Public talk demystifying Large Language Models and their applications.}
+\cventry{2024}{Presenting Aggregate Computing at Researchers' Night}{}{}{}{Presented aggregate computing with physical robots, highlighting the potential of the paradigm.}
+\cventry{2023}{Scala Italy 2023}{}{}{}{Talk on Scala in machine-learning scenarios: a personal experience.}
+\cventry{2019}{Seminar: Create Your Own Video Game in Snap!}{Orientation Fair}{Forl\`i}{}{}
+\cventry{2018--2019}{Snap! Courses}{CRIAD Coding}{Primary and lower-secondary schools}{}{}
+\cventry{2018}{Presenting Snap! at Researchers' Night}{}{}{}{Presented Snap! as a tool for teaching computational thinking to younger learners.}
+
+\cvgroup{Background and Skills}
+\cvsection{Education}\label{sec:education}
+\cventry{2020--2023}{PhD in CS \& Software Engineering}{UniBO}{Cesena}{with distinction}{Focus: design and engineering of large-scale systems, multi-agent reinforcement learning, and cyber-physical swarms. \newline \textbf{Outstanding PhD Dissertation Award (IEEE TCSC)}. \newline Thesis: \emph{A language-based software engineering approach for cyber-physical swarms}. Supervisor: Prof. M. Viroli.}
+\cventry{2018--2020}{Master's in CS \& Software Engineering}{UniBO}{Cesena}{110/110 cum laude}{Focus: distributed systems, aggregate computing, and MARL. \newline \textbf{Best Master's Thesis --- Sergio Focardi Award}. \newline Thesis: \emph{ScaFi Web: a Scala-JavaScript platform for executing, simulating, and controlling aggregate computing systems}.}
+\cventry{2015--2018}{Bachelor's in CS \& Software Engineering}{UniBO}{Cesena}{110/110 cum laude}{\textbf{Prize for Meritorious Students}. \newline Thesis: \emph{Sviluppo di un front-end di simulazione per applicazioni aggregate nel framework Scafi}.}
+\cventry{2010--2015}{High School Diploma in Computer Science}{ITIS E. Mattei}{Urbino}{100/100}{Awarded a prize as one of the ten most deserving students.}
+
+% TODO(cv-gap): Add professional certifications, if any.
+% TODO(cv-gap): Add spoken languages with CEFR or equivalent proficiency levels.
 \cvsection{Technical Skills}
 \cvitem{How to read the scale}{\textbf{1}: used once or basic exposure; \textbf{2}: limited practical experience; \textbf{3}: regular working knowledge; \textbf{4}: able to give a seminar on the subject; \textbf{5}: able to write a book on the subject.}
 
@@ -793,7 +853,7 @@ Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which 
 \end{cvcolumns}
 
 
-\cvsubsection{Other Languages}
+\cvsubsection{Markup and Data Languages}
 \begin{cvcolumns}
   \cvcolumn{}{
     \languageknowledge{CSS}{3}
@@ -929,25 +989,14 @@ Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which 
   }
 \end{cvcolumns}
 \endgroup
-\cvsection{Third Mission}
-\cventry{2026}{Presentation at UniJunior: ``Collective Intelligence: From Nature to Robots''}{}{}{}{Outreach lesson for children aged 11--13 on collective intelligence, swarm robotics, and how groups of robots can cooperate, inspired by collective behaviours in nature. \url{https://www.unijunior.it/calendario/campus-di-cesena-romagna/lintelligenza-collettiva-dalla-natura-ai-robot-cesena}}
-\cventry{March 2025}{Speaker at Forum Young Campus}{}{}{}{Listed as a speaker for Young Campus Marzo 2025, with a profile focused on software engineering, distributed artificial intelligence, and generative AI. \url{https://www.forumyoung.it/it/speakers/format/young-campus-2025/}}
-\cventry{2025}{Presenting Project Emerge @ Researcher Night}{}{}{}{Demonstrated ``Project Emerge'', an open-source swarm robotics platform, to promote science and technology among the general public. \url{https://experiment.com/projects/project-emerge-an-open-source-swarm-robotics-platform}}
-\cventry{2025}{Presentation at GENERARE}{}{}{}{Delivered an engaging talk on Large Language Models, demystifying advanced concepts for a broader audience.}
-\cventry{2024}{Presenting Aggregate Computing @ Researcher Night}{}{}{}{In that occasion I presented Aggregate Computing with physical robots highlighting the potential of the paradigm.}
-\cventry{2023}{Scala Italy 2023}{}{}{}{Scala in machine learning scenario: a personal experience}
-
-\cvsection{Miscellaneous}
-\cventry{2020}{Student class representative @ Alma Mater Studiorum}{}{}{}{}
-\cventry{2019}{Seminar: Create your own video game in Snap!}{}{}{}{Orientation Fair - Forlì}
-\cventry{2018 - 2019}{Snap! courses}{CRIAD Coding}{Grade schools}{}{}
-\cventry{2018}{Presenting Snap! @ Researcher Night}{}{}{}{In that occasion I presented Snap! to the public as a tool for teaching the computational thinking to the youngest.}
-%\cventry{2013-2015}{Student class representative @ ITIS}{}{}{}{}
 
 % Keep the heading with both named referees; splitting them across a page reads as if
 % the section had ended.
 \Needspace{16\baselineskip}
+\cvgroup{References and Declarations}
 \cvsection{Referees}
+% TODO(cv-gap): Add referee email addresses and confirm permission to publish them if
+% formal applications require direct contact details.
 \cvitem{M. Viroli}{Prof. Mirko Viroli, Full Professor, Department of Computer Science and Engineering (DISI), Alma Mater Studiorum --- Università di Bologna.\newline Prof. Viroli was my Master's thesis and PhD advisor, and is my supervisor on both postdoctoral contracts. The collaboration is witnessed by 48 co-authored publications (2021--2026).}
 \cvitem[.7em]{R. Casadei}{Prof. Roberto Casadei, Senior Assistant Professor, Department of Computer Science and Engineering (DISI), Alma Mater Studiorum --- Università di Bologna.\newline Prof. Casadei has been my closest research collaborator since my PhD, with 20 co-authored publications (2021--2026) on macroprogramming and collective adaptive systems, including the ScaFi framework~\citejournals{casadei2022scafi}.}
 \cvitem[.7em]{D. Pianini}{Prof. Danilo Pianini, Associate Professor, Department of Computer Science and Engineering (DISI), Alma Mater Studiorum --- Università di Bologna.\newline Prof. Pianini has been a long-standing collaborator, with 15 co-authored publications (2021--2026), notably on simulation infrastructure and toolchains for large-scale collective systems~\citeconferences{domini2024reusable}.}
@@ -975,19 +1024,12 @@ Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which 
   \item Prof. Martino Francesco Pengo --- Istituto Auxologico Italiano IRCCS and University of Milano-Bicocca, Italy 
 \end{cvlist}
 
-
-% Publications from a BibTeX file without multibib
-%  for numerical labels: \renewcommand{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}% CONSIDER MERGING WITH PREAMBLE PART
-%  to redefine the heading string ("Publications"): \renewcommand{\refname}{Articles}
-
-% Publications from a BibTeX file using the multibib package
-%\section{Publications}
-%\nocitebook{book1,book2}
-%\bibliographystylebook{plain}
-%\bibliographybook{publications}                   % 'publications' is the name of a BibTeX file
-%\nocitemisc{misc1,misc2,misc3}
-%\bibliographystylemisc{plain}
-%\bibliographymisc{publications}                   % 'publications' is the name of a BibTeX file
+\cvsection{Declaration}
+\cvitem{Declaration}{I hereby certify that all content reported in this document is true.}
+% TODO(cv-gap): Confirm whether the target call requires explicit GDPR consent and,
+% if so, add the approved wording here.
+% TODO(cv-gap): Confirm whether the distributed PDF is digitally signed; only then
+% describe it as such in the visible declaration.
 
 \enlargethispage{3\baselineskip}
 \vspace{0.15cm}
