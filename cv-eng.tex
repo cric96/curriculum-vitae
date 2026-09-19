@@ -282,12 +282,15 @@
 
 % Compact selected-publication row. The full author list and bibliographic metadata
 % remain canonical in the journal bibliography; the citation number links the two.
-\newcommand{\selectedjournalpaper}[6]{%
+\newcommand{\selectedjournalpaper}[7]{%
   \cvitem{\quartilebadge{#3}}{%
-    \textbf{#1}~\citejournals{#2}. \emph{#6}.%
-    \space\textcolor{black!58}{\sffamily\scriptsize JIF #4 (#5)}}}
+    \textbf{#1}~\citejournals{#2}. \emph{#7}.%
+    \space\textcolor{black!58}{\sffamily\scriptsize JIF #4 $\boldsymbol{\cdot}$ CiteScore #5 (#6)}}}
+\input{publication-selection.tex}
 
 \newcommand{\cvmetricsdate}{10 August 2026}
+\newcommand{\cvjournalmetricsdate}{12 August 2026}
+\newcommand{\cvquartilesdate}{19 August 2026}
 
 % Compact administrative identity placed directly below the name. The closing
 % section retains only the declaration itself.
@@ -322,29 +325,22 @@
 \cvitem{Profile}{\textbf{Postdoctoral Research Fellow at the University of Bologna} working at the intersection of software engineering, collective adaptive systems, and machine learning. My research develops dependable and scalable methods for macroprogramming, cyber-physical swarms, cooperative learning, decentralised federated learning, and generative-AI-assisted software systems.}
 \cvitem{Position}{Postdoctoral Research Fellow on \textbf{COMMONS-WEARS}, University of Bologna, November 2023--November 2026. See \hyperref[sec:positions]{Research Positions}.}
 \cvitem{Qualification}{Italian National Scientific Qualification (ASN) as \textbf{Associate Professor}, sector 09/H1, valid 2026--2038. See \hyperref[sec:qualification]{National Scientific Qualification}.}
-\cvitem{Research record}{\textbf{63 publications}: 20 journal articles, 26 conference papers, 11 workshop papers, 3 book chapters, and 3 preprints. \textbf{H-index 15 with 605 citations} on Google Scholar; h-index 13 with 419 citations on Scopus (as of \cvmetricsdate). See \hyperref[sec:publications]{Publications}.}
-\cvitem{Teaching}{\textbf{326 course hours and 240 tutoring hours}; \textbf{39 supervised theses}; PhD mentorship of Davide Domini and Nicolas Farabegoli. See \hyperref[sec:teaching]{Teaching and Supervision}.}
+\cvitem{Research record}{\textbf{63 publications}: 20 journal articles, 26 conference papers, 11 workshop papers, 3 book chapters, and 3 preprints. \textbf{H-index 15 with 624 citations} on Google Scholar; h-index 13 with 427 citations on Scopus (as of \cvmetricsdate). See \hyperref[sec:publications]{Publications}.}
+\cvitem{Teaching}{\textbf{256.5 hours of completed university teaching, plus 70 hours already assigned for A.Y. 2026/27}; \textbf{240 hours of university tutoring}; \textbf{39 supervised theses}; PhD mentorship of Davide Domini and Nicolas Farabegoli. See \hyperref[sec:teaching]{Teaching and Supervision}.}
 \cvitem{Recognition}{\textbf{IEEE TCSC Outstanding PhD Dissertation Award}; ACSOS Best Student Paper; Marie Sk\l{}odowska-Curie Actions Seal of Excellence; \textbf{USD 40,000} in Google research credits. See \hyperref[sec:awards]{Awards and Distinctions}.}
 \cvitem{Software}{Designer or co-designer of Phyelds, MacroSwarm, FRASP, ScaRLib, and ScaFi-Web. See \hyperref[sec:software]{Research Software}.}
-\cvitem{Mobility}{Three-month visiting PhD period at Aarhus University, hosted by Prof. Lukas Esterle. See \hyperref[sec:mobility]{International Experience}.}
+\cvitem{Mobility}{Three-month visiting PhD period at Aarhus University in 2022, hosted by Prof. Lukas Esterle. See \hyperref[sec:mobility]{International Experience}.}
 
 %\clearpage
 %\cvgroup{Overview continued: Career and Research Profile}
 
 \cvsection{Research Positions}\label{sec:positions}
-\cvyear{2025--2026}
-\cvitem{Period}{November 2025 --- November 2026}
-\cvitem{Position}{Postdoctoral Research Fellow (``assegno di ricerca''), second contract}
+\cvyear{2023--2026}
+\cvitem{Period}{November 2023 --- November 2026}
+\cvitem{Position}{Postdoctoral Research Fellow (``assegno di ricerca'')}
 \cvitem{Institution}{Alma Mater Studiorum --- University of Bologna, Cesena}
 \cvitem{Project}{COMMONS-WEARS (PRIN-funded)}
-\cvitem{Supervisor}{Prof. Mirko Viroli}
-\cvitem{Description}{Renewal on the same project: engineering collective applications for layered, multi-mobile edge environments.}
-
-\cvyear{2023--2025}
-\cvitem{Period}{November 2023 --- November 2025}
-\cvitem{Position}{Postdoctoral Research Fellow (``assegno di ricerca''), first contract}
-\cvitem{Institution}{Alma Mater Studiorum --- University of Bologna, Cesena}
-\cvitem{Project}{COMMONS-WEARS (PRIN-funded)}
+\cvitem{Title}{Distributed Collective Intelligence in Wearable Computing and IoT Systems through hybrid aggregate computing}
 \cvitem{Supervisor}{Prof. Mirko Viroli}
 \cvitem{Description}{Engineering collective applications for layered, multi-mobile edge environments.}
 
@@ -387,7 +383,7 @@ My research sits at the intersection of \emph{collective adaptive systems engine
 \end{itemize}
 \end{cvprose}
 \Needspace{4\baselineskip}
-\cvitem{Bibliometrics}{H-index 15 with 605 citations on Google Scholar; h-index 13 with 419 citations on Scopus (as of \cvmetricsdate).}
+\cvitem{Bibliometrics}{H-index 15 with 624 citations on Google Scholar; h-index 13 with 427 citations on Scopus (as of \cvmetricsdate).}
 
 \cvsection{National Scientific Qualification}\label{sec:qualification}
 \cvitem{Qualification}{Italian National Scientific Qualification (\emph{Abilitazione Scientifica Nazionale}, ASN) as \textbf{Associate Professor} (Fascia II).}
@@ -400,7 +396,7 @@ My research sits at the intersection of \emph{collective adaptive systems engine
 \cvsection{Awards and Distinctions}\label{sec:awards}
 \cventry{November 2025}{Outstanding PhD Dissertation Award}{IEEE Technical Community on Scalable Computing}{}{}{\url{https://www.ieee-tcsc.org/thesis.php}}
 \cventry{October 2025}{Best Student Paper Award}{ACSOS 2025}{}{}{\emph{A Field-based Approach for Runtime Replanning in Swarm Robotics Missions}~\citeconferences{aguzzi2025field}.}
-\cventry{March 2025}{Seal of Excellence}{Marie Sk\l{}odowska-Curie Actions, European Commission}{}{}{Awarded to a proposal on decentralised federated learning for large-scale systems, developed from the collaboration begun during the visiting period at Aarhus University.}
+\cventry{March 2025}{Seal of Excellence}{Marie Sk\l{}odowska-Curie Actions, European Commission}{}{}{Awarded to a proposal on decentralised federated learning for large-scale systems, developed from the collaboration begun during the 2022 visiting period at Aarhus University.}
 \cventry{September 2024}{Best Poster Award}{ACSOS 2024}{}{}{\url{https://github.com/DanySK/poster-2024-acsos-imageonomics-drones}}
 \cventry{November 2023}{Best Master's Thesis --- Sergio Focardi Award}{}{}{}{\emph{ScaFi Web: a Scala-JavaScript platform for executing, simulating, and controlling aggregate computing systems}.}
 
@@ -414,42 +410,34 @@ My research sits at the intersection of \emph{collective adaptive systems engine
 
 \cvsubsection{Mobility and Travel Grants}
 \cvitem{2024}{\textbf{IFIP Student Travel Grant --- DisCoTec 2024}. Competitive travel support provided by the International Federation for Information Processing (IFIP) for participation in DisCoTec/COORDINATION 2024 in Groningen, the Netherlands, where I presented \emph{ScaFi-Blocks: A Visual Aggregate Programming Environment for Low-code Swarm Design}~\citeconferences{aguzzi2024scafi}.}
-\cvitem{2023}{\textbf{Mobility Grant --- Marco Polo Programme}. \emph{Issuer:} Department of Computer Science and Engineering (DISI), University of Bologna. This selective grant, awarded through a public call, supported my three-month visiting PhD period at Aarhus University, Denmark, hosted by Prof. Lukas Esterle.}
+\cvitem{2022}{\textbf{Mobility Grant --- Marco Polo Programme}. \emph{Issuer:} Department of Computer Science and Engineering (DISI), University of Bologna. This selective grant, awarded through a public call, funded the three-month visiting PhD period at Aarhus University in 2022, hosted by Prof. Lukas Esterle.}
 \cvitem{2023}{\textbf{ACSOS Travel Grant}. Competitive support awarded by the ACSOS 2023 Organizing Committee toward attending the conference in Toronto, Canada, where I presented \emph{Field-informed Reinforcement Learning of Collective Tasks with Graph Neural Networks}~\citeconferences{aguzzi2023field}.}
 \cvitem{2023}{\textbf{IFIP Student Travel Grant --- DisCoTec 2023}. Competitive travel support provided by IFIP for participation in DisCoTec/COORDINATION 2023 in Lisbon, Portugal, where I presented work on MacroSwarm and ScaRLib~\citeconferences{aguzzi2023macroswarm,domini2023scarlib}.}
 
-\cvsection{Selected Journal Publications by Venue Impact}
-\cvitem{Method}{Twelve journal articles, selected first by journal quartile and then ordered by the latest available JIF within each quartile. Metrics were checked on \cvmetricsdate.}
-\selectedjournalpaper{RAG-Enhanced Open SLMs for Hypertension Management Chatbots}{aguzzi2025rag}{Q1}{8.8}{2025}{Journal of Medical Systems}
-\selectedjournalpaper{Decentralized Proximity-Aware Clustering for Collective Self-Federated Learning}{domini2025decentralized}{Q1}{7.6}{2024}{Internet of Things}
-\selectedjournalpaper{Software Engineering for Collective Cyber-Physical Ecosystems}{casadei2025software}{Q1}{6.9}{2025}{ACM Transactions on Software Engineering and Methodology}
-\selectedjournalpaper{Scaling Swarm Coordination with GNNs---How Far Can We Go?}{aguzzi2025scaling}{Q1}{6.5}{2025}{AI}
-\selectedjournalpaper{Heterogeneous GNN for Collective-Task Offloading in Cloud-Edge via Deep Q-Learning}{farabegoli2026heterogeneous}{Q1}{6.1}{2024}{Future Generation Computer Systems}
-\selectedjournalpaper{A Programming Approach to Collective Autonomy}{casadei2021programming}{Q1}{4.8}{2025}{Journal of Sensor and Actuator Networks}
-\selectedjournalpaper{Dynamic Decentralization Domains for the Internet of Things}{aguzzi2022dynamic}{Q1}{4.5}{2025}{IEEE Internet Computing}
-\selectedjournalpaper{Java Academic Benchmark: Exam-Based Evaluation of LLMs on Object-Oriented Programming}{cocchieri2026java}{Q1}{4.1}{2024}{Journal of Systems and Software}
-\selectedjournalpaper{A Language-Based Approach to Macroprogramming for IoT Systems through Large Language Models}{aguzzi2025language}{Q1}{3.7}{2024}{ACM Transactions on Internet of Things}
-\selectedjournalpaper{Unraveling Creativity through Variability: A Comparison of LLMs and Humans in an Educational Q\&A Scenario}{braccini2026unraveling}{Q1}{3.5}{2024}{Technology, Knowledge and Learning}
-\selectedjournalpaper{Privacy-Preserving LLM-Based Chatbots for Hypertensive Patient Self-Management}{montagna2025privacy}{Q2}{3.4}{2025}{Smart Health}
-\selectedjournalpaper{A Field-Based Computing Approach to Sensing-Driven Clustering in Robot Swarms}{aguzzi2023field-sensing}{Q2}{2.5}{2025}{Swarm Intelligence}
+\cvsection{Selected Journal Publications}
+\cvitem{Metrics}{Venue quartiles from SCImago/SJR (checked on \cvquartilesdate); 2025 Journal Impact Factors (JIF) and 2025 CiteScores (checked on \cvjournalmetricsdate).}
+\begingroup
+\let\SelectedPublicationEntry\selectedjournalpaper
+\SelectedPublications
+\endgroup
 
 \Needspace{14\baselineskip}
 \cvsection{Peer-Reviewed Publications and Bibliometrics}\label{sec:publications}
 \cvsubsection{Bibliometrics}
 \begin{itemize}
   \item \textbf{H-index:} 15 (Google Scholar), 13 (Scopus), as of \cvmetricsdate.
-  \item \textbf{Number of citations:} 605 (Google Scholar), 419 (Scopus), as of \cvmetricsdate.
+  \item \textbf{Number of citations:} 624 (Google Scholar), 427 (Scopus), as of \cvmetricsdate.
   \item \textbf{Number of publications:} 63 (20 journal articles, 26 conference papers, 11 workshop papers, 3 book chapters, 3 preprints).
   \item \textbf{Number of journal publications:} 20.
   \begin{itemize}
-    \item Number of \quartilebadge{Q1} journal publications: 11.
-    \item Number of \quartilebadge{Q2} journal publications: 8.
-    \item Number of \quartilebadge{Q3} journal publications: 1.
+    \item Number of \quartilebadge{Q1} journal publications: 10.
+    \item Number of \quartilebadge{Q2} journal publications: 6.
+    \item Number of \quartilebadge{Q3} journal publications: 4.
   \end{itemize}
 \end{itemize}
 All my publications (ordered by venue and year DESC) follow.
 
-Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which the paper is published in a range from the year it is accepted to the year of publication (e.g., if a paper is accepted in 2023, I took the max quartile of 2022 - 2023).
+\textbf{Quartile methodology.} Quartiles are based on \href{https://www.scimagojr.com}{SCImago Journal \& Country Rank (SJR)}, taking the journal's best quartile across all subject categories (Q1 being the highest). For each published article, I report the best quartile attained by the journal in either the calendar year preceding publication, used as a proxy for the review period, or the publication year. If the publication-year SJR data are not yet available, I use the latest available data; for accepted or in-press articles not yet published, I use the journal's latest available quartile. Quartiles were last checked on \cvquartilesdate.
 \nocitejournals{*}
 \bibliographystylejournals{plainyr-rev}
 \bibliographyjournals{bibliography/journal_articles}
@@ -484,26 +472,29 @@ Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which 
 \cvgroup{Teaching and Supervision}
 \cvsection{Teaching}\label{sec:teaching}
 \cvsubsection{Courses}
-\cvitem{Summary}{326 documented course hours through 2026, across degree courses at the University of Bologna and invited teaching at PhD schools and partner universities.}
+\cvitem{Summary}{256.5 hours of completed university teaching, plus 70 hours already assigned for A.Y. 2026/27; 240 hours of university tutoring.}
 
-\cvyear{2026}
+\cvsubsection{Upcoming teaching appointments --- A.Y. 2026/27}
+\cvyear{2026/27}
 \cvitem{Course}{Advanced Software Modelling and Design}
-\cvitem{Role}{Module 3}
+\cvitem{Role}{Module 2}
 \cvitem{Hours}{20}
 \cvitem{Audience}{Master's in Computer Science and Engineering (English), University of Bologna}
 \cvitem[.9em]{Topics}{Software modelling, development practices, testing, verification, and computational models for intelligent and distributed systems. \href{https://www.unibo.it/it/studiare/insegnamenti-competenze-trasversali-moocs/insegnamenti/insegnamento/2026/558652}{Course page}.}
 
 \cvitem{Course}{Advanced Software Engineering and Development}
-\cvitem{Role}{Module 2}
+\cvitem{Role}{Module 3}
 \cvitem{Hours}{20}
 \cvitem{Audience}{Master's in Computer Science and Engineering, University of Bologna}
 \cvitem[.9em]{Topics}{Functional programming with Scala, logic programming with Prolog, software quality, refactoring, agile testing, and advanced design patterns.}
 
-\cvitem{Course}{Software Design and Development}
+\cvitem{Course}{Progettazione e Sviluppo del Software}
 \cvitem{Role}{Module 2}
 \cvitem{Hours}{30}
 \cvitem{Audience}{Professional Bachelor's in Information Systems Technologies, University of Bologna}
 \cvitem{Topics}{Object-oriented programming, design patterns, Java, software architecture, testing, and agile methodologies.}
+
+\cvsubsection{Completed courses}
 
 \cvyear{2025}
 \cvitem{Course}{Advanced Software Modelling and Design}
@@ -530,8 +521,8 @@ Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which 
 
 \cvitem{Course}{Compose in Android Development (April 2025)}
 \cvitem{Role}{Teaching module}
-\cvitem{Hours}{10}
-\cvitem{Audience}{Bachelor's in Computer Science (English), Western Norway University of Applied Sciences (HVL), Norway}
+\cvitem{Hours}{10.5}
+\cvitem{Audience}{Bachelor's in Computer Science (English), Western Norway University of Applied Sciences (HVL), Bergen, Norway}
 \cvitem{Topics}{Declarative UI programming with Compose, composable functions, state management, and UI design principles.}
 
 \cvyear{2024}
@@ -546,8 +537,8 @@ Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which 
 \cvitem{Audience}{Professional Bachelor's in Information Systems Technologies, University of Bologna}
 
 \cvyear{2023}
-\cvitem{Course}{Software Design and Development}
-\cvitem{Role}{Module 2}
+\cvitem{Course}{Progettazione e Sviluppo del Software}
+\cvitem{Role}{Module 3}
 \cvitem{Hours}{30}
 \cvitem[.9em]{Audience}{Professional Bachelor's in Information Systems Technologies, University of Bologna}
 
@@ -679,8 +670,8 @@ Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which 
 \cvitem{2023}{DISCOLI (PC)}
 
 \cvsubsection{Service in International Journals}
-\cventry{2026 -- present}{Guest Editor}{Elsevier Computer Science Journal}{}{}{Submission: \emph{Selected Software Artifacts from the Papers of DisCoTec 2026 --- 21st International Federated Conference on Distributed Computing Techniques}.}
-\cventry{2025 -- present}{Guest Editor}{Springer Discover Computing}{}{}{Special issue: \emph{Engineering Foundational Models for Intelligent Robotic and Multi-agent Systems}.}
+\cventry{2026 -- present}{Guest Editor}{Elsevier Computer Science Journal}{}{}{Accepted special issue, currently soliciting submissions: \emph{Selected Software Artifacts from the Papers of DisCoTec 2026 --- 21st International Federated Conference on Distributed Computing Techniques}.}
+\cventry{2025 -- present}{Guest Editor}{Springer Discover Computing}{}{}{Accepted special issue, currently soliciting submissions: \emph{Engineering Foundational Models for Intelligent Robotic and Multi-agent Systems}.}
 \cventry{2025}{Managing Guest Editor}{MDPI Applied Sciences (IF 2.5)}{}{}{Special issue: \emph{Emerging Techniques in Engineering Intelligent Agents and Multi-Agent Systems}. \url{https://www.mdpi.com/journal/applsci/special_issues/36128M0RBR}}
 
 \cvsubsection{Review Activity}
@@ -713,7 +704,7 @@ Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which 
 \end{cvlist}
 
 \cvsubsection{International Experience}\label{sec:mobility}
-\cventry{August--November 2023}{Visiting PhD Researcher}{Aarhus University}{Denmark}{}{Host: Prof. Lukas Esterle. Developed graph-neural-network-based distributed controllers, leading to work on field-informed reinforcement learning; continued collaboration on federated learning for large-scale systems contributed to the Marie Sk\l{}odowska-Curie Actions Seal of Excellence.}
+\cventry{August--November 2022}{Visiting PhD Researcher}{Aarhus University}{Denmark}{}{Host: Prof. Lukas Esterle. Supported by the 2022 Marco Polo mobility grant. Developed graph-neural-network-based distributed controllers, leading to work on field-informed reinforcement learning; continued collaboration on federated learning for large-scale systems contributed to the Marie Sk\l{}odowska-Curie Actions Seal of Excellence.}
 
 \cvsubsection{Invited Talks}
 \cvyear{2025}
@@ -734,7 +725,7 @@ Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which 
 \cvyear{2023}
 \cvitem{Title}{Multi-Agent Reinforcement Learning: Unleashing Collective Intelligence}
 \cvitem{Venue}{Advanced School in Artificial Intelligence Summer School}
-\cvitem[.7em]{Duration}{3 hours}
+\cvitem[.7em]{Duration}{4 hours}
 \cvitem{Title}{Introduction to Deep Reinforcement Learning}
 \cvitem{Venue}{Fundamentals of Artificial Intelligence, University of Urbino}
 \cvitem{Duration}{2 hours}
@@ -775,7 +766,7 @@ Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which 
 \begin{cvlist}[1]
   \item Participation in the research activity of the group coordinated by \textbf{Prof. Mirko Viroli} (University of Bologna, Italy), notably including \textbf{Prof. Roberto Casadei} and \textbf{Prof. Danilo Pianini}. This is the research group with which I have collaborated most extensively, on aggregate computing, macroprogramming, collective adaptive systems, cyber-physical swarms, and cooperative learning. The collaboration has produced 48+ co-authored outputs listed in this CV, including 16 journal articles. (2021--present)
   \item Collaboration with the research group coordinated by \textbf{Prof. Ferruccio Damiani} (University of Turin, Italy), notably including \textbf{Prof. Giorgio Audrito} and \textbf{Prof. Gianluca Torta}, on field-based coordination, swarm robotics, software engineering for collective systems, and distributed runtime verification. The collaboration has produced 5 co-authored publications, including 2 journal articles. (2021--present)
-  \item Collaboration with \textbf{Prof. Lukas Esterle} (Aarhus University, Denmark) on distributed collective intelligence, graph-neural-network-based controllers, and decentralised federated learning. The collaboration included a three-month visiting period at Aarhus University and has produced 7 co-authored outputs, including 3 journal articles; the resulting research line also contributed to a Marie Sk\l{}odowska-Curie Seal of Excellence. (2022--present)
+  \item Collaboration with \textbf{Prof. Lukas Esterle} (Aarhus University, Denmark) on distributed collective intelligence, graph-neural-network-based controllers, and decentralised federated learning. The collaboration included a three-month visiting period at Aarhus University in 2022 and has produced 7 co-authored outputs, including 3 journal articles; the resulting research line also contributed to a Marie Sk\l{}odowska-Curie Seal of Excellence. (2022--present)
   \item Ongoing collaboration with \textbf{Prof. Kenji Tei} (Institute of Science Tokyo and Waseda University, Japan) in the context of a Japan Society for the Promotion of Science (JSPS) initiative, on integrating federated learning with MAPE-K feedback loops for self-adaptive systems. (2026--present)
   \item Collaboration with \textbf{Prof. Alessandro Papadopoulos} (M\"alardalen University, Sweden) on field-based runtime replanning for robot-swarm missions, producing the ACSOS 2025 Best Student Paper. (2025--present)
   \item Collaboration with \textbf{Prof. Sara Montagna} (University of Urbino Carlo Bo, Italy) and \textbf{Prof. Stefano Ferretti} (University of Bologna, Italy), notably including Dr Matteo Magnini (University of Bologna, Italy), on small language models, retrieval-augmented generation, privacy, and healthcare chatbots. The collaboration has produced 8 co-authored publications, including 3 journal articles, and has been supported by the 2025 Gemma~3 Research Award from Google. (2024--present)
@@ -791,7 +782,7 @@ Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which 
 \cvsection{Participation in Research Projects}  
 % TODO(cv-gap): Add project leadership, work-package/task responsibility, awarded
 % budget, and proposal-writing roles where these can be documented.
-\cvitem{2026--present}{\textbf{FoMaSE (FIS 3)} --- Foundations for Macro-programming-based Software Engineering. Member of the AI team, contributing to scalable AI methods for large-scale collective systems, including hybrid AI-based approaches for understanding, development, interpretability, and validation.}
+%\cvitem{2026--present}{\textbf{FoMaSE (FIS 3)} --- Foundations for Macro-programming-based Software Engineering. Member of the AI team, contributing to scalable AI methods for large-scale collective systems, including hybrid AI-based approaches for understanding, development, interpretability, and validation.}
 \cvitem{2023--2025}{\textbf{COMMONS-WEARS (PRIN)}. Research on community-oriented wearable computing, collective systems, and machine learning for healthcare and emergency response. Principal contributions addressed federated learning for decentralised, large-scale applications~\citeconferences{domini2024field,domini2024proximity,domini2025sparse} and~\citejournals{domini2025decentralized,domini2026fbfl}, and engineering collective applications~\citeconferences{aguzzi2024engineering,torta2025aggregate} and~\citeworkshops{aguzzi2024optimising}.}
 \cvitem{2022--2024}{\textbf{FLUIDWARE (PRIN)}. Research on programming models for large-scale IoT services, field-based coordination, and event-flow management in the edge--cloud continuum. As a PhD student, contributed programming models~\citeconferences{aguzzi2023field,aguzzi2023macroswarm,domini2023scarlib}, machine-learning integration~\citeconferences{aguzzi2022towards,aguzzi2022addressing}, and a related book chapter~\citechapters{aguzzi2024learning}.}
 
@@ -1004,7 +995,8 @@ Note: for Quartile (Q1-Q4), I took the highest quartile of the journal in which 
 \cvsubsection{Further Referees from Academia}
 \cvitem{}{Further referees for my academic profile include:}
 \begin{cvlist}[1]
-  \item Prof. Lukas Esterle --- Aarhus University, Denmark (host of my visiting period; 7 co-authored publications)
+  \item Prof. Lukas Esterle --- Aarhus University, Denmark (host of my 2022 visiting period; 7 co-authored publications)
+  \item Prof. Giancarlo Fortino --- University of Calabria, Italy
   \item Prof. Guido Salvaneschi --- University of St.\ Gallen, Switzerland
   \item Prof. Alessandro Papadopoulos --- Mälardalen University, Sweden
   \item Prof. Ivana Dusparic --- Trinity College Dublin, Ireland

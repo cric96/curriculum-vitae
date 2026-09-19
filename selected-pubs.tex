@@ -1,0 +1,11 @@
+\input{publication-list-common.tex}
+\input{publication-selection.tex}
+
+\begin{document}
+\renewcommand*{\SelectedPublicationEntry}[7]{\nocite{#2}}
+\PublicationList
+  {List of Selected Publications}
+  {}
+  {\SelectedPublications}
+  {none}
+\end{document}

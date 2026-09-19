@@ -1,0 +1,137 @@
+% Shared preamble and layout for the two publication-list documents.
+% Bibliographic metadata remain canonical in bibliography/*.bib.
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{XCharter}
+\usepackage[scaled=0.94]{FiraSans}
+\usepackage{microtype}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{xcolor}
+\usepackage{etoolbox}
+\usepackage{csquotes}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\setlength{\emergencystretch}{2em}
+
+\definecolor{accent}{HTML}{24456B}
+\definecolor{missingid}{HTML}{9D241F}
+\hypersetup{colorlinks=true,urlcolor=accent,linkcolor=accent}
+
+\usepackage[
+  backend=biber,
+  style=numeric,
+  sorting=ydnt,
+  defernumbers=true,
+  giveninits=false,
+  maxbibnames=99,
+  doi=false,
+  isbn=false,
+  eprint=false,
+  url=false
+]{biblatex}
+
+\addbibresource{bibliography/journal_articles.bib}
+\addbibresource{bibliography/conference_papers.bib}
+\addbibresource{bibliography/workshop_papers.bib}
+\addbibresource{bibliography/book_chapters.bib}
+\addbibresource{bibliography/preprints.bib}
+
+% Ranking badges stored in `note` belong to the CV only and are intentionally
+% omitted from the administrative publication lists.
+\AtEveryBibitem{\clearfield{note}}
+
+% The candidate's name is highlighted without modifying the shared .bib files.
+\renewcommand*{\mkbibnamefamily}[1]{%
+  \ifboolexpr{
+    test {\ifdefstrequal{\namepartfamily}{Aguzzi}}
+    and
+    test {\ifdefstrequal{\namepartgiven}{Gianluca}}
+  }{\mkbibbold{#1}}{#1}}
+\renewcommand*{\mkbibnamegiven}[1]{%
+  \ifboolexpr{
+    test {\ifdefstrequal{\namepartfamily}{Aguzzi}}
+    and
+    test {\ifdefstrequal{\namepartgiven}{Gianluca}}
+  }{\mkbibbold{#1}}{#1}}
+
+% Fallback used unless publication-contributions.tex provides an entry-specific
+% declaration. It must be verified by the candidate before signing the PDF.
+\newcommand*{\DefaultCandidateContribution}{%
+  Contributed to the scientific and methodological design, technical and/or
+  experimental development, analysis of the results, and drafting or critical
+  revision of the manuscript.}
+
+\newcommand*{\DeclarePublicationContribution}[2]{%
+  \csdef{publicationcontribution@#1}{#2}}
+\input{publication-contributions.tex}
+
+\newbibmacro*{publication-identifier}{%
+  \printtext{\textbf{Identifier:}\space}%
+  \iffieldundef{doi}
+    {\iffieldundef{isbn}
+       {\iffieldundef{issn}
+          {\iffieldundef{eprint}
+             {\iffieldundef{url}
+                {\textcolor{missingid}{TO BE COMPLETED}}
+                {URL\addcolon\space
+                 \href{\thefield{url}}{\nolinkurl{\thefield{url}}}}}
+             {\thefield{eprinttype}\addcolon\space\thefield{eprint}}}
+          {ISSN\addcolon\space\thefield{issn}}}
+       {ISBN\addcolon\space\thefield{isbn}}}
+    {DOI\addcolon\space\href{https://doi.org/\thefield{doi}}{\nolinkurl{\thefield{doi}}}}}
+
+\newbibmacro*{candidate-contribution}{%
+  \par\smallskip
+  \printtext{\textbf{Candidate's contribution:}\space}%
+  \ifcsdef{publicationcontribution@\thefield{entrykey}}
+    {\csuse{publicationcontribution@\thefield{entrykey}}}
+    {\DefaultCandidateContribution}}
+
+\renewbibmacro*{finentry}{%
+  % Discard the standard driver's pending delimiter before starting the
+  % administrative metadata on a fresh line.
+  \setunit{}%
+  \par\smallskip\usebibmacro{publication-identifier}%
+  \usebibmacro{candidate-contribution}%
+  \finentry}
+
+\setlength{\bibitemsep}{1.15\baselineskip}
+\setlength{\bibhang}{0pt}
+\renewcommand*{\bibfont}{\small}
+
+\newcommand*{\PublicationList}[4]{%
+  \begin{center}
+    {\sffamily\Large\bfseries\color{accent} #1\par}
+    \vspace{0.5em}
+    {\sffamily #2\par}
+  \end{center}
+  \vspace{1em}
+
+  \noindent
+  I, \textbf{Gianluca Aguzzi}, ORCID
+  \href{https://orcid.org/0000-0002-1553-4561}{0000-0002-1553-4561},
+  submit the following numbered list of publications. Each citation includes
+  all authors and, where available, the DOI, ISBN, ISSN, or an equivalent
+  bibliographic identifier. The candidate's individual contribution is stated
+  for collaborative publications.
+
+  \begin{refcontext}[sorting=#4]
+    #3
+    \printbibliography[heading=none,resetnumbers=true]
+  \end{refcontext}
+
+  \vfill
+  \begin{minipage}[t]{0.46\textwidth}
+    Cesena, \today
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.46\textwidth}
+    \raggedleft
+    Signature\par
+    \vspace{2.6em}
+    \rule{0.9\linewidth}{0.4pt}\par
+    Gianluca Aguzzi
+  \end{minipage}
+}
